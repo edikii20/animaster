@@ -1,21 +1,21 @@
-part of 'boarding_cubit.dart';
+part of 'boarding_page_cubit.dart';
 
-class BoardingState {
+class BoardingPageState {
   final int selectedIndex;
-  BoardingState({
+  BoardingPageState({
     required this.selectedIndex,
   });
 
-  BoardingState copyWith({
+  BoardingPageState copyWith({
     int? selectedIndex,
   }) {
-    return BoardingState(
+    return BoardingPageState(
       selectedIndex: selectedIndex ?? this.selectedIndex,
     );
   }
 
   @override
-  bool operator ==(covariant BoardingState other) {
+  bool operator ==(covariant BoardingPageState other) {
     if (identical(this, other)) return true;
 
     return other.selectedIndex == selectedIndex;

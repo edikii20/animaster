@@ -1,3 +1,4 @@
+import 'package:aniquiz/src/config/colors.dart';
 import 'package:flutter/material.dart';
 
 abstract class AppButtons {
@@ -51,13 +52,25 @@ abstract class AppButtons {
             color: Colors.transparent,
             borderRadius: BorderRadius.circular(100),
             child: InkWell(
-              onTap: () => onTap,
+              onTap: () => onTap(),
               borderRadius: BorderRadius.circular(100),
               splashColor: Colors.transparent,
             ),
           ),
         ),
       ],
+    );
+  }
+
+  static Widget goBackButton({required Function onPressed}) {
+    return IconButton(
+      onPressed: () => onPressed(),
+      icon: const Icon(Icons.arrow_back_rounded),
+      padding: EdgeInsets.zero,
+      iconSize: 28,
+      color: AppColors.mainBlack,
+      splashColor: Colors.transparent,
+      highlightColor: Colors.transparent,
     );
   }
 }

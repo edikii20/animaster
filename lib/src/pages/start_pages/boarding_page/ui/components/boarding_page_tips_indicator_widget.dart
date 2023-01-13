@@ -17,45 +17,50 @@ class _BoardingPageTipsIndicatorWidget extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        AnimatedContainer(
-          width: _selectedIndex == 0 ? 35 : 10,
-          height: 10,
-          duration: const Duration(milliseconds: 300),
-          curve: Curves.easeInOut,
-          decoration: BoxDecoration(
-            color: _selectedIndex == 0
-                ? AppColors.mainPurple
-                : AppColors.mainDisableLight,
-            borderRadius: BorderRadius.circular(100),
-          ),
+        _BoardingPageTipsIndicatorItemWidget(
+          selectedIndex: _selectedIndex,
+          itemIndex: 0,
         ),
         SizedBox(width: 10 * _sizeRatio.width),
-        AnimatedContainer(
-          width: _selectedIndex == 1 ? 35 : 10,
-          height: 10,
-          duration: const Duration(milliseconds: 300),
-          curve: Curves.easeInOut,
-          decoration: BoxDecoration(
-            color: _selectedIndex == 1
-                ? AppColors.mainPurple
-                : AppColors.mainDisableLight,
-            borderRadius: BorderRadius.circular(100),
-          ),
+        _BoardingPageTipsIndicatorItemWidget(
+          selectedIndex: _selectedIndex,
+          itemIndex: 1,
         ),
         SizedBox(width: 10 * _sizeRatio.width),
-        AnimatedContainer(
-          width: _selectedIndex == 2 ? 35 : 10,
-          height: 10,
-          duration: const Duration(milliseconds: 300),
-          curve: Curves.easeInOut,
-          decoration: BoxDecoration(
-            color: _selectedIndex == 2
-                ? AppColors.mainPurple
-                : AppColors.mainDisableLight,
-            borderRadius: BorderRadius.circular(100),
-          ),
+        _BoardingPageTipsIndicatorItemWidget(
+          selectedIndex: _selectedIndex,
+          itemIndex: 2,
         ),
       ],
+    );
+  }
+}
+
+class _BoardingPageTipsIndicatorItemWidget extends StatelessWidget {
+  const _BoardingPageTipsIndicatorItemWidget({
+    Key? key,
+    required int selectedIndex,
+    required int itemIndex,
+  })  : _selectedIndex = selectedIndex,
+        _itemIndex = itemIndex,
+        super(key: key);
+
+  final int _selectedIndex;
+  final int _itemIndex;
+
+  @override
+  Widget build(BuildContext context) {
+    return AnimatedContainer(
+      width: _selectedIndex == _itemIndex ? 35 : 10,
+      height: 10,
+      duration: const Duration(milliseconds: 300),
+      curve: Curves.easeInOut,
+      decoration: BoxDecoration(
+        color: _selectedIndex == _itemIndex
+            ? AppColors.mainPurple
+            : AppColors.mainDisableLight,
+        borderRadius: BorderRadius.circular(100),
+      ),
     );
   }
 }

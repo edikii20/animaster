@@ -1,10 +1,12 @@
 import 'package:aniquiz/src/config/colors.dart';
 import 'package:aniquiz/src/config/sizes.dart';
 import 'package:aniquiz/src/config/text_styles.dart';
-import 'package:aniquiz/src/pages/start_pages/boarding_page/cubit/boarding_cubit.dart';
+import 'package:aniquiz/src/pages/start_pages/boarding_page/cubit/boarding_page_cubit.dart';
 import 'package:aniquiz/src/utils/app_buttons.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
+import 'package:lottie/lottie.dart';
 
 part 'components/boarding_page_tips_indicator_widget.dart';
 part 'components/boarding_page_tips_widget.dart';
@@ -26,7 +28,7 @@ class BoardingPageWidget extends StatelessWidget {
             children: [
               _BoardingPageTipsWidget(sizeRatio: sizeRatio),
               SizedBox(height: 30 * sizeRatio.height),
-              BlocBuilder<BoardingCubit, BoardingState>(
+              BlocBuilder<BoardingPageCubit, BoardingPageState>(
                 buildWhen: (previous, current) =>
                     previous.selectedIndex != current.selectedIndex,
                 builder: (context, state) {
@@ -49,7 +51,7 @@ class BoardingPageWidget extends StatelessWidget {
                 ),
                 sizeRatio: sizeRatio,
                 width: double.infinity,
-                onTap: () {},
+                onTap: () => context.go('/signup'),
               ),
               SizedBox(height: 30 * sizeRatio.height),
               AppButtons.fillBorderedButton(
