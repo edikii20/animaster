@@ -1,20 +1,29 @@
 import 'package:aniquiz/src/config/colors.dart';
 import 'package:aniquiz/src/config/sizes.dart';
 import 'package:aniquiz/src/config/text_styles.dart';
-import 'package:aniquiz/src/pages/start_pages/signup_page/cubit/signup_page_cubit.dart';
 import 'package:aniquiz/src/utils/app_buttons.dart';
-import 'package:aniquiz/src/utils/start_pages_input_widget.dart';
 import 'package:aniquiz/src/utils/start_pages_title_widget.dart';
+import 'package:aniquiz/src/utils/start_pages_input_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
-part 'components/signup_page_registration_form_widget.dart';
-part 'components/signup_page_divider_widgest.dart';
-part 'components/signup_page_rememberme_widgest.dart';
+class ForgotPasswordPageWidget extends StatefulWidget {
+  const ForgotPasswordPageWidget({super.key});
 
-class SignUpPageWidget extends StatelessWidget {
-  const SignUpPageWidget({super.key});
+  @override
+  State<ForgotPasswordPageWidget> createState() =>
+      _ForgotPasswordPageWidgetState();
+}
+
+class _ForgotPasswordPageWidgetState extends State<ForgotPasswordPageWidget> {
+  final _emailInputController = TextEditingController();
+
+  @override
+  void dispose() {
+    _emailInputController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -28,7 +37,7 @@ class SignUpPageWidget extends StatelessWidget {
           fillColor: AppColors.mainPurple,
           borderColor: AppColors.mainPurpleDark,
           text: Text(
-            'Sign up',
+            'Continue',
             style: AppTextStyles.bold(
               fontSize: 16,
               color: Colors.white,
@@ -36,7 +45,7 @@ class SignUpPageWidget extends StatelessWidget {
           ),
           width: double.infinity,
           sizeRatio: sizeRatio,
-          onTap: () => context.read<SignUpPageCubit>().onTapSignup(),
+          onTap: () => context.push('/confirm_email_code'),
         ),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
@@ -54,15 +63,24 @@ class SignUpPageWidget extends StatelessWidget {
               SizedBox(height: 40 * sizeRatio.height),
               StartPagesTitleWidget(
                 sizeRatio: sizeRatio,
-                title: 'Create an account',
+                title: 'Forgot Password',
+                titleIcon: Image.asset('assets/images/key_icon.png'),
                 subTitle:
-                    'Please enter your username, email address and password. If you forget it, then you have to do forgot password.',
-                titleIcon: Image.asset('assets/images/pencil_icon.png'),
-                titleCentered: true,
-                subTitleCentered: true,
+                    'Enter your email address to get an OTP code to reset your password.',
+                titleCentered: false,
               ),
               SizedBox(height: 30 * sizeRatio.height),
-              _SignUpPageRegistrationFormWidget(sizeRatio: sizeRatio),
+              Text(
+                'Email',
+                style: AppTextStyles.semiBold(
+                  fontSize: 15,
+                  color: AppColors.mainBlack,
+                ),
+              ),
+              StartPagesInputWidget(
+                inputController: _emailInputController,
+                inputType: StartPagesInputType.email,
+              ),
             ],
           ),
         ),

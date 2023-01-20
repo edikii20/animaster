@@ -1,6 +1,6 @@
 part of '../signup_page.dart';
 
-class _SignUpPageRegistrationFormWidget extends StatelessWidget {
+class _SignUpPageRegistrationFormWidget extends StatefulWidget {
   const _SignUpPageRegistrationFormWidget({
     Key? key,
     required Size sizeRatio,
@@ -10,11 +10,34 @@ class _SignUpPageRegistrationFormWidget extends StatelessWidget {
   final Size _sizeRatio;
 
   @override
+  State<_SignUpPageRegistrationFormWidget> createState() =>
+      _SignUpPageRegistrationFormWidgetState();
+}
+
+class _SignUpPageRegistrationFormWidgetState
+    extends State<_SignUpPageRegistrationFormWidget> {
+  final _usernameInputController = TextEditingController();
+  final _emailInputController = TextEditingController();
+  final _passwordInputController = TextEditingController();
+  final _emailInputFocusNode = FocusNode();
+  final _passwordInputFocusNode = FocusNode();
+
+  @override
+  void dispose() {
+    _usernameInputController.dispose();
+    _emailInputController.dispose();
+    _passwordInputController.dispose();
+    _emailInputFocusNode.dispose();
+    _passwordInputFocusNode.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Expanded(
       child: ListView(
         physics: const BouncingScrollPhysics(),
-        padding: EdgeInsets.only(bottom: 120 * _sizeRatio.height),
+        padding: EdgeInsets.only(bottom: 120 * widget._sizeRatio.height),
         children: [
           Text(
             'Username',
@@ -23,8 +46,12 @@ class _SignUpPageRegistrationFormWidget extends StatelessWidget {
               color: AppColors.mainBlack,
             ),
           ),
-          _SignUpPageUsernameInputWidgest(),
-          SizedBox(height: 25 * _sizeRatio.height),
+          StartPagesInputWidget(
+            inputController: _usernameInputController,
+            inputType: StartPagesInputType.username,
+            nextFocusNode: _emailInputFocusNode,
+          ),
+          SizedBox(height: 30 * widget._sizeRatio.height),
           Text(
             'Email',
             style: AppTextStyles.semiBold(
@@ -32,8 +59,13 @@ class _SignUpPageRegistrationFormWidget extends StatelessWidget {
               color: AppColors.mainBlack,
             ),
           ),
-          _SignUpPageEmailInputWidgest(),
-          SizedBox(height: 25 * _sizeRatio.height),
+          StartPagesInputWidget(
+            inputController: _emailInputController,
+            inputType: StartPagesInputType.email,
+            currentFocusNode: _emailInputFocusNode,
+            nextFocusNode: _passwordInputFocusNode,
+          ),
+          SizedBox(height: 30 * widget._sizeRatio.height),
           Text(
             'Password',
             style: AppTextStyles.semiBold(
@@ -41,12 +73,16 @@ class _SignUpPageRegistrationFormWidget extends StatelessWidget {
               color: AppColors.mainBlack,
             ),
           ),
-          _SignUpPagePasswordInputWidgest(),
-          SizedBox(height: 25 * _sizeRatio.height),
-          _SignUpPageRememberMeWidgest(sizeRatio: _sizeRatio),
-          SizedBox(height: 40 * _sizeRatio.height),
-          _SignUpPageDividerWidgest(sizeRatio: _sizeRatio),
-          SizedBox(height: 25 * _sizeRatio.height),
+          StartPagesInputWidget(
+            inputController: _passwordInputController,
+            inputType: StartPagesInputType.password,
+            currentFocusNode: _passwordInputFocusNode,
+          ),
+          SizedBox(height: 30 * widget._sizeRatio.height),
+          _SignUpPageRememberMeWidgest(sizeRatio: widget._sizeRatio),
+          SizedBox(height: 40 * widget._sizeRatio.height),
+          _SignUpPageDividerWidgest(sizeRatio: widget._sizeRatio),
+          SizedBox(height: 30 * widget._sizeRatio.height),
           AppButtons.fillBorderedButton(
             fillColor: AppColors.mainButtonWhiteLight,
             borderColor: AppColors.mainDisableDark,
@@ -58,10 +94,11 @@ class _SignUpPageRegistrationFormWidget extends StatelessWidget {
               ),
             ),
             width: double.infinity,
-            sizeRatio: _sizeRatio,
+            icon: Image.asset('assets/images/google_icon.png'),
+            sizeRatio: widget._sizeRatio,
             onTap: () {},
           ),
-          SizedBox(height: 25 * _sizeRatio.height),
+          SizedBox(height: 30 * widget._sizeRatio.height),
           AppButtons.fillBorderedButton(
             fillColor: AppColors.mainButtonWhiteLight,
             borderColor: AppColors.mainDisableDark,
@@ -73,186 +110,11 @@ class _SignUpPageRegistrationFormWidget extends StatelessWidget {
               ),
             ),
             width: double.infinity,
-            sizeRatio: _sizeRatio,
+            icon: Image.asset('assets/images/apple_icon.png'),
+            sizeRatio: widget._sizeRatio,
             onTap: () {},
           ),
         ],
-      ),
-    );
-  }
-}
-
-class _SignUpPageDividerWidgest extends StatelessWidget {
-  const _SignUpPageDividerWidgest({
-    Key? key,
-    required Size sizeRatio,
-  })  : _sizeRatio = sizeRatio,
-        super(key: key);
-
-  final Size _sizeRatio;
-
-  @override
-  Widget build(BuildContext context) {
-    return Row(
-      children: [
-        Expanded(
-          child: Container(
-            height: 1,
-            margin: EdgeInsets.only(right: 10 * _sizeRatio.width),
-            color: AppColors.mainDisableLight.withOpacity(0.3),
-          ),
-        ),
-        Text(
-          'or',
-          style: AppTextStyles.medium(
-            fontSize: 15,
-            color: AppColors.mainSecondaryLight,
-          ),
-        ),
-        Expanded(
-          child: Container(
-            height: 1,
-            margin: EdgeInsets.only(left: 10 * _sizeRatio.width),
-            color: AppColors.mainDisableLight.withOpacity(0.3),
-          ),
-        ),
-      ],
-    );
-  }
-}
-
-class _SignUpPageRememberMeWidgest extends StatelessWidget {
-  const _SignUpPageRememberMeWidgest({
-    Key? key,
-    required Size sizeRatio,
-  })  : _sizeRatio = sizeRatio,
-        super(key: key);
-
-  final Size _sizeRatio;
-
-  @override
-  Widget build(BuildContext context) {
-    return Row(
-      children: [
-        SizedBox(
-          width: 24 * _sizeRatio.width,
-          height: 24 * _sizeRatio.width,
-          child: Checkbox(
-            value: true,
-            onChanged: (value) {},
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(6),
-            ),
-            overlayColor: MaterialStateProperty.all<Color>(Colors.transparent),
-            fillColor: MaterialStateProperty.all<Color>(AppColors.mainPurple),
-          ),
-        ),
-        SizedBox(width: 10 * _sizeRatio.width),
-        Text(
-          'Remember me',
-          style: AppTextStyles.medium(
-            fontSize: 15,
-            color: AppColors.mainBlack,
-          ),
-        ),
-      ],
-    );
-  }
-}
-
-class _SignUpPageUsernameInputWidgest extends StatelessWidget {
-  const _SignUpPageUsernameInputWidgest({
-    Key? key,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return TextField(
-      style: AppTextStyles.bold(
-        fontSize: 18,
-        color: AppColors.mainBlack,
-      ),
-      cursorColor: AppColors.mainBlack,
-      cursorRadius: const Radius.circular(100),
-      decoration: const InputDecoration(
-        enabledBorder: UnderlineInputBorder(
-          borderSide: BorderSide(
-            color: AppColors.mainBlack,
-          ),
-        ),
-        focusedBorder: UnderlineInputBorder(
-          borderSide: BorderSide(
-            color: AppColors.mainPurple,
-          ),
-        ),
-      ),
-    );
-  }
-}
-
-class _SignUpPageEmailInputWidgest extends StatelessWidget {
-  const _SignUpPageEmailInputWidgest({
-    Key? key,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return TextField(
-      style: AppTextStyles.bold(
-        fontSize: 18,
-        color: AppColors.mainBlack,
-      ),
-      cursorColor: AppColors.mainBlack,
-      cursorRadius: const Radius.circular(100),
-      decoration: const InputDecoration(
-        enabledBorder: UnderlineInputBorder(
-          borderSide: BorderSide(
-            color: AppColors.mainBlack,
-          ),
-        ),
-        focusedBorder: UnderlineInputBorder(
-          borderSide: BorderSide(
-            color: AppColors.mainPurple,
-          ),
-        ),
-      ),
-    );
-  }
-}
-
-class _SignUpPagePasswordInputWidgest extends StatelessWidget {
-  const _SignUpPagePasswordInputWidgest({
-    Key? key,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return TextField(
-      style: AppTextStyles.bold(
-        fontSize: 18,
-        color: AppColors.mainBlack,
-      ),
-      cursorColor: AppColors.mainBlack,
-      cursorRadius: const Radius.circular(100),
-      obscureText: true,
-      decoration: InputDecoration(
-        enabledBorder: const UnderlineInputBorder(
-          borderSide: BorderSide(
-            color: AppColors.mainBlack,
-          ),
-        ),
-        focusedBorder: const UnderlineInputBorder(
-          borderSide: BorderSide(
-            color: AppColors.mainPurple,
-          ),
-        ),
-        suffixIcon: GestureDetector(
-          onTap: () {},
-          child: const Icon(
-            Icons.visibility_outlined,
-            color: AppColors.mainPurple,
-          ),
-        ),
       ),
     );
   }

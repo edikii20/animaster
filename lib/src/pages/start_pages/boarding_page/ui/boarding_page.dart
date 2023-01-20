@@ -51,7 +51,7 @@ class BoardingPageWidget extends StatelessWidget {
                 ),
                 sizeRatio: sizeRatio,
                 width: double.infinity,
-                onTap: () => context.go('/signup'),
+                onTap: () => context.push('/signup'),
               ),
               SizedBox(height: 30 * sizeRatio.height),
               AppButtons.fillBorderedButton(
@@ -66,7 +66,7 @@ class BoardingPageWidget extends StatelessWidget {
                 ),
                 sizeRatio: sizeRatio,
                 width: double.infinity,
-                onTap: () {},
+                onTap: () => context.push('/login'),
               ),
             ],
           ),

@@ -8,20 +8,23 @@ class StartPagesTitleWidget extends StatelessWidget {
     required Size sizeRatio,
     required String title,
     String? subTitle,
-    required Widget titleIcon,
+    required Image titleIcon,
     required bool titleCentered,
+    bool subTitleCentered = false,
   })  : _sizeRatio = sizeRatio,
         _title = title,
         _subTitle = subTitle,
         _titleIcon = titleIcon,
         _titleCentered = titleCentered,
+        _subTitleCentered = subTitleCentered,
         super(key: key);
 
   final Size _sizeRatio;
   final String _title;
   final String? _subTitle;
-  final Widget _titleIcon;
+  final Image _titleIcon;
   final bool _titleCentered;
+  final bool _subTitleCentered;
 
   @override
   Widget build(BuildContext context) {
@@ -41,7 +44,11 @@ class StartPagesTitleWidget extends StatelessWidget {
                     ),
                   ),
                   SizedBox(width: 10 * _sizeRatio.width),
-                  _titleIcon,
+                  SizedBox(
+                    width: 32 * _sizeRatio.height,
+                    height: 32 * _sizeRatio.height,
+                    child: _titleIcon,
+                  ),
                 ],
               ),
               SizedBox(height: 20 * _sizeRatio.height),
@@ -51,7 +58,8 @@ class StartPagesTitleWidget extends StatelessWidget {
                   fontSize: 18,
                   color: AppColors.mainSecondaryLight,
                 ),
-                textAlign: TextAlign.center,
+                textAlign:
+                    _subTitleCentered ? TextAlign.center : TextAlign.start,
               ),
             ],
           )
@@ -68,7 +76,11 @@ class StartPagesTitleWidget extends StatelessWidget {
                 ),
               ),
               SizedBox(width: 10 * _sizeRatio.width),
-              _titleIcon,
+              SizedBox(
+                width: 32 * _sizeRatio.height,
+                height: 32 * _sizeRatio.height,
+                child: _titleIcon,
+              ),
             ],
           );
   }

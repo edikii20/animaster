@@ -41,7 +41,7 @@ abstract class AppButtons {
                       height: 20,
                       child: icon,
                     ),
-                    const SizedBox(width: 16),
+                    const SizedBox(width: 10),
                     text,
                   ],
                 )
@@ -66,6 +66,7 @@ abstract class AppButtons {
     return IconButton(
       onPressed: () => onPressed(),
       icon: const Icon(Icons.arrow_back_rounded),
+      constraints: BoxConstraints.loose(const Size(28, 28)),
       padding: EdgeInsets.zero,
       iconSize: 28,
       color: AppColors.mainBlack,
