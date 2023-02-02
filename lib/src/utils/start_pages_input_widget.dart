@@ -1,3 +1,4 @@
+import 'package:aniquiz/src/utils/input_validation_mixin.dart';
 import 'package:flutter/material.dart';
 
 import '../config/colors.dart';
@@ -30,83 +31,38 @@ class StartPagesInputWidget extends StatefulWidget {
   State<StartPagesInputWidget> createState() => _StartPagesInputWidgetState();
 }
 
-class _StartPagesInputWidgetState extends State<StartPagesInputWidget> {
-  bool? isCorrectInput;
-  bool isPasswordObscure = true;
+class _StartPagesInputWidgetState extends State<StartPagesInputWidget>
+    with InputValidationMixin {
+  bool? _isCorrectInput;
+  bool _isPasswordObscure = true;
 
-  void inputValidator({required String text}) {
-    switch (widget._inputType) {
-      case StartPagesInputType.username:
-        if (text.length > 4) {
-          if (isCorrectInput != true) {
-            setState(() {
-              isCorrectInput = true;
-            });
-          }
-        } else {
-          if (isCorrectInput != false) {
-            setState(() {
-              isCorrectInput = false;
-            });
-          }
-        }
-        break;
-      case StartPagesInputType.email:
-        if (text.length > 4) {
-          if (isCorrectInput != true) {
-            setState(() {
-              isCorrectInput = true;
-            });
-          }
-        } else {
-          if (isCorrectInput != false) {
-            setState(() {
-              isCorrectInput = false;
-            });
-          }
-        }
-        break;
-      case StartPagesInputType.password:
-        if (text.length > 4) {
-          if (isCorrectInput != true) {
-            setState(() {
-              isCorrectInput = true;
-            });
-          }
-        } else {
-          if (isCorrectInput != false) {
-            setState(() {
-              isCorrectInput = false;
-            });
-          }
-        }
-        break;
-      case StartPagesInputType.confirmPassword:
-        if (widget._passwordInputController?.text ==
-            widget._inputController.text) {
-          if (isCorrectInput != true) {
-            setState(() {
-              isCorrectInput = true;
-            });
-          }
-        } else {
-          if (isCorrectInput != false) {
-            setState(() {
-              isCorrectInput = false;
-            });
-          }
-        }
-        break;
+  void _inputValidator({required String text}) {
+    if (validate(
+      inputType: widget._inputType,
+      inputText: text,
+      passwordText: widget._passwordInputController?.text,
+    )) {
+      if (_isCorrectInput != true) {
+        setState(() {
+          _isCorrectInput = true;
+        });
+      }
+    } else {
+      if (_isCorrectInput != false) {
+        setState(() {
+          _isCorrectInput = false;
+        });
+      }
     }
   }
 
-  void onTapObscurePassword() {
+  void _onTapObscurePassword() {
     setState(() {
-      isPasswordObscure = !isPasswordObscure;
+      _isPasswordObscure = !_isPasswordObscure;
     });
   }
 
-  Widget? pickSuffix() {
+  Widget? _pickSuffix() {
     if (widget._inputType == StartPagesInputType.password ||
         widget._inputType == StartPagesInputType.confirmPassword) {
       return Padding(
@@ -117,9 +73,9 @@ class _StartPagesInputWidgetState extends State<StartPagesInputWidget> {
             SizedBox(
               width: 24,
               height: 24,
-              child: isCorrectInput == null
+              child: _isCorrectInput == null
                   ? null
-                  : isCorrectInput!
+                  : _isCorrectInput!
                       ? Image.asset(
                           'assets/images/correct_icon.png',
                           color: Colors.green,
@@ -131,9 +87,9 @@ class _StartPagesInputWidgetState extends State<StartPagesInputWidget> {
             ),
             const SizedBox(width: 5),
             GestureDetector(
-              onTap: () => onTapObscurePassword(),
+              onTap: () => _onTapObscurePassword(),
               child: Icon(
-                isPasswordObscure
+                _isPasswordObscure
                     ? Icons.visibility_outlined
                     : Icons.visibility_off_outlined,
                 color: AppColors.mainPurple,
@@ -143,13 +99,13 @@ class _StartPagesInputWidgetState extends State<StartPagesInputWidget> {
         ),
       );
     } else {
-      return isCorrectInput == null
+      return _isCorrectInput == null
           ? null
           : Container(
               width: 24,
               height: 24,
               padding: const EdgeInsets.symmetric(vertical: 12),
-              child: isCorrectInput!
+              child: _isCorrectInput!
                   ? Image.asset(
                       'assets/images/correct_icon.png',
                       color: Colors.green,
@@ -166,10 +122,10 @@ class _StartPagesInputWidgetState extends State<StartPagesInputWidget> {
   Widget build(BuildContext context) {
     return TextField(
       controller: widget._inputController,
-      onChanged: (value) => inputValidator(text: value),
+      onChanged: (value) => _inputValidator(text: value),
       onSubmitted: (_) => widget._nextFocusNode?.requestFocus(),
       focusNode: widget._currentFocusNode,
-      obscureText: isPasswordObscure &&
+      obscureText: _isPasswordObscure &&
           (widget._inputType == StartPagesInputType.password ||
               widget._inputType == StartPagesInputType.confirmPassword),
       textInputAction: widget._nextFocusNode != null
@@ -192,7 +148,7 @@ class _StartPagesInputWidgetState extends State<StartPagesInputWidget> {
             color: AppColors.mainPurple,
           ),
         ),
-        suffixIcon: pickSuffix(),
+        suffixIcon: _pickSuffix(),
       ),
     );
   }

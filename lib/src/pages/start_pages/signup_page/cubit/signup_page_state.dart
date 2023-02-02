@@ -1,26 +1,17 @@
 part of 'signup_page_cubit.dart';
 
-class SignUpPageState {
-  final bool rememberMe;
-  SignUpPageState({
-    required this.rememberMe,
-  });
+abstract class SignUpPageState {}
 
-  SignUpPageState copyWith({
-    bool? rememberMe,
-  }) {
-    return SignUpPageState(
-      rememberMe: rememberMe ?? this.rememberMe,
-    );
-  }
+class SignUpPageCompleteState extends SignUpPageState {}
 
-  @override
-  bool operator ==(covariant SignUpPageState other) {
-    if (identical(this, other)) return true;
+class SignUpPageInitialState extends SignUpPageState {}
 
-    return other.rememberMe == rememberMe;
-  }
+class SignUpPageFailureState extends SignUpPageState {
+  final String message;
 
-  @override
-  int get hashCode => rememberMe.hashCode;
+  SignUpPageFailureState({required this.message});
 }
+
+class SignUpPageLoadingState extends SignUpPageState {}
+
+class SignUpPageNotVerifiedState extends SignUpPageState {}

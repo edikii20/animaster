@@ -42,13 +42,13 @@ class _ConfirmEmailCodePageResendEmailCodeWidget extends StatelessWidget {
                 ],
               )
             : AppButtons.fillBorderedButton(
-                fillColor: AppColors.mainButtonWhiteLight,
-                borderColor: AppColors.mainDisableDark,
-                text: Text(
+                fillColor: AppColors.mainPurple,
+                borderColor: AppColors.mainPurpleDark,
+                child: Text(
                   'Resend code',
                   style: AppTextStyles.bold(
                     fontSize: 16,
-                    color: AppColors.mainPurple,
+                    color: Colors.white,
                   ),
                 ),
                 sizeRatio: _sizeRatio,

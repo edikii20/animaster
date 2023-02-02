@@ -1,43 +1,41 @@
 part of '../signup_page.dart';
 
-class _SignUpPageRegistrationFormWidget extends StatefulWidget {
+class _SignUpPageRegistrationFormWidget extends StatelessWidget {
   const _SignUpPageRegistrationFormWidget({
     Key? key,
     required Size sizeRatio,
+    required TextEditingController usernameInputController,
+    required TextEditingController emailInputController,
+    required TextEditingController passwordInputController,
+    required TextEditingController confirmPasswordInputController,
+    required FocusNode emailInputFocusNode,
+    required FocusNode passwordInputFocusNode,
+    required FocusNode confirmPasswordFocusNode,
   })  : _sizeRatio = sizeRatio,
+        _usernameInputController = usernameInputController,
+        _emailInputController = emailInputController,
+        _passwordInputController = passwordInputController,
+        _confirmPasswordInputController = confirmPasswordInputController,
+        _emailInputFocusNode = emailInputFocusNode,
+        _passwordInputFocusNode = passwordInputFocusNode,
+        _confirmPasswordFocusNode = confirmPasswordFocusNode,
         super(key: key);
 
   final Size _sizeRatio;
-
-  @override
-  State<_SignUpPageRegistrationFormWidget> createState() =>
-      _SignUpPageRegistrationFormWidgetState();
-}
-
-class _SignUpPageRegistrationFormWidgetState
-    extends State<_SignUpPageRegistrationFormWidget> {
-  final _usernameInputController = TextEditingController();
-  final _emailInputController = TextEditingController();
-  final _passwordInputController = TextEditingController();
-  final _emailInputFocusNode = FocusNode();
-  final _passwordInputFocusNode = FocusNode();
-
-  @override
-  void dispose() {
-    _usernameInputController.dispose();
-    _emailInputController.dispose();
-    _passwordInputController.dispose();
-    _emailInputFocusNode.dispose();
-    _passwordInputFocusNode.dispose();
-    super.dispose();
-  }
+  final TextEditingController _usernameInputController;
+  final TextEditingController _emailInputController;
+  final TextEditingController _passwordInputController;
+  final TextEditingController _confirmPasswordInputController;
+  final FocusNode _emailInputFocusNode;
+  final FocusNode _passwordInputFocusNode;
+  final FocusNode _confirmPasswordFocusNode;
 
   @override
   Widget build(BuildContext context) {
     return Expanded(
       child: ListView(
         physics: const BouncingScrollPhysics(),
-        padding: EdgeInsets.only(bottom: 120 * widget._sizeRatio.height),
+        padding: EdgeInsets.only(bottom: 120 * _sizeRatio.height),
         children: [
           Text(
             'Username',
@@ -51,7 +49,7 @@ class _SignUpPageRegistrationFormWidgetState
             inputType: StartPagesInputType.username,
             nextFocusNode: _emailInputFocusNode,
           ),
-          SizedBox(height: 30 * widget._sizeRatio.height),
+          SizedBox(height: 20 * _sizeRatio.height),
           Text(
             'Email',
             style: AppTextStyles.semiBold(
@@ -65,7 +63,7 @@ class _SignUpPageRegistrationFormWidgetState
             currentFocusNode: _emailInputFocusNode,
             nextFocusNode: _passwordInputFocusNode,
           ),
-          SizedBox(height: 30 * widget._sizeRatio.height),
+          SizedBox(height: 20 * _sizeRatio.height),
           Text(
             'Password',
             style: AppTextStyles.semiBold(
@@ -77,16 +75,29 @@ class _SignUpPageRegistrationFormWidgetState
             inputController: _passwordInputController,
             inputType: StartPagesInputType.password,
             currentFocusNode: _passwordInputFocusNode,
+            nextFocusNode: _confirmPasswordFocusNode,
           ),
-          SizedBox(height: 30 * widget._sizeRatio.height),
-          _SignUpPageRememberMeWidgest(sizeRatio: widget._sizeRatio),
-          SizedBox(height: 40 * widget._sizeRatio.height),
-          _SignUpPageDividerWidgest(sizeRatio: widget._sizeRatio),
-          SizedBox(height: 30 * widget._sizeRatio.height),
+          SizedBox(height: 20 * _sizeRatio.height),
+          Text(
+            'Confirm Password',
+            style: AppTextStyles.semiBold(
+              fontSize: 15,
+              color: AppColors.mainBlack,
+            ),
+          ),
+          StartPagesInputWidget(
+            inputController: _confirmPasswordInputController,
+            passwordInputController: _passwordInputController,
+            inputType: StartPagesInputType.confirmPassword,
+            currentFocusNode: _confirmPasswordFocusNode,
+          ),
+          SizedBox(height: 40 * _sizeRatio.height),
+          _SignUpPageDividerWidgest(sizeRatio: _sizeRatio),
+          SizedBox(height: 30 * _sizeRatio.height),
           AppButtons.fillBorderedButton(
             fillColor: AppColors.mainButtonWhiteLight,
             borderColor: AppColors.mainDisableDark,
-            text: Text(
+            child: Text(
               'Continue with Google',
               style: AppTextStyles.semiBold(
                 fontSize: 15,
@@ -95,14 +106,14 @@ class _SignUpPageRegistrationFormWidgetState
             ),
             width: double.infinity,
             icon: Image.asset('assets/images/google_icon.png'),
-            sizeRatio: widget._sizeRatio,
+            sizeRatio: _sizeRatio,
             onTap: () {},
           ),
-          SizedBox(height: 30 * widget._sizeRatio.height),
+          SizedBox(height: 30 * _sizeRatio.height),
           AppButtons.fillBorderedButton(
             fillColor: AppColors.mainButtonWhiteLight,
             borderColor: AppColors.mainDisableDark,
-            text: Text(
+            child: Text(
               'Continue with Apple',
               style: AppTextStyles.semiBold(
                 fontSize: 15,
@@ -111,7 +122,7 @@ class _SignUpPageRegistrationFormWidgetState
             ),
             width: double.infinity,
             icon: Image.asset('assets/images/apple_icon.png'),
-            sizeRatio: widget._sizeRatio,
+            sizeRatio: _sizeRatio,
             onTap: () {},
           ),
         ],

@@ -1,15 +1,12 @@
 import 'package:aniquiz/src/config/colors.dart';
 import 'package:aniquiz/src/config/sizes.dart';
 import 'package:aniquiz/src/config/text_styles.dart';
-import 'package:aniquiz/src/pages/start_pages/new_password_page/cubit/new_password_page_cubit.dart';
 import 'package:aniquiz/src/utils/app_buttons.dart';
 import 'package:aniquiz/src/utils/start_pages_input_widget.dart';
 import 'package:aniquiz/src/utils/start_pages_title_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-
-part 'components/new_password_page_rememberme_widget.dart';
 
 class NewPasswordPageWidget extends StatefulWidget {
   const NewPasswordPageWidget({super.key});
@@ -42,7 +39,7 @@ class _NewPasswordPageWidgetState extends State<NewPasswordPageWidget> {
         child: AppButtons.fillBorderedButton(
           fillColor: AppColors.mainPurple,
           borderColor: AppColors.mainPurpleDark,
-          text: Text(
+          child: Text(
             'Continue',
             style: AppTextStyles.bold(
               fontSize: 16,
@@ -65,7 +62,8 @@ class _NewPasswordPageWidgetState extends State<NewPasswordPageWidget> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              AppButtons.goBackButton(onPressed: () => context.pop()),
+              AppButtons.goBackButton(
+                  onPressed: () => context.goNamed('forgot_password')),
               SizedBox(height: 40 * sizeRatio.height),
               StartPagesTitleWidget(
                 sizeRatio: sizeRatio,
@@ -88,7 +86,7 @@ class _NewPasswordPageWidgetState extends State<NewPasswordPageWidget> {
                 inputType: StartPagesInputType.password,
                 nextFocusNode: _confirmPasswordFocusNode,
               ),
-              SizedBox(height: 30 * sizeRatio.height),
+              SizedBox(height: 20 * sizeRatio.height),
               Text(
                 'Confirm a new password',
                 style: AppTextStyles.semiBold(
@@ -102,8 +100,6 @@ class _NewPasswordPageWidgetState extends State<NewPasswordPageWidget> {
                 inputType: StartPagesInputType.confirmPassword,
                 currentFocusNode: _confirmPasswordFocusNode,
               ),
-              SizedBox(height: 30 * sizeRatio.height),
-              _NewPasswordPageRememberMeWidgest(sizeRatio: sizeRatio),
             ],
           ),
         ),

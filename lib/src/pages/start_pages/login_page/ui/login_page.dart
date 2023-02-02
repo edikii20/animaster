@@ -11,7 +11,6 @@ import 'package:go_router/go_router.dart';
 
 part 'components/login_page_login_form_widget.dart';
 part 'components/login_page_divider_widgest.dart';
-part 'components/login_page_rememberme_widgest.dart';
 
 class LogInPageWidget extends StatelessWidget {
   const LogInPageWidget({super.key});
@@ -27,7 +26,7 @@ class LogInPageWidget extends StatelessWidget {
         child: AppButtons.fillBorderedButton(
           fillColor: AppColors.mainPurple,
           borderColor: AppColors.mainPurpleDark,
-          text: Text(
+          child: Text(
             'SIGN IN',
             style: AppTextStyles.bold(
               fontSize: 16,
@@ -50,7 +49,8 @@ class LogInPageWidget extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              AppButtons.goBackButton(onPressed: () => context.pop()),
+              AppButtons.goBackButton(
+                  onPressed: () => context.goNamed('boarding')),
               SizedBox(height: 40 * sizeRatio.height),
               StartPagesTitleWidget(
                 sizeRatio: sizeRatio,

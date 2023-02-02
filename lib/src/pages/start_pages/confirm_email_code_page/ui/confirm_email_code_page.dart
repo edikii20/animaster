@@ -48,7 +48,7 @@ class _ConfirmEmailCodePageWidgetState
           child: AppButtons.fillBorderedButton(
             fillColor: AppColors.mainPurple,
             borderColor: AppColors.mainPurpleDark,
-            text: Text(
+            child: Text(
               'Confirm',
               style: AppTextStyles.bold(
                 fontSize: 16,
@@ -58,8 +58,7 @@ class _ConfirmEmailCodePageWidgetState
             width: double.infinity,
             sizeRatio: sizeRatio,
             onTap: () {
-              context.pop();
-              context.pushReplacement('/new_password');
+              context.goNamed('new_password');
             },
           ),
         ),
@@ -75,8 +74,8 @@ class _ConfirmEmailCodePageWidgetState
               children: [
                 Align(
                   alignment: Alignment.centerLeft,
-                  child:
-                      AppButtons.goBackButton(onPressed: () => context.pop()),
+                  child: AppButtons.goBackButton(
+                      onPressed: () => context.goNamed('forgot_password')),
                 ),
                 SizedBox(height: 40 * sizeRatio.height),
                 StartPagesTitleWidget(
