@@ -5,7 +5,7 @@ abstract class AppButtons {
   static Widget fillBorderedButton({
     required Color fillColor,
     required Color borderColor,
-    required Text text,
+    required Widget child,
     required Size sizeRatio,
     required Function onTap,
     Image? icon,
@@ -42,10 +42,10 @@ abstract class AppButtons {
                       child: icon,
                     ),
                     const SizedBox(width: 10),
-                    text,
+                    child,
                   ],
                 )
-              : text,
+              : child,
         ),
         Positioned.fill(
           child: Material(

@@ -42,7 +42,7 @@ class BoardingPageWidget extends StatelessWidget {
               AppButtons.fillBorderedButton(
                 fillColor: AppColors.mainPurple,
                 borderColor: AppColors.mainPurpleDark,
-                text: Text(
+                child: Text(
                   'GET STARTED',
                   style: AppTextStyles.bold(
                     fontSize: 16,
@@ -51,13 +51,13 @@ class BoardingPageWidget extends StatelessWidget {
                 ),
                 sizeRatio: sizeRatio,
                 width: double.infinity,
-                onTap: () => context.push('/signup'),
+                onTap: () => context.goNamed('signup'),
               ),
               SizedBox(height: 30 * sizeRatio.height),
               AppButtons.fillBorderedButton(
                 fillColor: AppColors.mainButtonWhiteLight,
                 borderColor: AppColors.mainDisableDark,
-                text: Text(
+                child: Text(
                   'I ALREADY HAVE AN ACCOUNT',
                   style: AppTextStyles.bold(
                     fontSize: 16,
@@ -66,7 +66,7 @@ class BoardingPageWidget extends StatelessWidget {
                 ),
                 sizeRatio: sizeRatio,
                 width: double.infinity,
-                onTap: () => context.push('/login'),
+                onTap: () => context.goNamed('login'),
               ),
             ],
           ),

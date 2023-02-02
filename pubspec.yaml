@@ -24,6 +24,10 @@ dependencies:
   hive_flutter: ^1.1.0
   lottie: ^2.2.0
   pin_code_fields: ^7.4.0
+  firebase_core: ^2.4.1
+  firebase_auth: ^4.2.5
+  cloud_firestore: ^4.3.1
+  firestore_cache: ^2.3.0+1
 
 dev_dependencies:
   flutter_test:

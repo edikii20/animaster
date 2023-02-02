@@ -1,6 +1,7 @@
 import 'package:aniquiz/src/config/colors.dart';
 import 'package:aniquiz/src/config/sizes.dart';
 import 'package:aniquiz/src/config/text_styles.dart';
+import 'package:aniquiz/src/pages/start_pages/forgot_password_page/cubit/forgot_password_page_cubit.dart';
 import 'package:aniquiz/src/utils/app_buttons.dart';
 import 'package:aniquiz/src/utils/start_pages_title_widget.dart';
 import 'package:aniquiz/src/utils/start_pages_input_widget.dart';
@@ -36,7 +37,7 @@ class _ForgotPasswordPageWidgetState extends State<ForgotPasswordPageWidget> {
         child: AppButtons.fillBorderedButton(
           fillColor: AppColors.mainPurple,
           borderColor: AppColors.mainPurpleDark,
-          text: Text(
+          child: Text(
             'Continue',
             style: AppTextStyles.bold(
               fontSize: 16,
@@ -45,7 +46,7 @@ class _ForgotPasswordPageWidgetState extends State<ForgotPasswordPageWidget> {
           ),
           width: double.infinity,
           sizeRatio: sizeRatio,
-          onTap: () => context.push('/confirm_email_code'),
+          onTap: () => context.goNamed('confirm_email_code'),
         ),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
@@ -59,7 +60,8 @@ class _ForgotPasswordPageWidgetState extends State<ForgotPasswordPageWidget> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              AppButtons.goBackButton(onPressed: () => context.pop()),
+              AppButtons.goBackButton(
+                  onPressed: () => context.goNamed('login')),
               SizedBox(height: 40 * sizeRatio.height),
               StartPagesTitleWidget(
                 sizeRatio: sizeRatio,

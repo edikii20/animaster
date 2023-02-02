@@ -47,7 +47,7 @@ class _LogInPageRegistrationFormWidgetState
             inputType: StartPagesInputType.email,
             nextFocusNode: _passwordInputFocusNode,
           ),
-          SizedBox(height: 30 * widget._sizeRatio.height),
+          SizedBox(height: 20 * widget._sizeRatio.height),
           Text(
             'Password',
             style: AppTextStyles.semiBold(
@@ -60,15 +60,11 @@ class _LogInPageRegistrationFormWidgetState
             inputType: StartPagesInputType.password,
             currentFocusNode: _passwordInputFocusNode,
           ),
-          SizedBox(height: 30 * widget._sizeRatio.height),
-          _LogInPageRememberMeWidgest(sizeRatio: widget._sizeRatio),
           SizedBox(height: 40 * widget._sizeRatio.height),
-          _LogInPageDividerWidgest(sizeRatio: widget._sizeRatio),
-          SizedBox(height: 30 * widget._sizeRatio.height),
           Align(
             alignment: Alignment.center,
             child: GestureDetector(
-              onTap: () => context.push('/forgot_password'),
+              onTap: () => context.pushNamed('forgot_password'),
               child: Text(
                 'Forgot password?',
                 style: AppTextStyles.bold(
