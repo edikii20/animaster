@@ -18,49 +18,55 @@ class LogInPageWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final sizeRatio = AppSizes.getSizeRatio(context);
-    return Scaffold(
-      resizeToAvoidBottomInset: false,
-      floatingActionButton: Container(
-        padding: EdgeInsets.symmetric(horizontal: 20 * sizeRatio.width),
-        height: 60 * sizeRatio.height,
-        child: AppButtons.fillBorderedButton(
-          fillColor: AppColors.mainPurple,
-          borderColor: AppColors.mainPurpleDark,
-          child: Text(
-            'SIGN IN',
-            style: AppTextStyles.bold(
-              fontSize: 16,
-              color: Colors.white,
-            ),
-          ),
-          width: double.infinity,
-          sizeRatio: sizeRatio,
-          onTap: () => context.read<LogInPageCubit>().onTapSignin(),
-        ),
-      ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-      body: SafeArea(
-        child: Padding(
-          padding: EdgeInsets.only(
-            left: 20 * sizeRatio.width,
-            right: 20 * sizeRatio.width,
-            top: 30 * sizeRatio.height,
-          ),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              AppButtons.goBackButton(
-                  onPressed: () => context.goNamed('boarding')),
-              SizedBox(height: 40 * sizeRatio.height),
-              StartPagesTitleWidget(
-                sizeRatio: sizeRatio,
-                title: 'Hello there',
-                titleIcon: Image.asset('assets/images/hand_icon.png'),
-                titleCentered: false,
+    return WillPopScope(
+      onWillPop: () async {
+        context.goNamed('boarding');
+        return false;
+      },
+      child: Scaffold(
+        resizeToAvoidBottomInset: false,
+        floatingActionButton: Container(
+          padding: EdgeInsets.symmetric(horizontal: 20 * sizeRatio.width),
+          height: 60 * sizeRatio.height,
+          child: AppButtons.fillBorderedButton(
+            fillColor: AppColors.mainPurple,
+            borderColor: AppColors.mainPurpleDark,
+            child: Text(
+              'SIGN IN',
+              style: AppTextStyles.bold(
+                fontSize: 16,
+                color: Colors.white,
               ),
-              SizedBox(height: 30 * sizeRatio.height),
-              _LogInPageRegistrationFormWidget(sizeRatio: sizeRatio),
-            ],
+            ),
+            width: double.infinity,
+            sizeRatio: sizeRatio,
+            onTap: () => context.read<LogInPageCubit>().onTapSignin(),
+          ),
+        ),
+        floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+        body: SafeArea(
+          child: Padding(
+            padding: EdgeInsets.only(
+              left: 20 * sizeRatio.width,
+              right: 20 * sizeRatio.width,
+              top: 30 * sizeRatio.height,
+            ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                AppButtons.goBackButton(
+                    onPressed: () => context.goNamed('boarding')),
+                SizedBox(height: 40 * sizeRatio.height),
+                StartPagesTitleWidget(
+                  sizeRatio: sizeRatio,
+                  title: 'Hello there',
+                  titleIcon: Image.asset('assets/images/hand_icon.png'),
+                  titleCentered: false,
+                ),
+                SizedBox(height: 30 * sizeRatio.height),
+                _LogInPageRegistrationFormWidget(sizeRatio: sizeRatio),
+              ],
+            ),
           ),
         ),
       ),

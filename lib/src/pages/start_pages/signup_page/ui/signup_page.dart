@@ -85,90 +85,96 @@ class _SignUpPageWidgetState extends State<SignUpPageWidget> {
           }
         });
       },
-      child: GestureDetector(
-        onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
-        child: Scaffold(
-          resizeToAvoidBottomInset: false,
-          floatingActionButton: Container(
-            padding: EdgeInsets.symmetric(horizontal: 20 * sizeRatio.width),
-            height: 60 * sizeRatio.height,
-            child: BlocBuilder<SignUpPageCubit, SignUpPageState>(
-              buildWhen: (previous, current) =>
-                  (previous is! SignUpPageLoadingState &&
-                      current is SignUpPageLoadingState) ||
-                  (previous is SignUpPageLoadingState &&
-                      current is! SignUpPageLoadingState),
-              builder: (context, state) {
-                return AppButtons.fillBorderedButton(
-                  fillColor: AppColors.mainPurple,
-                  borderColor: AppColors.mainPurpleDark,
-                  child: state is SignUpPageLoadingState
-                      ? SizedBox(
-                          width: 21 * sizeRatio.height,
-                          height: 21 * sizeRatio.height,
-                          child: const CircularProgressIndicator(
-                            color: Colors.white,
-                            strokeWidth: 3,
+      child: WillPopScope(
+        onWillPop: () async {
+          context.goNamed('boarding');
+          return false;
+        },
+        child: GestureDetector(
+          onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
+          child: Scaffold(
+            resizeToAvoidBottomInset: false,
+            floatingActionButton: Container(
+              padding: EdgeInsets.symmetric(horizontal: 20 * sizeRatio.width),
+              height: 60 * sizeRatio.height,
+              child: BlocBuilder<SignUpPageCubit, SignUpPageState>(
+                buildWhen: (previous, current) =>
+                    (previous is! SignUpPageLoadingState &&
+                        current is SignUpPageLoadingState) ||
+                    (previous is SignUpPageLoadingState &&
+                        current is! SignUpPageLoadingState),
+                builder: (context, state) {
+                  return AppButtons.fillBorderedButton(
+                    fillColor: AppColors.mainPurple,
+                    borderColor: AppColors.mainPurpleDark,
+                    child: state is SignUpPageLoadingState
+                        ? SizedBox(
+                            width: 21 * sizeRatio.height,
+                            height: 21 * sizeRatio.height,
+                            child: const CircularProgressIndicator(
+                              color: Colors.white,
+                              strokeWidth: 3,
+                            ),
+                          )
+                        : Text(
+                            'Sign up',
+                            style: AppTextStyles.bold(
+                              fontSize: 16,
+                              color: Colors.white,
+                            ),
                           ),
-                        )
-                      : Text(
-                          'Sign up',
-                          style: AppTextStyles.bold(
-                            fontSize: 16,
-                            color: Colors.white,
-                          ),
+                    width: double.infinity,
+                    sizeRatio: sizeRatio,
+                    onTap: () => context.read<SignUpPageCubit>().onTapSignup(
+                          username: _usernameInputController.text,
+                          email: _emailInputController.text,
+                          password: _passwordInputController.text,
+                          confirmPassword: _confirmPasswordInputController.text,
                         ),
-                  width: double.infinity,
-                  sizeRatio: sizeRatio,
-                  onTap: () => context.read<SignUpPageCubit>().onTapSignup(
-                        username: _usernameInputController.text,
-                        email: _emailInputController.text,
-                        password: _passwordInputController.text,
-                        confirmPassword: _confirmPasswordInputController.text,
-                      ),
-                );
-              },
-            ),
-          ),
-          floatingActionButtonLocation:
-              FloatingActionButtonLocation.centerFloat,
-          body: SafeArea(
-            child: Padding(
-              padding: EdgeInsets.only(
-                left: 20 * sizeRatio.width,
-                right: 20 * sizeRatio.width,
-                top: 30 * sizeRatio.height,
+                  );
+                },
               ),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  AppButtons.goBackButton(
-                      onPressed: () => context.goNamed('boarding')),
-                  SizedBox(height: 40 * sizeRatio.height),
-                  StartPagesTitleWidget(
-                    sizeRatio: sizeRatio,
-                    title: 'Create an account',
-                    subTitle:
-                        'Please enter your username, email address and password. If you forget it, then you have to do forgot password.',
-                    titleIcon: Image.asset('assets/images/pencil_icon.png'),
-                    titleCentered: true,
-                    subTitleCentered: true,
-                  ),
-                  SizedBox(height: 30 * sizeRatio.height),
-                  //TODO: Исправить ошибку при которой когда клавиатура открыта и нажимается кнопка назад происходить overflow
-                  //TODO: Нужно при нажатии кнопки назад убирать клавиатуру а только потом переходить на другую страницу
-                  _SignUpPageRegistrationFormWidget(
-                    sizeRatio: sizeRatio,
-                    usernameInputController: _usernameInputController,
-                    emailInputController: _emailInputController,
-                    passwordInputController: _passwordInputController,
-                    confirmPasswordInputController:
-                        _confirmPasswordInputController,
-                    emailInputFocusNode: _emailInputFocusNode,
-                    passwordInputFocusNode: _passwordInputFocusNode,
-                    confirmPasswordFocusNode: _confirmPasswordFocusNode,
-                  )
-                ],
+            ),
+            floatingActionButtonLocation:
+                FloatingActionButtonLocation.centerFloat,
+            body: SafeArea(
+              child: Padding(
+                padding: EdgeInsets.only(
+                  left: 20 * sizeRatio.width,
+                  right: 20 * sizeRatio.width,
+                  top: 30 * sizeRatio.height,
+                ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    AppButtons.goBackButton(
+                        onPressed: () => context.goNamed('boarding')),
+                    SizedBox(height: 40 * sizeRatio.height),
+                    StartPagesTitleWidget(
+                      sizeRatio: sizeRatio,
+                      title: 'Create an account',
+                      subTitle:
+                          'Please enter your username, email address and password. If you forget it, then you have to do forgot password.',
+                      titleIcon: Image.asset('assets/images/pencil_icon.png'),
+                      titleCentered: true,
+                      subTitleCentered: true,
+                    ),
+                    SizedBox(height: 30 * sizeRatio.height),
+                    //TODO: Исправить ошибку при которой когда клавиатура открыта и нажимается кнопка назад происходить overflow
+                    //TODO: Нужно при нажатии кнопки назад убирать клавиатуру а только потом переходить на другую страницу
+                    _SignUpPageRegistrationFormWidget(
+                      sizeRatio: sizeRatio,
+                      usernameInputController: _usernameInputController,
+                      emailInputController: _emailInputController,
+                      passwordInputController: _passwordInputController,
+                      confirmPasswordInputController:
+                          _confirmPasswordInputController,
+                      emailInputFocusNode: _emailInputFocusNode,
+                      passwordInputFocusNode: _passwordInputFocusNode,
+                      confirmPasswordFocusNode: _confirmPasswordFocusNode,
+                    )
+                  ],
+                ),
               ),
             ),
           ),

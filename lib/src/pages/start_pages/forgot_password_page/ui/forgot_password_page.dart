@@ -29,61 +29,67 @@ class _ForgotPasswordPageWidgetState extends State<ForgotPasswordPageWidget> {
   @override
   Widget build(BuildContext context) {
     final sizeRatio = AppSizes.getSizeRatio(context);
-    return Scaffold(
-      resizeToAvoidBottomInset: false,
-      floatingActionButton: Container(
-        padding: EdgeInsets.symmetric(horizontal: 20 * sizeRatio.width),
-        height: 60 * sizeRatio.height,
-        child: AppButtons.fillBorderedButton(
-          fillColor: AppColors.mainPurple,
-          borderColor: AppColors.mainPurpleDark,
-          child: Text(
-            'Continue',
-            style: AppTextStyles.bold(
-              fontSize: 16,
-              color: Colors.white,
+    return WillPopScope(
+      onWillPop: () async {
+        context.goNamed('login');
+        return false;
+      },
+      child: Scaffold(
+        resizeToAvoidBottomInset: false,
+        floatingActionButton: Container(
+          padding: EdgeInsets.symmetric(horizontal: 20 * sizeRatio.width),
+          height: 60 * sizeRatio.height,
+          child: AppButtons.fillBorderedButton(
+            fillColor: AppColors.mainPurple,
+            borderColor: AppColors.mainPurpleDark,
+            child: Text(
+              'Continue',
+              style: AppTextStyles.bold(
+                fontSize: 16,
+                color: Colors.white,
+              ),
             ),
+            width: double.infinity,
+            sizeRatio: sizeRatio,
+            onTap: () => context.goNamed('confirm_email_code'),
           ),
-          width: double.infinity,
-          sizeRatio: sizeRatio,
-          onTap: () => context.goNamed('confirm_email_code'),
         ),
-      ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-      body: SafeArea(
-        child: Padding(
-          padding: EdgeInsets.only(
-            left: 20 * sizeRatio.width,
-            right: 20 * sizeRatio.width,
-            top: 30 * sizeRatio.height,
-          ),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              AppButtons.goBackButton(
-                  onPressed: () => context.goNamed('login')),
-              SizedBox(height: 40 * sizeRatio.height),
-              StartPagesTitleWidget(
-                sizeRatio: sizeRatio,
-                title: 'Forgot Password',
-                titleIcon: Image.asset('assets/images/key_icon.png'),
-                subTitle:
-                    'Enter your email address to get an OTP code to reset your password.',
-                titleCentered: false,
-              ),
-              SizedBox(height: 30 * sizeRatio.height),
-              Text(
-                'Email',
-                style: AppTextStyles.semiBold(
-                  fontSize: 15,
-                  color: AppColors.mainBlack,
+        floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+        body: SafeArea(
+          child: Padding(
+            padding: EdgeInsets.only(
+              left: 20 * sizeRatio.width,
+              right: 20 * sizeRatio.width,
+              top: 30 * sizeRatio.height,
+            ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                AppButtons.goBackButton(
+                    onPressed: () => context.goNamed('login')),
+                SizedBox(height: 40 * sizeRatio.height),
+                StartPagesTitleWidget(
+                  sizeRatio: sizeRatio,
+                  title: 'Forgot Password',
+                  titleIcon: Image.asset('assets/images/key_icon.png'),
+                  subTitle:
+                      'Enter your email address to get an OTP code to reset your password.',
+                  titleCentered: false,
                 ),
-              ),
-              StartPagesInputWidget(
-                inputController: _emailInputController,
-                inputType: StartPagesInputType.email,
-              ),
-            ],
+                SizedBox(height: 30 * sizeRatio.height),
+                Text(
+                  'Email',
+                  style: AppTextStyles.semiBold(
+                    fontSize: 15,
+                    color: AppColors.mainBlack,
+                  ),
+                ),
+                StartPagesInputWidget(
+                  inputController: _emailInputController,
+                  inputType: StartPagesInputType.email,
+                ),
+              ],
+            ),
           ),
         ),
       ),

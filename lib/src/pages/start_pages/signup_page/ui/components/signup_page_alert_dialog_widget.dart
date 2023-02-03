@@ -41,69 +41,71 @@ class _SignUpPageAlertDialogWidgetState
       child: BlocListener<SignUpPageCubit, SignUpPageState>(
         listenWhen: (previous, current) => current is SignUpPageCompleteState,
         listener: (context, state) {
-          Future.delayed(const Duration(seconds: 2), () {
+          Future.delayed(const Duration(seconds: 1), () {
             Navigator.of(context).pop(true);
           });
         },
         child: BlocBuilder<SignUpPageCubit, SignUpPageState>(
           buildWhen: (previous, current) => current is SignUpPageCompleteState,
           builder: (context, state) {
-            return state is SignUpPageCompleteState
-                ? Container(
-                    color: Colors.green,
-                  )
-                : Container(
-                    padding: EdgeInsets.symmetric(
-                      horizontal: 40 * widget._sizeRatio.width,
-                      vertical: 20 * widget._sizeRatio.height,
+            return Container(
+              padding: EdgeInsets.symmetric(
+                horizontal: 40 * widget._sizeRatio.width,
+                vertical: 20 * widget._sizeRatio.height,
+              ),
+              height: state is SignUpPageFailureState
+                  ? 370 * widget._sizeRatio.height
+                  : 430 * widget._sizeRatio.height,
+              child: Column(
+                children: [
+                  Container(
+                    height: 180 * widget._sizeRatio.height,
+                    width: 180 * widget._sizeRatio.height,
+                    color: state is SignUpPageFailureState
+                        ? Colors.red
+                        : AppColors.mainDisableDark,
+                  ),
+                  SizedBox(height: 10 * widget._sizeRatio.height),
+                  Text(
+                    state is SignUpPageFailureState
+                        ? 'Failure!'
+                        : 'Verification!',
+                    style: AppTextStyles.bold(
+                      fontSize: 24,
+                      color: AppColors.mainPurple,
                     ),
-                    height: state is SignUpPageFailureState
-                        ? 370 * widget._sizeRatio.height
-                        : 430 * widget._sizeRatio.height,
-                    child: Column(
-                      children: [
-                        Container(
-                          height: 180 * widget._sizeRatio.height,
-                          width: 180 * widget._sizeRatio.height,
-                          color: state is SignUpPageFailureState
-                              ? Colors.red
-                              : AppColors.mainDisableDark,
-                        ),
-                        SizedBox(height: 10 * widget._sizeRatio.height),
-                        Text(
-                          state is SignUpPageFailureState
-                              ? 'Failure!'
-                              : 'Verification!',
-                          style: AppTextStyles.bold(
-                            fontSize: 24,
-                            color: AppColors.mainPurple,
-                          ),
-                        ),
-                        SizedBox(height: 5 * widget._sizeRatio.height),
-                        Text(
-                          state is SignUpPageFailureState
-                              ? state.message
-                              : 'Check your email. We have sent you a mail to confirm your registration.',
-                          textAlign: TextAlign.center,
-                          style: AppTextStyles.medium(
-                            fontSize: 15,
-                            color: AppColors.mainBlack,
-                          ),
-                        ),
-                        state is SignUpPageFailureState
-                            ? const SizedBox.shrink()
-                            : SizedBox(height: 20 * widget._sizeRatio.height),
-                        state is SignUpPageFailureState
-                            ? const SizedBox.shrink()
-                            : SizedBox(
-                                width: 80 * widget._sizeRatio.height,
-                                height: 80 * widget._sizeRatio.height,
-                                child: Lottie.asset(
-                                    'assets/animations/loader_animation.json'),
-                              ),
-                      ],
+                  ),
+                  SizedBox(height: 5 * widget._sizeRatio.height),
+                  Text(
+                    state is SignUpPageFailureState
+                        ? state.message
+                        : 'Check your email. We have sent you a mail to confirm your registration.',
+                    textAlign: TextAlign.center,
+                    style: AppTextStyles.medium(
+                      fontSize: 15,
+                      color: AppColors.mainBlack,
                     ),
-                  );
+                  ),
+                  state is SignUpPageFailureState
+                      ? const SizedBox.shrink()
+                      : SizedBox(height: 20 * widget._sizeRatio.height),
+                  state is SignUpPageFailureState
+                      ? const SizedBox.shrink()
+                      : state is SignUpPageCompleteState
+                          ? Container(
+                              width: 80 * widget._sizeRatio.height,
+                              height: 80 * widget._sizeRatio.height,
+                              color: Colors.green,
+                            )
+                          : SizedBox(
+                              width: 80 * widget._sizeRatio.height,
+                              height: 80 * widget._sizeRatio.height,
+                              child: Lottie.asset(
+                                  'assets/animations/loader_animation.json'),
+                            ),
+                ],
+              ),
+            );
           },
         ),
       ),

@@ -6,12 +6,15 @@ class LoaderPageWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Center(
-        child: SizedBox(
-          width: 100,
-          height: 100,
-          child: Lottie.asset('assets/animations/loader_animation.json'),
+    return WillPopScope(
+      onWillPop: () async => false,
+      child: Scaffold(
+        body: Center(
+          child: SizedBox(
+            width: 100,
+            height: 100,
+            child: Lottie.asset('assets/animations/loader_animation.json'),
+          ),
         ),
       ),
     );
