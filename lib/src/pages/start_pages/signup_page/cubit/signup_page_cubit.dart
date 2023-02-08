@@ -41,6 +41,20 @@ class SignUpPageCubit extends Cubit<SignUpPageState> with InputValidationMixin {
     }
   }
 
+  void onCompleteSignup({
+    required String uid,
+    required String name,
+    required String email,
+    required String password,
+  }) {
+    _authenticationRepository.createUser(
+      uid: uid,
+      name: name,
+      email: email,
+      password: password,
+    );
+  }
+
   Future<void> onTapSignup({
     required String username,
     required String email,

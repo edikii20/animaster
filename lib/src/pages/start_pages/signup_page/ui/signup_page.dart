@@ -76,12 +76,12 @@ class _SignUpPageWidgetState extends State<SignUpPageWidget> {
             context.read<AppBloc>().add(AppUserChangedEvent(
                   user: user,
                 ));
-            CloudFirestoreManager.createUser(
-              uid: user.uid,
-              name: _usernameInputController.text,
-              email: _emailInputController.text,
-              password: _passwordInputController.text,
-            );
+            context.read<SignUpPageCubit>().onCompleteSignup(
+                  uid: user.uid,
+                  name: _usernameInputController.text,
+                  email: _emailInputController.text,
+                  password: _passwordInputController.text,
+                );
           }
         });
       },
@@ -125,12 +125,15 @@ class _SignUpPageWidgetState extends State<SignUpPageWidget> {
                           ),
                     width: double.infinity,
                     sizeRatio: sizeRatio,
-                    onTap: () => context.read<SignUpPageCubit>().onTapSignup(
-                          username: _usernameInputController.text,
-                          email: _emailInputController.text,
-                          password: _passwordInputController.text,
-                          confirmPassword: _confirmPasswordInputController.text,
-                        ),
+                    onTap: state is SignUpPageLoadingState
+                        ? null
+                        : () => context.read<SignUpPageCubit>().onTapSignup(
+                              username: _usernameInputController.text,
+                              email: _emailInputController.text,
+                              password: _passwordInputController.text,
+                              confirmPassword:
+                                  _confirmPasswordInputController.text,
+                            ),
                   );
                 },
               ),

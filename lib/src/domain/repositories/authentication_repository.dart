@@ -1,4 +1,5 @@
 import 'package:aniquiz/src/domain/db/cloud_firestore_db/cloud_firestore_manager.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 class SignUpWithEmailAndPasswordFailure implements Exception {
@@ -130,6 +131,39 @@ class AuthenticationRepository {
 
   Future<void> sendOTP({required String email}) async {
     //await _firebaseAuth.sendPasswordResetEmail(email: email);
+  }
+
+  Future<bool> userExist({required String email}) async {
+    final users = CloudFirestoreManager.instance.collection('users');
+
+    final result = await users.where('id', isEqualTo: email).get();
+    if (result.docs.isNotEmpty) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  Future<void> createUser({
+    required String uid,
+    required String name,
+    required String email,
+    required String password,
+  }) async {
+    final users = CloudFirestoreManager.instance.collection('users');
+    final userPrivate =
+        CloudFirestoreManager.instance.collection('users/$email/private');
+    await users.doc(email).set({
+      'deleted': false,
+      'lastUpdate': FieldValue.serverTimestamp(),
+      'email': email,
+      'name': name,
+      'avatar': '',
+      'uid': uid,
+    });
+    await userPrivate.doc('userPrivateInfo').set({
+      'password': password,
+    });
   }
 
   Future<void> signUp(

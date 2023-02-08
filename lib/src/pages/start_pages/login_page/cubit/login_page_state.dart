@@ -1,32 +1,15 @@
 part of 'login_page_cubit.dart';
 
-enum LogInStatus { complete, loading, failure, uncomplete }
+abstract class LogInPageState {}
 
-class LogInPageState {
-  final bool rememberMe;
-  final LogInStatus logInStatus;
-  LogInPageState({
-    required this.rememberMe,
-    required this.logInStatus,
-  });
+class LogInPageCompleteState extends LogInPageState {}
 
-  LogInPageState copyWith({
-    bool? rememberMe,
-    LogInStatus? logInStatus,
-  }) {
-    return LogInPageState(
-      rememberMe: rememberMe ?? this.rememberMe,
-      logInStatus: logInStatus ?? this.logInStatus,
-    );
-  }
+class LogInPageInitialState extends LogInPageState {}
 
-  @override
-  bool operator ==(covariant LogInPageState other) {
-    if (identical(this, other)) return true;
+class LogInPageFailureState extends LogInPageState {
+  final String message;
 
-    return other.rememberMe == rememberMe && other.logInStatus == logInStatus;
-  }
-
-  @override
-  int get hashCode => rememberMe.hashCode ^ logInStatus.hashCode;
+  LogInPageFailureState({required this.message});
 }
+
+class LogInPageLoadingState extends LogInPageState {}

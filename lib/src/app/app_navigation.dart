@@ -166,13 +166,14 @@ abstract class AppNavigation {
               ),
               routes: [
                 GoRoute(
-                  path: 'confirm-email-code',
+                  path: 'confirm-email-code/:email',
                   name: 'confirm_email_code',
                   pageBuilder: (context, state) => CustomTransitionPage(
                     child: BlocProvider(
                       create: (_) => ConfirmEmailCodePageCubit(
                         authenticationRepository:
                             context.read<AuthenticationRepository>(),
+                        email: state.params['email'],
                       ),
                       child: const ConfirmEmailCodePageWidget(),
                     ),
