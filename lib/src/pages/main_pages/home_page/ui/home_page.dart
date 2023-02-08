@@ -7,6 +7,9 @@ class HomePageWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold();
+    return WillPopScope(
+      onWillPop: () async => false,
+      child: Scaffold(),
+    );
   }
 }

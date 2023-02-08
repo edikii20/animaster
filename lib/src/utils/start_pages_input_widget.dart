@@ -36,6 +36,30 @@ class _StartPagesInputWidgetState extends State<StartPagesInputWidget>
   bool? _isCorrectInput;
   bool _isPasswordObscure = true;
 
+  void _createPasswordListener() {
+    widget._passwordInputController?.addListener(() {
+      if (widget._passwordInputController!.text != '') {
+        _inputValidator(text: widget._inputController.text);
+      }
+    });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    if (widget._passwordInputController != null) {
+      _createPasswordListener();
+    }
+  }
+
+  @override
+  void dispose() {
+    widget._passwordInputController?.removeListener(() {
+      _inputValidator(text: widget._inputController.text);
+    });
+    super.dispose();
+  }
+
   void _inputValidator({required String text}) {
     if (validate(
       inputType: widget._inputType,
@@ -123,7 +147,9 @@ class _StartPagesInputWidgetState extends State<StartPagesInputWidget>
     return TextField(
       controller: widget._inputController,
       onChanged: (value) => _inputValidator(text: value),
-      onSubmitted: (_) => widget._nextFocusNode?.requestFocus(),
+      onSubmitted: widget._passwordInputController != null
+          ? (_) {}
+          : (_) => widget._nextFocusNode?.requestFocus(),
       focusNode: widget._currentFocusNode,
       obscureText: _isPasswordObscure &&
           (widget._inputType == StartPagesInputType.password ||

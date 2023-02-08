@@ -48,25 +48,4 @@ abstract class CloudFirestoreManager {
       'lastUpdate': FieldValue.serverTimestamp(),
     });
   }
-
-  static Future<void> createUser({
-    required String uid,
-    required String name,
-    required String email,
-    required String password,
-  }) async {
-    final users = instance.collection('users');
-    final userPrivate = instance.collection('users/$email/private');
-    await users.doc(email).set({
-      'deleted': false,
-      'lastUpdate': FieldValue.serverTimestamp(),
-      'email': email,
-      'name': name,
-      'avatar': '',
-      'uid': uid,
-    });
-    await userPrivate.doc('userPrivateInfo').set({
-      'password': password,
-    });
-  }
 }

@@ -1,32 +1,51 @@
 import 'package:aniquiz/src/domain/repositories/authentication_repository.dart';
+import 'package:aniquiz/src/utils/input_validation_mixin.dart';
+import 'package:aniquiz/src/utils/start_pages_input_widget.dart';
 import 'package:bloc/bloc.dart';
 
 part 'login_page_state.dart';
 
-class LogInPageCubit extends Cubit<LogInPageState> {
+class LogInPageCubit extends Cubit<LogInPageState> with InputValidationMixin {
   final AuthenticationRepository _authenticationRepository;
 
   LogInPageCubit({
     required AuthenticationRepository authenticationRepository,
   })  : _authenticationRepository = authenticationRepository,
-        super(LogInPageState(
-          rememberMe: false,
-          logInStatus: LogInStatus.uncomplete,
-        ));
+        super(LogInPageInitialState());
 
-  Future<void> onTapSignin() async {
-    emit(state.copyWith(logInStatus: LogInStatus.loading));
+  Future<void> onTapSignin({
+    required String email,
+    required String password,
+  }) async {
+    emit(LogInPageLoadingState());
     try {
-      await _authenticationRepository.logInWithEmailAndPassword(
-          email: 'edikii20@mail.ru', password: '08222730');
+      if (_loginFormValidation(email: email, password: password)) {
+        await _authenticationRepository.logInWithEmailAndPassword(
+          email: email,
+          password: password,
+        );
 
-      emit(state.copyWith(logInStatus: LogInStatus.complete));
-    } catch (e) {
-      emit(state.copyWith(logInStatus: LogInStatus.failure));
+        emit(LogInPageCompleteState());
+      } else {
+        emit(LogInPageFailureState(
+            message: 'The data written in the form is incorrect.'));
+      }
+    } on LogInWithEmailAndPasswordFailure catch (e) {
+      emit(LogInPageFailureState(message: e.message));
     }
   }
 
-  void onTapRememberme() {
-    emit(state.copyWith(rememberMe: !state.rememberMe));
+  bool _loginFormValidation({
+    required String email,
+    required String password,
+  }) {
+    return validate(
+          inputType: StartPagesInputType.email,
+          inputText: email,
+        ) &&
+        validate(
+          inputType: StartPagesInputType.password,
+          inputText: password,
+        );
   }
 }

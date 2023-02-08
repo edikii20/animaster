@@ -1,39 +1,29 @@
 part of '../login_page.dart';
 
-class _LogInPageRegistrationFormWidget extends StatefulWidget {
+class _LogInPageRegistrationFormWidget extends StatelessWidget {
   const _LogInPageRegistrationFormWidget({
     Key? key,
     required Size sizeRatio,
+    required TextEditingController emailInputController,
+    required TextEditingController passwordInputController,
+    required FocusNode passwordInputFocusNode,
   })  : _sizeRatio = sizeRatio,
+        _emailInputController = emailInputController,
+        _passwordInputController = passwordInputController,
+        _passwordInputFocusNode = passwordInputFocusNode,
         super(key: key);
 
   final Size _sizeRatio;
-
-  @override
-  State<_LogInPageRegistrationFormWidget> createState() =>
-      _LogInPageRegistrationFormWidgetState();
-}
-
-class _LogInPageRegistrationFormWidgetState
-    extends State<_LogInPageRegistrationFormWidget> {
-  final _emailInputController = TextEditingController();
-  final _passwordInputController = TextEditingController();
-  final _passwordInputFocusNode = FocusNode();
-
-  @override
-  void dispose() {
-    _emailInputController.dispose();
-    _passwordInputController.dispose();
-    _passwordInputFocusNode.dispose();
-    super.dispose();
-  }
+  final TextEditingController _emailInputController;
+  final TextEditingController _passwordInputController;
+  final FocusNode _passwordInputFocusNode;
 
   @override
   Widget build(BuildContext context) {
     return Expanded(
       child: ListView(
         physics: const BouncingScrollPhysics(),
-        padding: EdgeInsets.only(bottom: 120 * widget._sizeRatio.height),
+        padding: EdgeInsets.only(bottom: 120 * _sizeRatio.height),
         children: [
           Text(
             'Email',
@@ -47,7 +37,7 @@ class _LogInPageRegistrationFormWidgetState
             inputType: StartPagesInputType.email,
             nextFocusNode: _passwordInputFocusNode,
           ),
-          SizedBox(height: 20 * widget._sizeRatio.height),
+          SizedBox(height: 20 * _sizeRatio.height),
           Text(
             'Password',
             style: AppTextStyles.semiBold(
@@ -60,11 +50,11 @@ class _LogInPageRegistrationFormWidgetState
             inputType: StartPagesInputType.password,
             currentFocusNode: _passwordInputFocusNode,
           ),
-          SizedBox(height: 40 * widget._sizeRatio.height),
+          SizedBox(height: 40 * _sizeRatio.height),
           Align(
             alignment: Alignment.center,
             child: GestureDetector(
-              onTap: () => context.pushNamed('forgot_password'),
+              onTap: () => context.goNamed('forgot_password'),
               child: Text(
                 'Forgot password?',
                 style: AppTextStyles.bold(

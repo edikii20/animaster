@@ -7,7 +7,7 @@ abstract class AppButtons {
     required Color borderColor,
     required Widget child,
     required Size sizeRatio,
-    required Function onTap,
+    required Function? onTap,
     Image? icon,
     double? width,
   }) {
@@ -52,7 +52,7 @@ abstract class AppButtons {
             color: Colors.transparent,
             borderRadius: BorderRadius.circular(100),
             child: InkWell(
-              onTap: () => onTap(),
+              onTap: onTap != null ? () => onTap() : null,
               borderRadius: BorderRadius.circular(100),
               splashColor: Colors.transparent,
             ),
