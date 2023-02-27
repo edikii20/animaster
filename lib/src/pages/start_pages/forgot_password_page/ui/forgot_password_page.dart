@@ -42,9 +42,10 @@ class _ForgotPasswordPageWidgetState extends State<ForgotPasswordPageWidget> {
             current is ForgotPasswordPageFailureState,
         listener: (context, state) {
           if (state is ForgotPasswordPageCompleteState) {
-            context.goNamed('confirm_email_code', params: {
-              'email': _emailInputController.text,
-            });
+            context.goNamed(
+              'confirm_email_code',
+              extra: _emailInputController.text,
+            );
           } else {
             showDialog(
               context: context,
