@@ -52,9 +52,12 @@ class _ConfirmEmailCodePageResendEmailCodeWidget extends StatelessWidget {
                   ),
                 ),
                 sizeRatio: _sizeRatio,
-                onTap: () => context
-                    .read<ConfirmEmailCodePageCubit>()
-                    .changeResendCodeTimer(),
+                onTap: () {
+                  context.read<ConfirmEmailCodePageCubit>().sendEmailCode();
+                  context
+                      .read<ConfirmEmailCodePageCubit>()
+                      .changeResendCodeTimer();
+                },
               );
       },
     );

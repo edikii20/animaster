@@ -21,7 +21,7 @@ import '../pages/start_pages/confirm_email_code_page/ui/confirm_email_code_page.
 import '../pages/start_pages/login_page/cubit/login_page_cubit.dart';
 
 abstract class AppNavigation {
-  static final List<String> _startPagesPaths = [
+  static final List<String> _startPagesRoutes = [
     '/boarding',
     '/signup',
     '/login',
@@ -29,16 +29,17 @@ abstract class AppNavigation {
     '/login/forgot-password/confirm-email-code',
     '/login/forgot-password/new-password',
   ];
+
   static GoRouter getRouter({required AppBloc appBloc}) {
     return GoRouter(
       refreshListenable: appBloc,
       redirect: (context, state) {
         final authStatus = appBloc.state.authStatus;
         if (authStatus == AuthStatus.unauthenticated &&
-            !_startPagesPaths.contains(state.subloc)) {
+            !_startPagesRoutes.contains(state.subloc)) {
           return '/boarding';
         } else if (authStatus == AuthStatus.authenticated &&
-            (_startPagesPaths.contains(state.subloc) || state.subloc == '/')) {
+            (_startPagesRoutes.contains(state.subloc) || state.subloc == '/')) {
           return '/home';
         }
         return null;
@@ -166,14 +167,14 @@ abstract class AppNavigation {
               ),
               routes: [
                 GoRoute(
-                  path: 'confirm-email-code/:email',
+                  path: 'confirm-email-code',
                   name: 'confirm_email_code',
                   pageBuilder: (context, state) => CustomTransitionPage(
                     child: BlocProvider(
                       create: (_) => ConfirmEmailCodePageCubit(
                         authenticationRepository:
                             context.read<AuthenticationRepository>(),
-                        email: state.params['email'],
+                        email: state.extra as String,
                       ),
                       child: const ConfirmEmailCodePageWidget(),
                     ),

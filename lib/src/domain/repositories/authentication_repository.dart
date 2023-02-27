@@ -1,5 +1,6 @@
 import 'package:aniquiz/src/domain/db/cloud_firestore_db/cloud_firestore_manager.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:email_auth/email_auth.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 class SignUpWithEmailAndPasswordFailure implements Exception {
@@ -118,6 +119,7 @@ class AuthenticationRepository {
 
   AuthenticationRepository({
     FirebaseAuth? firebaseAuth,
+    EmailAuth? emailOTPProvider,
   }) : _firebaseAuth = firebaseAuth ?? FirebaseAuth.instance;
 
   //TODO: Нужно будет переделать на отслеживания tenantId чтобы понимать когда аккаунт удален или дизейблинутный
@@ -129,14 +131,27 @@ class AuthenticationRepository {
     return _firebaseAuth.currentUser;
   }
 
-  Future<void> sendOTP({required String email}) async {
-    //await _firebaseAuth.sendPasswordResetEmail(email: email);
-  }
+  // Future<void> sendOTP({
+  //   required String email,
+  //   required int otpLength,
+  // }) async {
+  //   await _emailOTPProvider.sendOtp(recipientMail: email, otpLength: otpLength);
+  // }
+
+  // bool validateOTP({
+  //   required String email,
+  //   required String userOtp,
+  // }) {
+  //   return _emailOTPProvider.validateOtp(
+  //     recipientMail: email,
+  //     userOtp: userOtp,
+  //   );
+  // }
 
   Future<bool> userExist({required String email}) async {
     final users = CloudFirestoreManager.instance.collection('users');
 
-    final result = await users.where('id', isEqualTo: email).get();
+    final result = await users.where('email', isEqualTo: email).get();
     if (result.docs.isNotEmpty) {
       return true;
     } else {

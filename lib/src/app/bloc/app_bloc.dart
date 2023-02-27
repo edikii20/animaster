@@ -1,6 +1,4 @@
 import 'dart:async';
-
-import 'package:aniquiz/src/domain/entities/user.dart';
 import 'package:aniquiz/src/domain/repositories/authentication_repository.dart';
 import 'package:bloc/bloc.dart';
 import 'package:firebase_auth/firebase_auth.dart';
