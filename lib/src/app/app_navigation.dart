@@ -1,6 +1,12 @@
 import 'package:aniquiz/src/app/bloc/app_bloc.dart';
 import 'package:aniquiz/src/domain/repositories/authentication_repository.dart';
 import 'package:aniquiz/src/pages/main_pages/home_page/ui/home_page.dart';
+import 'package:aniquiz/src/pages/main_pages/library_page/ui/library_page.dart';
+import 'package:aniquiz/src/pages/main_pages/page_selector/cubit/page_selector_cubit.dart';
+import 'package:aniquiz/src/pages/main_pages/page_selector/ui/page_selector_widget.dart';
+import 'package:aniquiz/src/pages/main_pages/profile_page/ui/profile_page.dart';
+import 'package:aniquiz/src/pages/main_pages/rating_page/ui/rating_page.dart';
+import 'package:aniquiz/src/pages/main_pages/tests_page/ui/tests_page.dart';
 import 'package:aniquiz/src/pages/start_pages/boarding_page/cubit/boarding_page_cubit.dart';
 import 'package:aniquiz/src/pages/start_pages/boarding_page/ui/boarding_page.dart';
 import 'package:aniquiz/src/pages/start_pages/confirm_email_code_page/cubit/confirm_email_code_page_cubit.dart';
@@ -50,20 +56,6 @@ abstract class AppNavigation {
           name: 'loader',
           pageBuilder: (context, state) => CustomTransitionPage(
             child: const LoaderPageWidget(),
-            transitionsBuilder:
-                (context, animation, secondaryAnimation, child) =>
-                    FadeTransition(opacity: animation, child: child),
-            transitionDuration: const Duration(milliseconds: 270),
-          ),
-        ),
-        GoRoute(
-          path: '/home',
-          name: 'home',
-          pageBuilder: (context, state) => CustomTransitionPage(
-            child: BlocProvider(
-              create: (_) => HomePageCubit(),
-              child: const HomePageWidget(),
-            ),
             transitionsBuilder:
                 (context, animation, secondaryAnimation, child) =>
                     FadeTransition(opacity: animation, child: child),
@@ -224,6 +216,69 @@ abstract class AppNavigation {
                   ),
                 ),
               ],
+            ),
+          ],
+        ),
+        ShellRoute(
+          builder: (context, state, child) => BlocProvider(
+            create: (_) => PageSelectorCubit(),
+            child: PageSelectorWidget(child: child),
+          ),
+          routes: [
+            GoRoute(
+              path: '/home',
+              name: 'home',
+              pageBuilder: (context, state) => CustomTransitionPage(
+                child: const HomePageWidget(),
+                transitionsBuilder:
+                    (context, animation, secondaryAnimation, child) =>
+                        FadeTransition(opacity: animation, child: child),
+                transitionDuration: Duration.zero,
+              ),
+            ),
+            GoRoute(
+              path: '/library',
+              name: 'library',
+              pageBuilder: (context, state) => CustomTransitionPage(
+                child: const LibraryPageWidget(),
+                transitionsBuilder:
+                    (context, animation, secondaryAnimation, child) =>
+                        FadeTransition(opacity: animation, child: child),
+                transitionDuration: Duration.zero,
+              ),
+            ),
+            GoRoute(
+              path: '/tests',
+              name: 'tests',
+              pageBuilder: (context, state) => CustomTransitionPage(
+                child: const TestsPageWidget(),
+                transitionsBuilder:
+                    (context, animation, secondaryAnimation, child) =>
+                        FadeTransition(opacity: animation, child: child),
+                transitionDuration: Duration.zero,
+              ),
+            ),
+            GoRoute(
+              path: '/rating',
+              name: 'rating',
+              pageBuilder: (context, state) => CustomTransitionPage(
+                child: const RatingPageWidget(),
+                transitionsBuilder:
+                    (context, animation, secondaryAnimation, child) =>
+                        FadeTransition(opacity: animation, child: child),
+                transitionDuration: Duration.zero,
+              ),
+            ),
+            GoRoute(
+              path: '/profile',
+              name: 'profile',
+              pageBuilder: (context, state) => CustomTransitionPage(
+                child: const ProfilePageWidget(),
+                transitionsBuilder:
+                    (context, animation, secondaryAnimation, child) =>
+                        FadeTransition(opacity: animation, child: child),
+                transitionDuration: Duration.zero,
+              ),
             ),
           ],
         ),

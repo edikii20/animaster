@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import '../../../../config/colors.dart';
 import '../../../../config/text_styles.dart';
 
-class HomePageWidget extends StatelessWidget {
-  const HomePageWidget({
+class TestsPageWidget extends StatelessWidget {
+  const TestsPageWidget({
     Key? key,
   }) : super(key: key);
 
@@ -14,7 +14,7 @@ class HomePageWidget extends StatelessWidget {
       onWillPop: () async => false,
       child: Center(
         child: Text(
-          'Home',
+          'Tests',
           style: AppTextStyles.bold(
             fontSize: 18,
             color: AppColors.mainBlack,
