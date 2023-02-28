@@ -3,21 +3,25 @@ part of '../page_selector_widget.dart';
 class _PageSelectorBottomNavBarWidget extends StatelessWidget {
   const _PageSelectorBottomNavBarWidget({
     Key? key,
-  }) : super(key: key);
+    required Size sizeRatio,
+  })  : _sizeRatio = sizeRatio,
+        super(key: key);
+
+  final Size _sizeRatio;
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 70,
+      height: 86 * _sizeRatio.height,
       decoration: BoxDecoration(
-        borderRadius: const BorderRadius.only(
-          topLeft: Radius.circular(20),
-          topRight: Radius.circular(20),
+        borderRadius: BorderRadius.only(
+          topLeft: Radius.circular(20 * _sizeRatio.width),
+          topRight: Radius.circular(20 * _sizeRatio.width),
         ),
         boxShadow: [
           BoxShadow(
             color: AppColors.mainSecondaryDark,
-            offset: Offset(0, -0.5),
+            offset: Offset(0, -0.5 * _sizeRatio.height),
           ),
         ],
         color: Colors.white,

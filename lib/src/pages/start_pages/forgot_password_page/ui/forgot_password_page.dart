@@ -57,6 +57,7 @@ class _ForgotPasswordPageWidgetState extends State<ForgotPasswordPageWidget> {
           }
         },
         child: Scaffold(
+          backgroundColor: Colors.white,
           resizeToAvoidBottomInset: false,
           floatingActionButton: Container(
             padding: EdgeInsets.symmetric(horizontal: 20 * sizeRatio.width),
