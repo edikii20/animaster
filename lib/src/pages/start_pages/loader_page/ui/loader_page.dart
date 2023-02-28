@@ -9,6 +9,7 @@ class LoaderPageWidget extends StatelessWidget {
     return WillPopScope(
       onWillPop: () async => false,
       child: Scaffold(
+        backgroundColor: Colors.white,
         body: Center(
           child: SizedBox(
             width: 100,

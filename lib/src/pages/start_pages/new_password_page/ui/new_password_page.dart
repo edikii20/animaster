@@ -37,6 +37,7 @@ class _NewPasswordPageWidgetState extends State<NewPasswordPageWidget> {
         return false;
       },
       child: Scaffold(
+        backgroundColor: Colors.white,
         resizeToAvoidBottomInset: false,
         floatingActionButton: Container(
           padding: EdgeInsets.symmetric(horizontal: 20 * sizeRatio.width),

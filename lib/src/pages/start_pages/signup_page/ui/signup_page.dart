@@ -93,6 +93,7 @@ class _SignUpPageWidgetState extends State<SignUpPageWidget> {
         child: GestureDetector(
           onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
           child: Scaffold(
+            backgroundColor: Colors.white,
             resizeToAvoidBottomInset: false,
             floatingActionButton: Container(
               padding: EdgeInsets.symmetric(horizontal: 20 * sizeRatio.width),
