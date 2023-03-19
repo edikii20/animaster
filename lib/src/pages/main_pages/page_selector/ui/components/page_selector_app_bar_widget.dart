@@ -37,8 +37,14 @@ class _PageSelectorAppBarWidget extends StatelessWidget
             highlightColor: Colors.transparent,
             splashColor: Colors.transparent,
             constraints: BoxConstraints.tight(const Size(28, 28)),
-            icon: const ImageIcon(
-              AssetImage('assets/images/search_icon.png'),
+            icon: SvgPicture.asset(
+              'assets/icons/search.svg',
+              width: 28,
+              height: 28,
+              colorFilter: const ColorFilter.mode(
+                AppColors.mainBlack,
+                BlendMode.srcIn,
+              ),
             ),
           ),
           Padding(
@@ -52,8 +58,14 @@ class _PageSelectorAppBarWidget extends StatelessWidget
               highlightColor: Colors.transparent,
               splashColor: Colors.transparent,
               constraints: BoxConstraints.tight(const Size(28, 28)),
-              icon: const ImageIcon(
-                AssetImage('assets/images/bell_icon.png'),
+              icon: SvgPicture.asset(
+                'assets/icons/bell.svg',
+                width: 28,
+                height: 28,
+                colorFilter: const ColorFilter.mode(
+                  AppColors.mainBlack,
+                  BlendMode.srcIn,
+                ),
               ),
             ),
           ),
@@ -68,8 +80,14 @@ class _PageSelectorAppBarWidget extends StatelessWidget
               highlightColor: Colors.transparent,
               splashColor: Colors.transparent,
               constraints: BoxConstraints.tight(const Size(28, 28)),
-              icon: const ImageIcon(
-                AssetImage('assets/images/search_icon.png'),
+              icon: SvgPicture.asset(
+                'assets/icons/search.svg',
+                width: 28,
+                height: 28,
+                colorFilter: const ColorFilter.mode(
+                  AppColors.mainBlack,
+                  BlendMode.srcIn,
+                ),
               ),
             ),
           ),
@@ -84,8 +102,14 @@ class _PageSelectorAppBarWidget extends StatelessWidget
               highlightColor: Colors.transparent,
               splashColor: Colors.transparent,
               constraints: BoxConstraints.tight(const Size(28, 28)),
-              icon: const ImageIcon(
-                AssetImage('assets/images/search_icon.png'),
+              icon: SvgPicture.asset(
+                'assets/icons/search.svg',
+                width: 28,
+                height: 28,
+                colorFilter: const ColorFilter.mode(
+                  AppColors.mainBlack,
+                  BlendMode.srcIn,
+                ),
               ),
             ),
           ),
@@ -100,8 +124,14 @@ class _PageSelectorAppBarWidget extends StatelessWidget
               highlightColor: Colors.transparent,
               splashColor: Colors.transparent,
               constraints: BoxConstraints.tight(const Size(28, 28)),
-              icon: const ImageIcon(
-                AssetImage('assets/images/search_icon.png'),
+              icon: SvgPicture.asset(
+                'assets/icons/search.svg',
+                width: 28,
+                height: 28,
+                colorFilter: const ColorFilter.mode(
+                  AppColors.mainBlack,
+                  BlendMode.srcIn,
+                ),
               ),
             ),
           ),
@@ -116,8 +146,14 @@ class _PageSelectorAppBarWidget extends StatelessWidget
               highlightColor: Colors.transparent,
               splashColor: Colors.transparent,
               constraints: BoxConstraints.tight(const Size(28, 28)),
-              icon: const ImageIcon(
-                AssetImage('assets/images/settings_icon.png'),
+              icon: SvgPicture.asset(
+                'assets/icons/settings.svg',
+                width: 28,
+                height: 28,
+                colorFilter: const ColorFilter.mode(
+                  AppColors.mainBlack,
+                  BlendMode.srcIn,
+                ),
               ),
             ),
           ),
@@ -137,20 +173,7 @@ class _PageSelectorAppBarWidget extends StatelessWidget
           previous.selectedIndex != current.selectedIndex,
       builder: (context, state) {
         return AppBar(
-          title: Row(
-            children: [
-              const SizedBox(
-                width: 28,
-                height: 28,
-                child: Image(
-                  fit: BoxFit.contain,
-                  image: AssetImage('assets/images/app_logo_icon4.png'),
-                ),
-              ),
-              SizedBox(width: 16 * _sizeRatio.width),
-              _pickTitle(index: state.selectedIndex),
-            ],
-          ),
+          title: _pickTitle(index: state.selectedIndex),
           actions: _pickActions(index: state.selectedIndex),
           titleSpacing: 20 * _sizeRatio.width,
           actionsIconTheme: const IconThemeData(

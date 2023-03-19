@@ -1,9 +1,6 @@
 import 'package:aniquiz/firebase_options.dart';
 import 'package:aniquiz/src/app/bloc/app_bloc.dart';
-import 'package:aniquiz/src/domain/db/cloud_firestore_db/cloud_firestore_manager.dart';
 import 'package:aniquiz/src/domain/repositories/authentication_repository.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
-
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

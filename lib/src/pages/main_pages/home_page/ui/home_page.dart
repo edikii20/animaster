@@ -10,15 +10,12 @@ class HomePageWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return WillPopScope(
-      onWillPop: () async => false,
-      child: Center(
-        child: Text(
-          'Home',
-          style: AppTextStyles.bold(
-            fontSize: 18,
-            color: AppColors.mainBlack,
-          ),
+    return Center(
+      child: Text(
+        'Home',
+        style: AppTextStyles.bold(
+          fontSize: 18,
+          color: AppColors.mainBlack,
         ),
       ),
     );

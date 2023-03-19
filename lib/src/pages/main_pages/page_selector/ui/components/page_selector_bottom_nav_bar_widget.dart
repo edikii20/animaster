@@ -44,66 +44,75 @@ class _PageSelectorBottomNavBarWidget extends StatelessWidget {
                   .onTapBottomNavBarItem(index: index),
               items: [
                 BottomNavigationBarItem(
-                  icon: Image(
-                    color: state.selectedIndex == 0
-                        ? AppColors.mainBlack
-                        : AppColors.mainDisableLight,
-                    image: AssetImage(
+                  icon: SvgPicture.asset(
+                    state.selectedIndex == 0
+                        ? 'assets/icons/home_filled.svg'
+                        : 'assets/icons/home.svg',
+                    colorFilter: ColorFilter.mode(
                       state.selectedIndex == 0
-                          ? 'assets/images/home_filled_icon.png'
-                          : 'assets/images/home_icon.png',
+                          ? AppColors.mainBlack
+                          : AppColors.mainDisableLight,
+                      BlendMode.srcIn,
                     ),
                   ),
                   label: 'Home',
                 ),
                 BottomNavigationBarItem(
-                  icon: Image(
-                    color: state.selectedIndex == 1
-                        ? AppColors.mainBlack
-                        : AppColors.mainDisableLight,
-                    image: AssetImage(
+                  icon: SvgPicture.asset(
+                    state.selectedIndex == 1
+                        ? 'assets/icons/library_filled.svg'
+                        : 'assets/icons/library.svg',
+                    width: 24,
+                    height: 24,
+                    colorFilter: ColorFilter.mode(
                       state.selectedIndex == 1
-                          ? 'assets/images/library_filled_icon.png'
-                          : 'assets/images/library_icon.png',
+                          ? AppColors.mainBlack
+                          : AppColors.mainDisableLight,
+                      BlendMode.srcIn,
                     ),
                   ),
                   label: 'Library',
                 ),
                 BottomNavigationBarItem(
-                  icon: Image(
-                    color: state.selectedIndex == 2
-                        ? AppColors.mainBlack
-                        : AppColors.mainDisableLight,
-                    image: AssetImage(
+                  icon: SvgPicture.asset(
+                    state.selectedIndex == 2
+                        ? 'assets/icons/puzzle_filled.svg'
+                        : 'assets/icons/puzzle.svg',
+                    width: 24,
+                    height: 24,
+                    colorFilter: ColorFilter.mode(
                       state.selectedIndex == 2
-                          ? 'assets/images/puzzle_filled_icon.png'
-                          : 'assets/images/puzzle_icon.png',
+                          ? AppColors.mainBlack
+                          : AppColors.mainDisableLight,
+                      BlendMode.srcIn,
                     ),
                   ),
                   label: 'Tests',
                 ),
                 BottomNavigationBarItem(
-                  icon: Image(
-                    color: state.selectedIndex == 3
-                        ? AppColors.mainBlack
-                        : AppColors.mainDisableLight,
-                    image: AssetImage(
+                  icon: SvgPicture.asset(
+                    state.selectedIndex == 3
+                        ? 'assets/icons/star_filled.svg'
+                        : 'assets/icons/star.svg',
+                    colorFilter: ColorFilter.mode(
                       state.selectedIndex == 3
-                          ? 'assets/images/star_filled_icon.png'
-                          : 'assets/images/star_icon.png',
+                          ? AppColors.mainBlack
+                          : AppColors.mainDisableLight,
+                      BlendMode.srcIn,
                     ),
                   ),
                   label: 'Rating',
                 ),
                 BottomNavigationBarItem(
-                  icon: Image(
-                    color: state.selectedIndex == 4
-                        ? AppColors.mainBlack
-                        : AppColors.mainDisableLight,
-                    image: AssetImage(
+                  icon: SvgPicture.asset(
+                    state.selectedIndex == 4
+                        ? 'assets/icons/user_filled.svg'
+                        : 'assets/icons/user.svg',
+                    colorFilter: ColorFilter.mode(
                       state.selectedIndex == 4
-                          ? 'assets/images/user_filled_icon.png'
-                          : 'assets/images/user_icon.png',
+                          ? AppColors.mainBlack
+                          : AppColors.mainDisableLight,
+                      BlendMode.srcIn,
                     ),
                   ),
                   label: 'Profile',
