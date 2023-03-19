@@ -5,7 +5,9 @@ import 'package:aniquiz/src/pages/main_pages/library_page/ui/library_page.dart';
 import 'package:aniquiz/src/pages/main_pages/page_selector/cubit/page_selector_cubit.dart';
 import 'package:aniquiz/src/pages/main_pages/page_selector/ui/page_selector_widget.dart';
 import 'package:aniquiz/src/pages/main_pages/profile_page/ui/profile_page.dart';
+import 'package:aniquiz/src/pages/main_pages/quiz_details_page/ui/quiz_details_page.dart';
 import 'package:aniquiz/src/pages/main_pages/rating_page/ui/rating_page.dart';
+import 'package:aniquiz/src/pages/main_pages/tests_collection_details_page/ui/tests_collection_details_page.dart';
 import 'package:aniquiz/src/pages/main_pages/tests_page/ui/tests_page.dart';
 import 'package:aniquiz/src/pages/start_pages/boarding_page/cubit/boarding_page_cubit.dart';
 import 'package:aniquiz/src/pages/start_pages/boarding_page/ui/boarding_page.dart';
@@ -36,24 +38,30 @@ abstract class AppNavigation {
     '/login/forgot-password/new-password',
   ];
 
+  static final _rootNavigatorKey = GlobalKey<NavigatorState>();
+  static final _shellNavigatorKey = GlobalKey<NavigatorState>();
+
   static GoRouter getRouter({required AppBloc appBloc}) {
     return GoRouter(
-      refreshListenable: appBloc,
-      redirect: (context, state) {
-        final authStatus = appBloc.state.authStatus;
-        if (authStatus == AuthStatus.unauthenticated &&
-            !_startPagesRoutes.contains(state.subloc)) {
-          return '/boarding';
-        } else if (authStatus == AuthStatus.authenticated &&
-            (_startPagesRoutes.contains(state.subloc) || state.subloc == '/')) {
-          return '/home';
-        }
-        return null;
-      },
+      initialLocation: '/tests/123/0',
+      navigatorKey: _rootNavigatorKey,
+      //refreshListenable: appBloc,
+      // redirect: (context, state) {
+      //   final authStatus = appBloc.state.authStatus;
+      //   if (authStatus == AuthStatus.unauthenticated &&
+      //       !_startPagesRoutes.contains(state.subloc)) {
+      //     return '/boarding';
+      //   } else if (authStatus == AuthStatus.authenticated &&
+      //       (_startPagesRoutes.contains(state.subloc) || state.subloc == '/')) {
+      //     return '/home';
+      //   }
+      //   return null;
+      // },
       routes: [
         GoRoute(
           path: '/',
           name: 'loader',
+          parentNavigatorKey: _rootNavigatorKey,
           pageBuilder: (context, state) => CustomTransitionPage(
             child: const LoaderPageWidget(),
             transitionsBuilder:
@@ -65,6 +73,7 @@ abstract class AppNavigation {
         GoRoute(
           path: '/boarding',
           name: 'boarding',
+          parentNavigatorKey: _rootNavigatorKey,
           pageBuilder: (context, state) => CustomTransitionPage(
             child: BlocProvider(
               create: (_) => BoardingPageCubit(),
@@ -79,6 +88,7 @@ abstract class AppNavigation {
         GoRoute(
           path: '/signup',
           name: 'signup',
+          parentNavigatorKey: _rootNavigatorKey,
           pageBuilder: (context, state) => CustomTransitionPage(
             child: BlocProvider(
               create: (_) => SignUpPageCubit(
@@ -107,6 +117,7 @@ abstract class AppNavigation {
         GoRoute(
           path: '/login',
           name: 'login',
+          parentNavigatorKey: _rootNavigatorKey,
           pageBuilder: (context, state) => CustomTransitionPage(
             child: BlocProvider(
               create: (_) => LogInPageCubit(
@@ -133,6 +144,7 @@ abstract class AppNavigation {
             GoRoute(
               path: 'forgot-password',
               name: 'forgot_password',
+              parentNavigatorKey: _rootNavigatorKey,
               pageBuilder: (context, state) => CustomTransitionPage(
                 child: BlocProvider(
                   create: (_) => ForgotPasswordPageCubit(
@@ -161,6 +173,7 @@ abstract class AppNavigation {
                 GoRoute(
                   path: 'confirm-email-code',
                   name: 'confirm_email_code',
+                  parentNavigatorKey: _rootNavigatorKey,
                   pageBuilder: (context, state) => CustomTransitionPage(
                     child: BlocProvider(
                       create: (_) => ConfirmEmailCodePageCubit(
@@ -190,6 +203,7 @@ abstract class AppNavigation {
                 GoRoute(
                   path: 'new-password',
                   name: 'new_password',
+                  parentNavigatorKey: _rootNavigatorKey,
                   pageBuilder: (context, state) => CustomTransitionPage(
                     child: BlocProvider(
                       create: (_) => NewPasswordPageCubit(
@@ -220,6 +234,7 @@ abstract class AppNavigation {
           ],
         ),
         ShellRoute(
+          navigatorKey: _shellNavigatorKey,
           builder: (context, state, child) => BlocProvider(
             create: (_) => PageSelectorCubit(),
             child: PageSelectorWidget(child: child),
@@ -228,6 +243,7 @@ abstract class AppNavigation {
             GoRoute(
               path: '/home',
               name: 'home',
+              parentNavigatorKey: _shellNavigatorKey,
               pageBuilder: (context, state) => CustomTransitionPage(
                 child: const HomePageWidget(),
                 transitionsBuilder:
@@ -239,6 +255,7 @@ abstract class AppNavigation {
             GoRoute(
               path: '/library',
               name: 'library',
+              parentNavigatorKey: _shellNavigatorKey,
               pageBuilder: (context, state) => CustomTransitionPage(
                 child: const LibraryPageWidget(),
                 transitionsBuilder:
@@ -250,6 +267,7 @@ abstract class AppNavigation {
             GoRoute(
               path: '/tests',
               name: 'tests',
+              parentNavigatorKey: _shellNavigatorKey,
               pageBuilder: (context, state) => CustomTransitionPage(
                 child: const TestsPageWidget(),
                 transitionsBuilder:
@@ -257,10 +275,43 @@ abstract class AppNavigation {
                         FadeTransition(opacity: animation, child: child),
                 transitionDuration: Duration.zero,
               ),
+              routes: [
+                GoRoute(
+                  path: ':collectionId',
+                  name: 'collection_details',
+                  parentNavigatorKey: _rootNavigatorKey,
+                  pageBuilder: (context, state) => CustomTransitionPage(
+                    child: TestsCollectionDetailsPageWidget(
+                      collectionId: state.params['collectionId'] ?? '',
+                    ),
+                    transitionsBuilder:
+                        (context, animation, secondaryAnimation, child) =>
+                            FadeTransition(opacity: animation, child: child),
+                    transitionDuration: const Duration(milliseconds: 400),
+                  ),
+                  routes: [
+                    GoRoute(
+                      path: ':quizId',
+                      name: 'quiz_details',
+                      parentNavigatorKey: _rootNavigatorKey,
+                      pageBuilder: (context, state) => CustomTransitionPage(
+                        child: QuizDetailsPageWidget(
+                          quizId: state.params['quizId'] ?? '',
+                        ),
+                        transitionsBuilder: (context, animation,
+                                secondaryAnimation, child) =>
+                            FadeTransition(opacity: animation, child: child),
+                        transitionDuration: const Duration(milliseconds: 400),
+                      ),
+                    ),
+                  ],
+                ),
+              ],
             ),
             GoRoute(
               path: '/rating',
               name: 'rating',
+              parentNavigatorKey: _shellNavigatorKey,
               pageBuilder: (context, state) => CustomTransitionPage(
                 child: const RatingPageWidget(),
                 transitionsBuilder:
@@ -272,6 +323,7 @@ abstract class AppNavigation {
             GoRoute(
               path: '/profile',
               name: 'profile',
+              parentNavigatorKey: _shellNavigatorKey,
               pageBuilder: (context, state) => CustomTransitionPage(
                 child: const ProfilePageWidget(),
                 transitionsBuilder:

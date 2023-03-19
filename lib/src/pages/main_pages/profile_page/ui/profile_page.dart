@@ -10,15 +10,12 @@ class ProfilePageWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return WillPopScope(
-      onWillPop: () async => false,
-      child: Center(
-        child: Text(
-          'Profile',
-          style: AppTextStyles.bold(
-            fontSize: 18,
-            color: AppColors.mainBlack,
-          ),
+    return Center(
+      child: Text(
+        'Profile',
+        style: AppTextStyles.bold(
+          fontSize: 18,
+          color: AppColors.mainBlack,
         ),
       ),
     );

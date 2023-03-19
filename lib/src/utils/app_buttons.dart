@@ -1,5 +1,6 @@
 import 'package:aniquiz/src/config/colors.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 abstract class AppButtons {
   static Widget fillBorderedButton({
@@ -66,7 +67,7 @@ abstract class AppButtons {
     return IconButton(
       onPressed: () => onPressed(),
       icon: const Icon(Icons.arrow_back_rounded),
-      constraints: BoxConstraints.loose(const Size(28, 28)),
+      constraints: BoxConstraints.tight(const Size(28, 28)),
       padding: EdgeInsets.zero,
       iconSize: 28,
       color: AppColors.mainBlack,
