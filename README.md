@@ -1,30 +1,20 @@
 # aniquiz
 
-A new Flutter project.
+Mobile application for passing anime-themed quizzes.
 
-## Getting Started
-
-This project is a starting point for a Flutter application that follows the
-[simple app state management
-tutorial](https://flutter.dev/docs/development/data-and-backend/state-mgmt/simple).
-
-For help getting started with Flutter development, view the
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
-
-## Assets
-
-The `assets` directory houses images, fonts, and any other files you want to
-include with your application.
-
-The `assets/images` directory contains [resolution-aware
-images](https://flutter.dev/docs/development/ui/assets-and-images#resolution-aware).
-
-## Localization
-
-This project generates localized messages based on arb files found in
-the `lib/src/localization` directory.
-
-To support additional languages, please visit the tutorial on
-[Internationalizing Flutter
-apps](https://flutter.dev/docs/development/accessibility-and-localization/internationalization)
+## Screens
+![alt text](https://github.com/edikii20/animaster/blob/master/assets/readme_screens/aniquiz1.jpg?raw=true)
+![alt text](https://github.com/edikii20/animaster/blob/master/assets/readme_screens/aniquiz2.jpg?raw=true)
+![alt text](https://github.com/edikii20/animaster/blob/master/assets/readme_screens/aniquiz3.jpg?raw=true)
+![alt text](https://github.com/edikii20/animaster/blob/master/assets/readme_screens/aniquiz4.jpg?raw=true)
+![alt text](https://github.com/edikii20/animaster/blob/master/assets/readme_screens/aniquiz5.jpg?raw=true)
+![alt text](https://github.com/edikii20/animaster/blob/master/assets/readme_screens/aniquiz6.jpg?raw=true)
+![alt text](https://github.com/edikii20/animaster/blob/master/assets/readme_screens/aniquiz7.jpg?raw=true)
+![alt text](https://github.com/edikii20/animaster/blob/master/assets/readme_screens/aniquiz8.jpg?raw=true)
+![alt text](https://github.com/edikii20/animaster/blob/master/assets/readme_screens/aniquiz9.jpg?raw=true)
+![alt text](https://github.com/edikii20/animaster/blob/master/assets/readme_screens/aniquiz10.jpg?raw=true)
+![alt text](https://github.com/edikii20/animaster/blob/master/assets/readme_screens/aniquiz11.jpg?raw=true)
+![alt text](https://github.com/edikii20/animaster/blob/master/assets/readme_screens/aniquiz12.jpg?raw=true)
+![alt text](https://github.com/edikii20/animaster/blob/master/assets/readme_screens/aniquiz13.jpg?raw=true)
+![alt text](https://github.com/edikii20/animaster/blob/master/assets/readme_screens/aniquiz14.jpg?raw=true)
+![alt text](https://github.com/edikii20/animaster/blob/master/assets/readme_screens/aniquiz15.jpg?raw=true)
