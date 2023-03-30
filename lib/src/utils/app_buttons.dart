@@ -1,5 +1,6 @@
 import 'package:aniquiz/src/config/colors.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 abstract class AppButtons {
@@ -15,12 +16,12 @@ abstract class AppButtons {
     return Stack(
       children: [
         Container(
-          width: width != null ? width * sizeRatio.width : null,
+          width: width?.w,
           padding: EdgeInsets.only(
-            left: 16 * sizeRatio.width,
-            right: 16 * sizeRatio.width,
-            top: 18 * sizeRatio.height,
-            bottom: 18 * sizeRatio.height - 5,
+            left: 16.w,
+            right: 16.w,
+            top: 18.h,
+            bottom: 18.h - 5,
           ),
           alignment: width != null ? Alignment.center : null,
           decoration: BoxDecoration(
