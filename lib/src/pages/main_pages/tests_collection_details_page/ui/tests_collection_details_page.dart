@@ -1,9 +1,9 @@
 import 'package:aniquiz/src/utils/app_buttons.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:go_router/go_router.dart';
 import '../../../../config/colors.dart';
-import '../../../../config/sizes.dart';
 import '../../../../config/text_styles.dart';
 
 part 'components/tests_collection_details_page_appbar_widget.dart';
@@ -22,7 +22,6 @@ class TestsCollectionDetailsPageWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final sizeRatio = AppSizes.getSizeRatio(context);
     return WillPopScope(
       onWillPop: () async {
         context.pop();
@@ -30,15 +29,12 @@ class TestsCollectionDetailsPageWidget extends StatelessWidget {
       },
       child: Scaffold(
         backgroundColor: Colors.white,
-        appBar: _TestsCollectionDetailsPageAppbarWidget(
-          sizeRatio: sizeRatio,
-        ),
+        appBar: const _TestsCollectionDetailsPageAppbarWidget(),
         body: CustomScrollView(
           physics: const BouncingScrollPhysics(),
           slivers: [
-            _TestsCollectionDetailsPageHeaderWidget(sizeRatio: sizeRatio),
+            const _TestsCollectionDetailsPageHeaderWidget(),
             _TestsCollectionDetailsPageListQuizzesWidget(
-              sizeRatio: sizeRatio,
               collectionId: _collectionId,
             ),
           ],

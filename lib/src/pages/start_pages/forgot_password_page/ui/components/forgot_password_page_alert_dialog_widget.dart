@@ -3,46 +3,43 @@ part of '../forgot_password_page.dart';
 class _ForgotPasswordPageAlertDialogWidget extends StatelessWidget {
   const _ForgotPasswordPageAlertDialogWidget({
     Key? key,
-    required Size sizeRatio,
     required String message,
-  })  : _sizeRatio = sizeRatio,
-        _message = message,
+  })  : _message = message,
         super(key: key);
 
-  final Size _sizeRatio;
   final String _message;
 
   @override
   Widget build(BuildContext context) {
     return Dialog(
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30.w)),
       child: Container(
         padding: EdgeInsets.symmetric(
-          horizontal: 40 * _sizeRatio.width,
-          vertical: 20 * _sizeRatio.height,
+          horizontal: 40.w,
+          vertical: 20.h,
         ),
-        height: 370 * _sizeRatio.height,
+        height: 370.h,
         child: Column(
           children: [
             Container(
-              height: 180 * _sizeRatio.height,
-              width: 180 * _sizeRatio.height,
+              height: 180.h,
+              width: 180.h,
               color: Colors.red,
             ),
-            SizedBox(height: 10 * _sizeRatio.height),
+            SizedBox(height: 10.h),
             Text(
               'Failure!',
               style: AppTextStyles.bold(
-                fontSize: 24,
+                fontSize: 24.sp,
                 color: AppColors.mainPurple,
               ),
             ),
-            SizedBox(height: 5 * _sizeRatio.height),
+            SizedBox(height: 5.h),
             Text(
               _message,
               textAlign: TextAlign.center,
               style: AppTextStyles.medium(
-                fontSize: 15,
+                fontSize: 15.sp,
                 color: AppColors.mainBlack,
               ),
             ),

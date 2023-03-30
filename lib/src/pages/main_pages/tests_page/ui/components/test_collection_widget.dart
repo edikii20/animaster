@@ -3,13 +3,10 @@ part of '../tests_page.dart';
 class _TestCollectionWidget extends StatelessWidget {
   const _TestCollectionWidget({
     Key? key,
-    required Size sizeRatio,
     required int index,
-  })  : _sizeRatio = sizeRatio,
-        _index = index,
+  })  : _index = index,
         super(key: key);
 
-  final Size _sizeRatio;
   final int _index;
 
   @override
@@ -22,12 +19,12 @@ class _TestCollectionWidget extends StatelessWidget {
               image: AssetImage('assets/images/attack_on_titan.jpg'),
               fit: BoxFit.cover,
             ),
-            borderRadius: BorderRadius.circular(10),
+            borderRadius: BorderRadius.circular(10.w),
           ),
         ),
         Container(
           decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(10),
+            borderRadius: BorderRadius.circular(10.w),
             gradient: LinearGradient(
               begin: Alignment.bottomCenter,
               end: Alignment.center,
@@ -39,9 +36,9 @@ class _TestCollectionWidget extends StatelessWidget {
           ),
         ),
         Positioned.fill(
-          bottom: 15 * _sizeRatio.height,
-          left: 10 * _sizeRatio.width,
-          right: 5 * _sizeRatio.width,
+          bottom: 15.h,
+          left: 10.w,
+          right: 5.w,
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.end,
             children: [
@@ -51,7 +48,7 @@ class _TestCollectionWidget extends StatelessWidget {
                   maxLines: 2,
                   overflow: TextOverflow.ellipsis,
                   style: AppTextStyles.bold(
-                    fontSize: 12,
+                    fontSize: 12.sp,
                     color: Colors.white,
                   ),
                 ),
@@ -70,7 +67,7 @@ class _TestCollectionWidget extends StatelessWidget {
                 },
               ),
               splashFactory: NoSplash.splashFactory,
-              borderRadius: BorderRadius.circular(10),
+              borderRadius: BorderRadius.circular(10.w),
             ),
           ),
         ),

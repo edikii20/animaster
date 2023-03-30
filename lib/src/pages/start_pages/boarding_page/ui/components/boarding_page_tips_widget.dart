@@ -3,16 +3,12 @@ part of '../boarding_page.dart';
 class _BoardingPageTipsWidget extends StatelessWidget {
   const _BoardingPageTipsWidget({
     Key? key,
-    required Size sizeRatio,
-  })  : _sizeRatio = sizeRatio,
-        super(key: key);
-
-  final Size _sizeRatio;
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 550 * _sizeRatio.height,
+      height: 550.h,
       child: PageView(
         onPageChanged: (value) =>
             context.read<BoardingPageCubit>().onTipsChanged(index: value),
@@ -62,7 +58,7 @@ class _BoardingPageTipWidget extends StatelessWidget {
           _text,
           textAlign: TextAlign.center,
           style: AppTextStyles.bold(
-            fontSize: 28,
+            fontSize: 28.sp,
             color: AppColors.mainBlack,
           ),
         ),

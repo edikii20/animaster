@@ -1,14 +1,12 @@
 import 'package:aniquiz/src/config/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 
 abstract class AppButtons {
   static Widget fillBorderedButton({
     required Color fillColor,
     required Color borderColor,
     required Widget child,
-    required Size sizeRatio,
     required Function? onTap,
     Image? icon,
     double? width,
@@ -26,7 +24,7 @@ abstract class AppButtons {
           alignment: width != null ? Alignment.center : null,
           decoration: BoxDecoration(
             color: fillColor,
-            borderRadius: BorderRadius.circular(100),
+            borderRadius: BorderRadius.circular(100.w),
             boxShadow: [
               BoxShadow(
                 color: borderColor,
@@ -39,11 +37,11 @@ abstract class AppButtons {
                   mainAxisSize: MainAxisSize.min,
                   children: [
                     SizedBox(
-                      width: 20,
-                      height: 20,
+                      width: 20.w,
+                      height: 20.w,
                       child: icon,
                     ),
-                    const SizedBox(width: 10),
+                    SizedBox(width: 10.w),
                     child,
                   ],
                 )
@@ -52,10 +50,10 @@ abstract class AppButtons {
         Positioned.fill(
           child: Material(
             color: Colors.transparent,
-            borderRadius: BorderRadius.circular(100),
+            borderRadius: BorderRadius.circular(100.w),
             child: InkWell(
               onTap: onTap != null ? () => onTap() : null,
-              borderRadius: BorderRadius.circular(100),
+              borderRadius: BorderRadius.circular(100.w),
               splashColor: Colors.transparent,
             ),
           ),
@@ -68,9 +66,9 @@ abstract class AppButtons {
     return IconButton(
       onPressed: () => onPressed(),
       icon: const Icon(Icons.arrow_back_rounded),
-      constraints: BoxConstraints.tight(const Size(28, 28)),
+      constraints: BoxConstraints.tight(Size(28.w, 28.w)),
       padding: EdgeInsets.zero,
-      iconSize: 28,
+      iconSize: 28.w,
       color: AppColors.mainBlack,
       splashColor: Colors.transparent,
       highlightColor: Colors.transparent,

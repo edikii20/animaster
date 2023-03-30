@@ -3,13 +3,10 @@ part of '../boarding_page.dart';
 class _BoardingPageTipsIndicatorWidget extends StatelessWidget {
   const _BoardingPageTipsIndicatorWidget({
     Key? key,
-    required Size sizeRatio,
     required int selectedIndex,
-  })  : _sizeRatio = sizeRatio,
-        _selectedIndex = selectedIndex,
+  })  : _selectedIndex = selectedIndex,
         super(key: key);
 
-  final Size _sizeRatio;
   final int _selectedIndex;
 
   @override
@@ -21,12 +18,12 @@ class _BoardingPageTipsIndicatorWidget extends StatelessWidget {
           selectedIndex: _selectedIndex,
           itemIndex: 0,
         ),
-        SizedBox(width: 10 * _sizeRatio.width),
+        SizedBox(width: 10.w),
         _BoardingPageTipsIndicatorItemWidget(
           selectedIndex: _selectedIndex,
           itemIndex: 1,
         ),
-        SizedBox(width: 10 * _sizeRatio.width),
+        SizedBox(width: 10.w),
         _BoardingPageTipsIndicatorItemWidget(
           selectedIndex: _selectedIndex,
           itemIndex: 2,
@@ -51,8 +48,8 @@ class _BoardingPageTipsIndicatorItemWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AnimatedContainer(
-      width: _selectedIndex == _itemIndex ? 35 : 10,
-      height: 10,
+      width: _selectedIndex == _itemIndex ? 35.w : 10.w,
+      height: 10.w,
       duration: const Duration(milliseconds: 300),
       curve: Curves.easeInOut,
       decoration: BoxDecoration(

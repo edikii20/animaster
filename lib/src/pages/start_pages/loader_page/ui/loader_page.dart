@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:lottie/lottie.dart';
 
 class LoaderPageWidget extends StatelessWidget {
@@ -12,8 +13,8 @@ class LoaderPageWidget extends StatelessWidget {
         backgroundColor: Colors.white,
         body: Center(
           child: SizedBox(
-            width: 100,
-            height: 100,
+            width: 100.h,
+            height: 100.h,
             child: Lottie.asset('assets/animations/loader_animation.json'),
           ),
         ),
