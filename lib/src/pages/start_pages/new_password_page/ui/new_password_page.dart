@@ -1,11 +1,11 @@
 import 'package:aniquiz/src/config/colors.dart';
-import 'package:aniquiz/src/config/sizes.dart';
 import 'package:aniquiz/src/config/text_styles.dart';
 import 'package:aniquiz/src/utils/app_buttons.dart';
 import 'package:aniquiz/src/utils/start_pages_input_widget.dart';
 import 'package:aniquiz/src/utils/start_pages_title_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 
 class NewPasswordPageWidget extends StatefulWidget {
@@ -30,7 +30,6 @@ class _NewPasswordPageWidgetState extends State<NewPasswordPageWidget> {
 
   @override
   Widget build(BuildContext context) {
-    final sizeRatio = AppSizes.getSizeRatio(context);
     return WillPopScope(
       onWillPop: () async {
         context.goNamed('forgot_password');
@@ -40,20 +39,19 @@ class _NewPasswordPageWidgetState extends State<NewPasswordPageWidget> {
         backgroundColor: Colors.white,
         resizeToAvoidBottomInset: false,
         floatingActionButton: Container(
-          padding: EdgeInsets.symmetric(horizontal: 20 * sizeRatio.width),
-          height: 60 * sizeRatio.height,
+          padding: EdgeInsets.symmetric(horizontal: 20.w),
+          height: 60.h,
           child: AppButtons.fillBorderedButton(
             fillColor: AppColors.mainPurple,
             borderColor: AppColors.mainPurpleDark,
             child: Text(
               'Continue',
               style: AppTextStyles.bold(
-                fontSize: 16,
+                fontSize: 16.sp,
                 color: Colors.white,
               ),
             ),
             width: double.infinity,
-            sizeRatio: sizeRatio,
             onTap: () {},
           ),
         ),
@@ -61,29 +59,28 @@ class _NewPasswordPageWidgetState extends State<NewPasswordPageWidget> {
         body: SafeArea(
           child: Padding(
             padding: EdgeInsets.only(
-              left: 20 * sizeRatio.width,
-              right: 20 * sizeRatio.width,
-              top: 30 * sizeRatio.height,
+              left: 20.w,
+              right: 20.w,
+              top: 30.h,
             ),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 AppButtons.goBackButton(
                     onPressed: () => context.goNamed('forgot_password')),
-                SizedBox(height: 40 * sizeRatio.height),
+                SizedBox(height: 40.h),
                 StartPagesTitleWidget(
-                  sizeRatio: sizeRatio,
                   title: 'Create new password',
                   titleIcon: Image.asset('assets/images/lock_icon.png'),
                   subTitle:
                       'Save the new password in a safe place, if you forget it then you have to do a forgot password again.',
                   titleCentered: false,
                 ),
-                SizedBox(height: 30 * sizeRatio.height),
+                SizedBox(height: 30.h),
                 Text(
                   'Create a new password',
                   style: AppTextStyles.semiBold(
-                    fontSize: 15,
+                    fontSize: 15.sp,
                     color: AppColors.mainBlack,
                   ),
                 ),
@@ -92,11 +89,11 @@ class _NewPasswordPageWidgetState extends State<NewPasswordPageWidget> {
                   inputType: StartPagesInputType.password,
                   nextFocusNode: _confirmPasswordFocusNode,
                 ),
-                SizedBox(height: 20 * sizeRatio.height),
+                SizedBox(height: 20.h),
                 Text(
                   'Confirm a new password',
                   style: AppTextStyles.semiBold(
-                    fontSize: 15,
+                    fontSize: 15.sp,
                     color: AppColors.mainBlack,
                   ),
                 ),

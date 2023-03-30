@@ -43,7 +43,7 @@ abstract class AppNavigation {
 
   static GoRouter getRouter({required AppBloc appBloc}) {
     return GoRouter(
-      initialLocation: '/tests/123/0',
+      initialLocation: '/tests/123/12',
       navigatorKey: _rootNavigatorKey,
       //refreshListenable: appBloc,
       // redirect: (context, state) {

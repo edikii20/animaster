@@ -1,25 +1,23 @@
 import 'package:aniquiz/src/config/colors.dart';
 import 'package:aniquiz/src/config/text_styles.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class StartPagesTitleWidget extends StatelessWidget {
   const StartPagesTitleWidget({
     Key? key,
-    required Size sizeRatio,
     required String title,
     String? subTitle,
     required Image titleIcon,
     required bool titleCentered,
     bool subTitleCentered = false,
-  })  : _sizeRatio = sizeRatio,
-        _title = title,
+  })  : _title = title,
         _subTitle = subTitle,
         _titleIcon = titleIcon,
         _titleCentered = titleCentered,
         _subTitleCentered = subTitleCentered,
         super(key: key);
 
-  final Size _sizeRatio;
   final String _title;
   final String? _subTitle;
   final Image _titleIcon;
@@ -39,23 +37,23 @@ class StartPagesTitleWidget extends StatelessWidget {
                   Text(
                     _title,
                     style: AppTextStyles.bold(
-                      fontSize: 28,
+                      fontSize: 28.sp,
                       color: AppColors.mainBlack,
                     ),
                   ),
-                  SizedBox(width: 10 * _sizeRatio.width),
+                  SizedBox(width: 10.w),
                   SizedBox(
-                    width: 32 * _sizeRatio.height,
-                    height: 32 * _sizeRatio.height,
+                    width: 32.w,
+                    height: 32.w,
                     child: _titleIcon,
                   ),
                 ],
               ),
-              SizedBox(height: 20 * _sizeRatio.height),
+              SizedBox(height: 20.h),
               Text(
                 _subTitle!,
                 style: AppTextStyles.medium(
-                  fontSize: 18,
+                  fontSize: 18.sp,
                   color: AppColors.mainSecondaryLight,
                 ),
                 textAlign:
@@ -71,14 +69,14 @@ class StartPagesTitleWidget extends StatelessWidget {
               Text(
                 _title,
                 style: AppTextStyles.bold(
-                  fontSize: 28,
+                  fontSize: 28.sp,
                   color: AppColors.mainBlack,
                 ),
               ),
-              SizedBox(width: 10 * _sizeRatio.width),
+              SizedBox(width: 10.w),
               SizedBox(
-                width: 32 * _sizeRatio.height,
-                height: 32 * _sizeRatio.height,
+                width: 32.w,
+                height: 32.w,
                 child: _titleIcon,
               ),
             ],

@@ -1,5 +1,6 @@
 import 'package:aniquiz/src/utils/input_validation_mixin.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../config/colors.dart';
 import '../config/text_styles.dart';
@@ -90,13 +91,13 @@ class _StartPagesInputWidgetState extends State<StartPagesInputWidget>
     if (widget._inputType == StartPagesInputType.password ||
         widget._inputType == StartPagesInputType.confirmPassword) {
       return Padding(
-        padding: const EdgeInsets.symmetric(vertical: 12),
+        padding: EdgeInsets.symmetric(vertical: 12.h),
         child: Row(
           mainAxisSize: MainAxisSize.min,
           children: [
             SizedBox(
-              width: 24,
-              height: 24,
+              width: 24.w,
+              height: 24.w,
               child: _isCorrectInput == null
                   ? null
                   : _isCorrectInput!
@@ -109,7 +110,7 @@ class _StartPagesInputWidgetState extends State<StartPagesInputWidget>
                           color: Colors.red,
                         ),
             ),
-            const SizedBox(width: 5),
+            SizedBox(width: 5.w),
             GestureDetector(
               onTap: () => _onTapObscurePassword(),
               child: Icon(
@@ -126,9 +127,9 @@ class _StartPagesInputWidgetState extends State<StartPagesInputWidget>
       return _isCorrectInput == null
           ? null
           : Container(
-              width: 24,
-              height: 24,
-              padding: const EdgeInsets.symmetric(vertical: 12),
+              width: 24.w,
+              height: 24.w,
+              padding: EdgeInsets.symmetric(vertical: 12.h),
               child: _isCorrectInput!
                   ? Image.asset(
                       'assets/images/correct_icon.png',
@@ -158,7 +159,7 @@ class _StartPagesInputWidgetState extends State<StartPagesInputWidget>
           ? TextInputAction.next
           : TextInputAction.done,
       style: AppTextStyles.bold(
-        fontSize: 18,
+        fontSize: 18.sp,
         color: AppColors.mainBlack,
       ),
       cursorColor: AppColors.mainBlack,

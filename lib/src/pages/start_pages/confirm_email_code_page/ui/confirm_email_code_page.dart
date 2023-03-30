@@ -1,11 +1,11 @@
 import 'package:aniquiz/src/config/colors.dart';
-import 'package:aniquiz/src/config/sizes.dart';
 import 'package:aniquiz/src/config/text_styles.dart';
 import 'package:aniquiz/src/pages/start_pages/confirm_email_code_page/cubit/confirm_email_code_page_cubit.dart';
 import 'package:aniquiz/src/utils/app_buttons.dart';
 import 'package:aniquiz/src/utils/start_pages_title_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 
@@ -32,7 +32,6 @@ class _ConfirmEmailCodePageWidgetState
 
   @override
   Widget build(BuildContext context) {
-    final sizeRatio = AppSizes.getSizeRatio(context);
     return BlocListener<ConfirmEmailCodePageCubit, ConfirmEmailCodePageState>(
       listenWhen: (previous, current) =>
           current.status == ConfirmEmailCodePageStatus.complete,
@@ -55,20 +54,19 @@ class _ConfirmEmailCodePageWidgetState
             backgroundColor: Colors.white,
             resizeToAvoidBottomInset: false,
             floatingActionButton: Container(
-              padding: EdgeInsets.symmetric(horizontal: 20 * sizeRatio.width),
-              height: 60 * sizeRatio.height,
+              padding: EdgeInsets.symmetric(horizontal: 20.w),
+              height: 60.h,
               child: AppButtons.fillBorderedButton(
                 fillColor: AppColors.mainPurple,
                 borderColor: AppColors.mainPurpleDark,
                 child: Text(
                   'Confirm',
                   style: AppTextStyles.bold(
-                    fontSize: 16,
+                    fontSize: 16.sp,
                     color: Colors.white,
                   ),
                 ),
                 width: double.infinity,
-                sizeRatio: sizeRatio,
                 onTap: () => context
                     .read<ConfirmEmailCodePageCubit>()
                     .onTapConfirm(userOtp: _emailCodeInputController.text),
@@ -79,9 +77,9 @@ class _ConfirmEmailCodePageWidgetState
             body: SafeArea(
               child: Padding(
                 padding: EdgeInsets.only(
-                  left: 20 * sizeRatio.width,
-                  right: 20 * sizeRatio.width,
-                  top: 30 * sizeRatio.height,
+                  left: 20.w,
+                  right: 20.w,
+                  top: 30.h,
                 ),
                 child: Column(
                   children: [
@@ -90,31 +88,28 @@ class _ConfirmEmailCodePageWidgetState
                       child: AppButtons.goBackButton(
                           onPressed: () => context.goNamed('forgot_password')),
                     ),
-                    SizedBox(height: 40 * sizeRatio.height),
+                    SizedBox(height: 40.h),
                     StartPagesTitleWidget(
-                      sizeRatio: sizeRatio,
                       title: 'You\'ve got mail',
                       titleIcon: Image.asset('assets/images/email_icon.png'),
                       subTitle:
                           'We have sent the OTP verification code to your email address. Check your email and enter the code below.',
                       titleCentered: false,
                     ),
-                    SizedBox(height: 50 * sizeRatio.height),
+                    SizedBox(height: 50.h),
                     _ConfirmEmailCodePageEmailCodeInputWidget(
                       emailCodeInputController: _emailCodeInputController,
-                      sizeRatio: sizeRatio,
                     ),
-                    SizedBox(height: 20 * sizeRatio.height),
+                    SizedBox(height: 20.h),
                     Text(
                       'Didn\'t receive email?',
                       style: AppTextStyles.medium(
-                        fontSize: 18,
+                        fontSize: 18.sp,
                         color: AppColors.mainSecondaryLight,
                       ),
                     ),
-                    SizedBox(height: 20 * sizeRatio.height),
-                    _ConfirmEmailCodePageResendEmailCodeWidget(
-                        sizeRatio: sizeRatio),
+                    SizedBox(height: 20.h),
+                    const _ConfirmEmailCodePageResendEmailCodeWidget(),
                   ],
                 ),
               ),

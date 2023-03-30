@@ -45,7 +45,6 @@ class QuizDetailsPageWidget extends StatelessWidget {
               ),
             ),
             width: double.infinity,
-            sizeRatio: Size(3, 2),
             onTap: () {},
           ),
         ),

@@ -3,30 +3,25 @@ part of '../tests_collection_details_page.dart';
 class _TestsCollectionDetailsPageQuizWidget extends StatelessWidget {
   const _TestsCollectionDetailsPageQuizWidget({
     Key? key,
-    required Size sizeRatio,
     required int index,
     required String collectionId,
-  })  : _sizeRatio = sizeRatio,
-        _index = index,
+  })  : _index = index,
         _collectionId = collectionId,
         super(key: key);
 
-  final Size _sizeRatio;
   final int _index;
   final String _collectionId;
 
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.only(bottom: 20 * _sizeRatio.height),
+      padding: EdgeInsets.only(bottom: 20.h),
       child: Stack(
         children: [
           Row(
-            children: [
-              _TestsCollectionDetailsPageQuizLeftSectionWidget(
-                  sizeRatio: _sizeRatio),
-              _TestsCollectionDetailsPageQuizRightSectionWidget(
-                  sizeRatio: _sizeRatio),
+            children: const [
+              _TestsCollectionDetailsPageQuizLeftSectionWidget(),
+              _TestsCollectionDetailsPageQuizRightSectionWidget(),
             ],
           ),
           Positioned.fill(
@@ -41,7 +36,7 @@ class _TestsCollectionDetailsPageQuizWidget extends StatelessWidget {
                   },
                 ),
                 splashFactory: NoSplash.splashFactory,
-                borderRadius: BorderRadius.circular(20),
+                borderRadius: BorderRadius.circular(20.w),
               ),
             ),
           ),
@@ -54,11 +49,7 @@ class _TestsCollectionDetailsPageQuizWidget extends StatelessWidget {
 class _TestsCollectionDetailsPageQuizLeftSectionWidget extends StatelessWidget {
   const _TestsCollectionDetailsPageQuizLeftSectionWidget({
     Key? key,
-    required Size sizeRatio,
-  })  : _sizeRatio = sizeRatio,
-        super(key: key);
-
-  final Size _sizeRatio;
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -67,34 +58,34 @@ class _TestsCollectionDetailsPageQuizLeftSectionWidget extends StatelessWidget {
       child: Stack(
         children: [
           Container(
-            height: 130 * _sizeRatio.height,
+            height: 130.h,
             decoration: BoxDecoration(
               image: DecorationImage(
                 image: AssetImage('assets/images/quiz_img.jpg'),
                 fit: BoxFit.cover,
               ),
-              borderRadius: const BorderRadius.only(
-                bottomLeft: Radius.circular(20),
-                topLeft: Radius.circular(20),
+              borderRadius: BorderRadius.only(
+                bottomLeft: Radius.circular(20.w),
+                topLeft: Radius.circular(20.w),
               ),
             ),
           ),
           Positioned(
-            right: 10 * _sizeRatio.height,
-            bottom: 10 * _sizeRatio.height,
+            right: 10.h,
+            bottom: 10.h,
             child: Container(
               padding: EdgeInsets.symmetric(
-                horizontal: 10 * _sizeRatio.width,
-                vertical: 5 * _sizeRatio.height,
+                horizontal: 10.w,
+                vertical: 5.h,
               ),
               decoration: BoxDecoration(
                 color: AppColors.mainPurple,
-                borderRadius: BorderRadius.circular(7),
+                borderRadius: BorderRadius.circular(7.w),
               ),
               child: Text(
                 '10 Qs',
                 style: AppTextStyles.semiBold(
-                  fontSize: 12,
+                  fontSize: 12.sp,
                   color: Colors.white,
                 ),
               ),
@@ -110,27 +101,23 @@ class _TestsCollectionDetailsPageQuizRightSectionWidget
     extends StatelessWidget {
   const _TestsCollectionDetailsPageQuizRightSectionWidget({
     Key? key,
-    required Size sizeRatio,
-  })  : _sizeRatio = sizeRatio,
-        super(key: key);
-
-  final Size _sizeRatio;
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Expanded(
       flex: 4,
       child: Container(
-        height: 130 * _sizeRatio.height,
+        height: 130.h,
         padding: EdgeInsets.only(
-          left: 14 * _sizeRatio.width,
-          top: 12 * _sizeRatio.height,
-          right: 10 * _sizeRatio.width,
+          left: 14.w,
+          right: 10.w,
+          top: 12.h,
         ),
         decoration: BoxDecoration(
-          borderRadius: const BorderRadius.only(
-            bottomRight: Radius.circular(20),
-            topRight: Radius.circular(20),
+          borderRadius: BorderRadius.only(
+            bottomRight: Radius.circular(20.w),
+            topRight: Radius.circular(20.w),
           ),
           border: Border.all(
             color: AppColors.mainSecondaryDark,
@@ -144,33 +131,33 @@ class _TestsCollectionDetailsPageQuizRightSectionWidget
               overflow: TextOverflow.ellipsis,
               maxLines: 1,
               style: AppTextStyles.bold(
-                fontSize: 18,
+                fontSize: 18.sp,
                 color: AppColors.mainBlack,
               ),
             ),
-            SizedBox(height: 14 * _sizeRatio.height),
+            SizedBox(height: 10.h),
             Text(
               '2 weeks ago  •  2.6K plays',
               style: AppTextStyles.semiBold(
-                fontSize: 11,
+                fontSize: 11.sp,
                 color: AppColors.mainSecondaryLight,
               ),
             ),
-            SizedBox(height: 12 * _sizeRatio.height),
+            SizedBox(height: 20.h),
             Text.rich(
               TextSpan(
                 children: [
                   TextSpan(
                     text: 'Difficulty: ',
                     style: AppTextStyles.semiBold(
-                      fontSize: 14,
+                      fontSize: 14.sp,
                       color: AppColors.mainBlack,
                     ),
                   ),
                   TextSpan(
                     text: 'Hard',
                     style: AppTextStyles.bold(
-                      fontSize: 14,
+                      fontSize: 14.sp,
                       color: Colors.red,
                     ),
                   ),

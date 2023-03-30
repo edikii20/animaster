@@ -4,11 +4,7 @@ class _PageSelectorAppBarWidget extends StatelessWidget
     implements PreferredSizeWidget {
   const _PageSelectorAppBarWidget({
     Key? key,
-    required Size sizeRatio,
-  })  : _sizeRatio = sizeRatio,
-        super(key: key);
-
-  final Size _sizeRatio;
+  }) : super(key: key);
 
   Text _pickTitle({required int index}) {
     switch (index) {
@@ -36,11 +32,11 @@ class _PageSelectorAppBarWidget extends StatelessWidget
             padding: EdgeInsets.zero,
             highlightColor: Colors.transparent,
             splashColor: Colors.transparent,
-            constraints: BoxConstraints.tight(const Size(28, 28)),
+            constraints: BoxConstraints.tight(Size(28.w, 28.w)),
             icon: SvgPicture.asset(
               'assets/icons/search.svg',
-              width: 28,
-              height: 28,
+              width: 28.w,
+              height: 28.w,
               colorFilter: const ColorFilter.mode(
                 AppColors.mainBlack,
                 BlendMode.srcIn,
@@ -49,19 +45,19 @@ class _PageSelectorAppBarWidget extends StatelessWidget
           ),
           Padding(
             padding: EdgeInsets.only(
-              left: 16 * _sizeRatio.width,
-              right: 20 * _sizeRatio.width,
+              left: 16.w,
+              right: 20.w,
             ),
             child: IconButton(
               onPressed: () {},
               padding: EdgeInsets.zero,
               highlightColor: Colors.transparent,
               splashColor: Colors.transparent,
-              constraints: BoxConstraints.tight(const Size(28, 28)),
+              constraints: BoxConstraints.tight(Size(28.w, 28.w)),
               icon: SvgPicture.asset(
                 'assets/icons/bell.svg',
-                width: 28,
-                height: 28,
+                width: 28.w,
+                height: 28.w,
                 colorFilter: const ColorFilter.mode(
                   AppColors.mainBlack,
                   BlendMode.srcIn,
@@ -73,17 +69,17 @@ class _PageSelectorAppBarWidget extends StatelessWidget
       case 1:
         return [
           Padding(
-            padding: EdgeInsets.only(right: 20 * _sizeRatio.width),
+            padding: EdgeInsets.only(right: 20.w),
             child: IconButton(
               onPressed: () {},
               padding: EdgeInsets.zero,
               highlightColor: Colors.transparent,
               splashColor: Colors.transparent,
-              constraints: BoxConstraints.tight(const Size(28, 28)),
+              constraints: BoxConstraints.tight(Size(28.w, 28.w)),
               icon: SvgPicture.asset(
                 'assets/icons/search.svg',
-                width: 28,
-                height: 28,
+                width: 28.w,
+                height: 28.w,
                 colorFilter: const ColorFilter.mode(
                   AppColors.mainBlack,
                   BlendMode.srcIn,
@@ -95,17 +91,17 @@ class _PageSelectorAppBarWidget extends StatelessWidget
       case 2:
         return [
           Padding(
-            padding: EdgeInsets.only(right: 20 * _sizeRatio.width),
+            padding: EdgeInsets.only(right: 20.w),
             child: IconButton(
               onPressed: () {},
               padding: EdgeInsets.zero,
               highlightColor: Colors.transparent,
               splashColor: Colors.transparent,
-              constraints: BoxConstraints.tight(const Size(28, 28)),
+              constraints: BoxConstraints.tight(Size(28.w, 28.w)),
               icon: SvgPicture.asset(
                 'assets/icons/search.svg',
-                width: 28,
-                height: 28,
+                width: 28.w,
+                height: 28.w,
                 colorFilter: const ColorFilter.mode(
                   AppColors.mainBlack,
                   BlendMode.srcIn,
@@ -117,17 +113,17 @@ class _PageSelectorAppBarWidget extends StatelessWidget
       case 3:
         return [
           Padding(
-            padding: EdgeInsets.only(right: 20 * _sizeRatio.width),
+            padding: EdgeInsets.only(right: 20.w),
             child: IconButton(
               onPressed: () {},
               padding: EdgeInsets.zero,
               highlightColor: Colors.transparent,
               splashColor: Colors.transparent,
-              constraints: BoxConstraints.tight(const Size(28, 28)),
+              constraints: BoxConstraints.tight(Size(28.w, 28.w)),
               icon: SvgPicture.asset(
                 'assets/icons/search.svg',
-                width: 28,
-                height: 28,
+                width: 28.w,
+                height: 28.w,
                 colorFilter: const ColorFilter.mode(
                   AppColors.mainBlack,
                   BlendMode.srcIn,
@@ -139,17 +135,17 @@ class _PageSelectorAppBarWidget extends StatelessWidget
       case 4:
         return [
           Padding(
-            padding: EdgeInsets.only(right: 20 * _sizeRatio.width),
+            padding: EdgeInsets.only(right: 20.w),
             child: IconButton(
               onPressed: () {},
               padding: EdgeInsets.zero,
               highlightColor: Colors.transparent,
               splashColor: Colors.transparent,
-              constraints: BoxConstraints.tight(const Size(28, 28)),
+              constraints: BoxConstraints.tight(Size(28.w, 28.w)),
               icon: SvgPicture.asset(
                 'assets/icons/settings.svg',
-                width: 28,
-                height: 28,
+                width: 28.w,
+                height: 28.w,
                 colorFilter: const ColorFilter.mode(
                   AppColors.mainBlack,
                   BlendMode.srcIn,
@@ -164,7 +160,7 @@ class _PageSelectorAppBarWidget extends StatelessWidget
   }
 
   @override
-  Size get preferredSize => Size.fromHeight(86 * _sizeRatio.height);
+  Size get preferredSize => Size.fromHeight(70.h);
 
   @override
   Widget build(BuildContext context) {
@@ -175,14 +171,10 @@ class _PageSelectorAppBarWidget extends StatelessWidget
         return AppBar(
           title: _pickTitle(index: state.selectedIndex),
           actions: _pickActions(index: state.selectedIndex),
-          titleSpacing: 20 * _sizeRatio.width,
-          actionsIconTheme: const IconThemeData(
-            size: 28,
-            color: AppColors.mainBlack,
-          ),
-          toolbarHeight: 86 * _sizeRatio.height,
+          titleSpacing: 20.w,
+          toolbarHeight: 70.h,
           titleTextStyle: AppTextStyles.bold(
-            fontSize: 24,
+            fontSize: 24.sp,
             color: AppColors.mainBlack,
           ),
           elevation: 0,

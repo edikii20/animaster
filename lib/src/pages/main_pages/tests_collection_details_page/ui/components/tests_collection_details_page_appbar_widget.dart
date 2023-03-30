@@ -4,11 +4,7 @@ class _TestsCollectionDetailsPageAppbarWidget extends StatelessWidget
     implements PreferredSizeWidget {
   const _TestsCollectionDetailsPageAppbarWidget({
     Key? key,
-    required Size sizeRatio,
-  })  : _sizeRatio = sizeRatio,
-        super(key: key);
-
-  final Size _sizeRatio;
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -18,17 +14,17 @@ class _TestsCollectionDetailsPageAppbarWidget extends StatelessWidget
       ),
       actions: [
         Padding(
-          padding: EdgeInsets.only(right: 20 * _sizeRatio.width),
+          padding: EdgeInsets.only(right: 20.w),
           child: IconButton(
             onPressed: () {},
             padding: EdgeInsets.zero,
             highlightColor: Colors.transparent,
             splashColor: Colors.transparent,
-            constraints: BoxConstraints.tight(const Size(28, 28)),
+            constraints: BoxConstraints.tight(Size(28.w, 28.w)),
             icon: SvgPicture.asset(
               'assets/icons/filter.svg',
-              width: 28,
-              height: 28,
+              width: 28.w,
+              height: 28.w,
               colorFilter: const ColorFilter.mode(
                 AppColors.mainBlack,
                 BlendMode.srcIn,
@@ -40,15 +36,11 @@ class _TestsCollectionDetailsPageAppbarWidget extends StatelessWidget
       leading: AppButtons.goBackButton(
         onPressed: () => context.pop(),
       ),
-      leadingWidth: 69.1 * _sizeRatio.width,
+      leadingWidth: 69.1.w,
       titleSpacing: 0,
-      actionsIconTheme: const IconThemeData(
-        size: 28,
-        color: AppColors.mainBlack,
-      ),
-      toolbarHeight: 86 * _sizeRatio.height,
+      toolbarHeight: 70.h,
       titleTextStyle: AppTextStyles.bold(
-        fontSize: 24,
+        fontSize: 24.sp,
         color: AppColors.mainBlack,
       ),
       elevation: 0,
@@ -57,5 +49,5 @@ class _TestsCollectionDetailsPageAppbarWidget extends StatelessWidget
   }
 
   @override
-  Size get preferredSize => Size.fromHeight(86 * _sizeRatio.height);
+  Size get preferredSize => Size.fromHeight(70.h);
 }

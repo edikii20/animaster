@@ -7,6 +7,7 @@ import 'package:aniquiz/src/utils/start_pages_title_widget.dart';
 import 'package:aniquiz/src/utils/start_pages_input_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 
 part 'components/forgot_password_page_alert_dialog_widget.dart';
@@ -30,7 +31,6 @@ class _ForgotPasswordPageWidgetState extends State<ForgotPasswordPageWidget> {
 
   @override
   Widget build(BuildContext context) {
-    final sizeRatio = AppSizes.getSizeRatio(context);
     return WillPopScope(
       onWillPop: () async {
         context.goNamed('login');
@@ -50,7 +50,6 @@ class _ForgotPasswordPageWidgetState extends State<ForgotPasswordPageWidget> {
             showDialog(
               context: context,
               builder: (_) => _ForgotPasswordPageAlertDialogWidget(
-                sizeRatio: sizeRatio,
                 message: (state as ForgotPasswordPageFailureState).message,
               ),
             );
@@ -60,8 +59,8 @@ class _ForgotPasswordPageWidgetState extends State<ForgotPasswordPageWidget> {
           backgroundColor: Colors.white,
           resizeToAvoidBottomInset: false,
           floatingActionButton: Container(
-            padding: EdgeInsets.symmetric(horizontal: 20 * sizeRatio.width),
-            height: 60 * sizeRatio.height,
+            padding: EdgeInsets.symmetric(horizontal: 20.w),
+            height: 60.h,
             child:
                 BlocBuilder<ForgotPasswordPageCubit, ForgotPasswordPageState>(
               buildWhen: (previous, current) =>
@@ -75,8 +74,8 @@ class _ForgotPasswordPageWidgetState extends State<ForgotPasswordPageWidget> {
                   borderColor: AppColors.mainPurpleDark,
                   child: state is ForgotPasswordPageLoadingState
                       ? SizedBox(
-                          width: 21 * sizeRatio.height,
-                          height: 21 * sizeRatio.height,
+                          width: 21.h,
+                          height: 21.h,
                           child: const CircularProgressIndicator(
                             color: Colors.white,
                             strokeWidth: 3,
@@ -85,12 +84,11 @@ class _ForgotPasswordPageWidgetState extends State<ForgotPasswordPageWidget> {
                       : Text(
                           'Continue',
                           style: AppTextStyles.bold(
-                            fontSize: 16,
+                            fontSize: 16.sp,
                             color: Colors.white,
                           ),
                         ),
                   width: double.infinity,
-                  sizeRatio: sizeRatio,
                   onTap: state is ForgotPasswordPageLoadingState
                       ? null
                       : () => context
@@ -105,29 +103,28 @@ class _ForgotPasswordPageWidgetState extends State<ForgotPasswordPageWidget> {
           body: SafeArea(
             child: Padding(
               padding: EdgeInsets.only(
-                left: 20 * sizeRatio.width,
-                right: 20 * sizeRatio.width,
-                top: 30 * sizeRatio.height,
+                left: 20.w,
+                right: 20.w,
+                top: 30.h,
               ),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   AppButtons.goBackButton(
                       onPressed: () => context.goNamed('login')),
-                  SizedBox(height: 40 * sizeRatio.height),
+                  SizedBox(height: 40.h),
                   StartPagesTitleWidget(
-                    sizeRatio: sizeRatio,
                     title: 'Forgot Password',
                     titleIcon: Image.asset('assets/images/key_icon.png'),
                     subTitle:
                         'Enter your email address to get an OTP code to reset your password.',
                     titleCentered: false,
                   ),
-                  SizedBox(height: 30 * sizeRatio.height),
+                  SizedBox(height: 30.h),
                   Text(
                     'Email',
                     style: AppTextStyles.semiBold(
-                      fontSize: 15,
+                      fontSize: 15.sp,
                       color: AppColors.mainBlack,
                     ),
                   ),

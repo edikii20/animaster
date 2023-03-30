@@ -3,25 +3,21 @@ part of '../page_selector_widget.dart';
 class _PageSelectorBottomNavBarWidget extends StatelessWidget {
   const _PageSelectorBottomNavBarWidget({
     Key? key,
-    required Size sizeRatio,
-  })  : _sizeRatio = sizeRatio,
-        super(key: key);
-
-  final Size _sizeRatio;
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 86 * _sizeRatio.height,
+      height: 70.h,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.only(
-          topLeft: Radius.circular(20 * _sizeRatio.width),
-          topRight: Radius.circular(20 * _sizeRatio.width),
+          topLeft: Radius.circular(20.w),
+          topRight: Radius.circular(20.w),
         ),
-        boxShadow: [
+        boxShadow: const [
           BoxShadow(
             color: AppColors.mainSecondaryDark,
-            offset: Offset(0, -0.5 * _sizeRatio.height),
+            offset: Offset(0, -0.5),
           ),
         ],
         color: Colors.white,
@@ -36,8 +32,8 @@ class _PageSelectorBottomNavBarWidget extends StatelessWidget {
               splashFactory: NoSplash.splashFactory,
             ),
             child: BottomNavigationBar(
-              selectedFontSize: 14,
-              unselectedFontSize: 14,
+              selectedFontSize: 14.sp,
+              unselectedFontSize: 14.sp,
               currentIndex: state.selectedIndex,
               onTap: (index) => context
                   .read<PageSelectorCubit>()
@@ -62,8 +58,8 @@ class _PageSelectorBottomNavBarWidget extends StatelessWidget {
                     state.selectedIndex == 1
                         ? 'assets/icons/library_filled.svg'
                         : 'assets/icons/library.svg',
-                    width: 24,
-                    height: 24,
+                    width: 24.w,
+                    height: 24.w,
                     colorFilter: ColorFilter.mode(
                       state.selectedIndex == 1
                           ? AppColors.mainBlack
@@ -78,8 +74,8 @@ class _PageSelectorBottomNavBarWidget extends StatelessWidget {
                     state.selectedIndex == 2
                         ? 'assets/icons/puzzle_filled.svg'
                         : 'assets/icons/puzzle.svg',
-                    width: 24,
-                    height: 24,
+                    width: 24.w,
+                    height: 24.w,
                     colorFilter: ColorFilter.mode(
                       state.selectedIndex == 2
                           ? AppColors.mainBlack

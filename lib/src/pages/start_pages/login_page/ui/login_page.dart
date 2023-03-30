@@ -7,6 +7,7 @@ import 'package:aniquiz/src/utils/start_pages_input_widget.dart';
 import 'package:aniquiz/src/utils/start_pages_title_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 
 part 'components/login_page_login_form_widget.dart';
@@ -36,7 +37,6 @@ class _LogInPageWidgetState extends State<LogInPageWidget> {
 
   @override
   Widget build(BuildContext context) {
-    final sizeRatio = AppSizes.getSizeRatio(context);
     return WillPopScope(
       onWillPop: () async {
         context.goNamed('boarding');
@@ -48,7 +48,6 @@ class _LogInPageWidgetState extends State<LogInPageWidget> {
           showDialog(
             context: context,
             builder: (_) => _LogInPageAlertDialogWidget(
-              sizeRatio: sizeRatio,
               message: (state as LogInPageFailureState).message,
             ),
           );
@@ -57,8 +56,8 @@ class _LogInPageWidgetState extends State<LogInPageWidget> {
           backgroundColor: Colors.white,
           resizeToAvoidBottomInset: false,
           floatingActionButton: Container(
-            padding: EdgeInsets.symmetric(horizontal: 20 * sizeRatio.width),
-            height: 60 * sizeRatio.height,
+            padding: EdgeInsets.symmetric(horizontal: 20.w),
+            height: 60.h,
             child: BlocBuilder<LogInPageCubit, LogInPageState>(
               buildWhen: (previous, current) =>
                   (previous is! LogInPageLoadingState &&
@@ -71,8 +70,8 @@ class _LogInPageWidgetState extends State<LogInPageWidget> {
                   borderColor: AppColors.mainPurpleDark,
                   child: state is LogInPageLoadingState
                       ? SizedBox(
-                          width: 21 * sizeRatio.height,
-                          height: 21 * sizeRatio.height,
+                          width: 21.h,
+                          height: 21.h,
                           child: const CircularProgressIndicator(
                             color: Colors.white,
                             strokeWidth: 3,
@@ -81,12 +80,11 @@ class _LogInPageWidgetState extends State<LogInPageWidget> {
                       : Text(
                           'SIGN IN',
                           style: AppTextStyles.bold(
-                            fontSize: 16,
+                            fontSize: 16.sp,
                             color: Colors.white,
                           ),
                         ),
                   width: double.infinity,
-                  sizeRatio: sizeRatio,
                   onTap: state is LogInPageLoadingState
                       ? null
                       : () => context.read<LogInPageCubit>().onTapSignin(
@@ -102,25 +100,23 @@ class _LogInPageWidgetState extends State<LogInPageWidget> {
           body: SafeArea(
             child: Padding(
               padding: EdgeInsets.only(
-                left: 20 * sizeRatio.width,
-                right: 20 * sizeRatio.width,
-                top: 30 * sizeRatio.height,
+                left: 20.w,
+                right: 20.w,
+                top: 30.h,
               ),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   AppButtons.goBackButton(
                       onPressed: () => context.goNamed('boarding')),
-                  SizedBox(height: 40 * sizeRatio.height),
+                  SizedBox(height: 40.h),
                   StartPagesTitleWidget(
-                    sizeRatio: sizeRatio,
                     title: 'Hello there',
                     titleIcon: Image.asset('assets/images/hand_icon.png'),
                     titleCentered: false,
                   ),
-                  SizedBox(height: 30 * sizeRatio.height),
+                  SizedBox(height: 30.h),
                   _LogInPageRegistrationFormWidget(
-                    sizeRatio: sizeRatio,
                     emailInputController: _emailInputController,
                     passwordInputController: _passwordInputController,
                     passwordInputFocusNode: _passwordInputFocusNode,
