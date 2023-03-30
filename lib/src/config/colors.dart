@@ -9,4 +9,7 @@ abstract class AppColors {
   static const Color mainDisableDark = Color(0xFFC3B6FF);
   static const Color mainPurple = Color(0xFF6949FF);
   static const Color mainPurpleDark = Color(0xFF543ACC);
+  static const Color gold = Color(0xFFffd132);
+  static const Color silver = Color(0xFFa6c1f4);
+  static const Color bronze = Color(0xFFc2723f);
 }

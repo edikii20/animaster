@@ -1,14 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../../../config/colors.dart';
-import '../../../../config/sizes.dart';
 import '../../../../config/text_styles.dart';
 import '../../../../utils/app_buttons.dart';
 
 part 'components/quiz_details_page_appbar_widget.dart';
+part 'components/quiz_details_page_leaderboard_widget.dart';
+part 'components/quiz_details_page_quiz_info_widget.dart';
 
 class QuizDetailsPageWidget extends StatelessWidget {
   const QuizDetailsPageWidget({
@@ -21,7 +23,6 @@ class QuizDetailsPageWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final sizeRatio = AppSizes.getSizeRatio(context);
     return WillPopScope(
       onWillPop: () async {
         context.pop();
@@ -29,324 +30,96 @@ class QuizDetailsPageWidget extends StatelessWidget {
       },
       child: Scaffold(
         backgroundColor: Colors.white,
-        appBar: _QuizDetailsPageAppbarWidget(sizeRatio: sizeRatio),
+        appBar: const _QuizDetailsPageAppbarWidget(),
         floatingActionButton: Container(
-          padding: EdgeInsets.symmetric(horizontal: 20 * sizeRatio.width),
-          height: 60 * sizeRatio.height,
+          padding: EdgeInsets.symmetric(horizontal: 20.w),
+          height: 60.h,
           child: AppButtons.fillBorderedButton(
             fillColor: AppColors.mainPurple,
             borderColor: AppColors.mainPurpleDark,
             child: Text(
               'Start',
               style: AppTextStyles.bold(
-                fontSize: 16,
+                fontSize: 16.sp,
                 color: Colors.white,
               ),
             ),
             width: double.infinity,
-            sizeRatio: sizeRatio,
+            sizeRatio: Size(3, 2),
             onTap: () {},
           ),
         ),
         floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-        body: Padding(
-          padding: EdgeInsets.symmetric(horizontal: 20 * sizeRatio.width),
+        body: SingleChildScrollView(
+          padding: EdgeInsets.only(
+            left: 20.w,
+            right: 20.w,
+            bottom: 100.h,
+          ),
+          physics: const BouncingScrollPhysics(),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Container(
-                height: 280 * sizeRatio.height,
+                height: 280.h,
                 decoration: BoxDecoration(
                   image: DecorationImage(
                     image: AssetImage('assets/images/quiz_img.jpg'),
                     fit: BoxFit.cover,
                   ),
-                  borderRadius: BorderRadius.circular(25),
+                  borderRadius: BorderRadius.circular(25.w),
                 ),
               ),
-              SizedBox(height: 20 * sizeRatio.height),
+              SizedBox(height: 20.h),
               Text(
                 'Re-Train your Brain AOT',
                 style: AppTextStyles.bold(
-                  fontSize: 24,
+                  fontSize: 24.sp,
                   color: AppColors.mainBlack,
                 ),
               ),
-              SizedBox(height: 10 * sizeRatio.height),
+              SizedBox(height: 10.h),
               Divider(
                 color: AppColors.mainDisableLight.withOpacity(0.3),
-                height: 20,
+                height: 20.h,
                 thickness: 1,
               ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-                  Text.rich(
-                    textAlign: TextAlign.center,
-                    TextSpan(
-                      children: [
-                        TextSpan(
-                          text: '10\n',
-                          style: AppTextStyles.bold(
-                            fontSize: 18,
-                            color: AppColors.mainBlack,
-                          ),
-                        ),
-                        TextSpan(
-                          text: 'Questions',
-                          style: AppTextStyles.semiBold(
-                            fontSize: 16,
-                            color: AppColors.mainSecondaryLight,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                  Container(
-                    color: AppColors.mainDisableLight.withOpacity(0.3),
-                    width: 1,
-                    height: 70 * sizeRatio.height,
-                  ),
-                  Text.rich(
-                    textAlign: TextAlign.center,
-                    TextSpan(
-                      children: [
-                        TextSpan(
-                          text: '2.6K\n',
-                          style: AppTextStyles.bold(
-                            fontSize: 18,
-                            color: AppColors.mainBlack,
-                          ),
-                        ),
-                        TextSpan(
-                          text: 'Played',
-                          style: AppTextStyles.semiBold(
-                            fontSize: 16,
-                            color: AppColors.mainSecondaryLight,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                  Container(
-                    color: AppColors.mainDisableLight.withOpacity(0.3),
-                    width: 1,
-                    height: 70 * sizeRatio.height,
-                  ),
-                  Text.rich(
-                    textAlign: TextAlign.center,
-                    TextSpan(
-                      children: [
-                        TextSpan(
-                          text: '1.2K\n',
-                          style: AppTextStyles.bold(
-                            fontSize: 18,
-                            color: AppColors.mainBlack,
-                          ),
-                        ),
-                        TextSpan(
-                          text: 'Completed',
-                          style: AppTextStyles.semiBold(
-                            fontSize: 16,
-                            color: AppColors.mainSecondaryLight,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                  Container(
-                    color: AppColors.mainDisableLight.withOpacity(0.3),
-                    width: 1,
-                    height: 70 * sizeRatio.height,
-                  ),
-                  Text.rich(
-                    textAlign: TextAlign.center,
-                    TextSpan(
-                      children: [
-                        TextSpan(
-                          text: 'Hard\n',
-                          style: AppTextStyles.bold(
-                            fontSize: 18,
-                            color: AppColors.mainBlack,
-                          ),
-                        ),
-                        TextSpan(
-                          text: 'Difficult',
-                          style: AppTextStyles.semiBold(
-                            fontSize: 16,
-                            color: AppColors.mainSecondaryLight,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ],
+              const _QuizDetailsPageQuizInfoWidget(
+                questionsQuantity: '10',
+                completedQuantity: '1.2K',
+                difficult: 'Hard',
+                playedQuantity: '2.6K',
               ),
               Divider(
                 color: AppColors.mainDisableLight.withOpacity(0.3),
-                height: 20,
+                height: 20.h,
                 thickness: 1,
               ),
-              SizedBox(height: 10 * sizeRatio.height),
+              SizedBox(height: 10.h),
               Text(
                 'Leaders',
                 style: AppTextStyles.bold(
-                  fontSize: 18,
+                  fontSize: 18.sp,
                   color: AppColors.mainBlack,
                 ),
               ),
-              SizedBox(height: 10 * sizeRatio.height),
-              Row(
-                // mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Expanded(
-                    child: Stack(
-                      alignment: Alignment.center,
-                      children: [
-                        Column(
-                          children: [
-                            CircleAvatar(
-                              backgroundColor: Colors.amber,
-                              radius: 38,
-                              child: CircleAvatar(
-                                radius: 35,
-                                backgroundImage:
-                                    AssetImage('assets/images/avatar_img.jpg'),
-                              ),
-                            ),
-                            SizedBox(height: 5 * sizeRatio.height),
-                            Text(
-                              'Pepranarolan',
-                              style: AppTextStyles.bold(
-                                fontSize: 15,
-                                color: AppColors.mainBlack,
-                              ),
-                            ),
-                            Text(
-                              '13m 50s',
-                              style: AppTextStyles.bold(
-                                fontSize: 15,
-                                color: AppColors.mainSecondaryLight,
-                              ),
-                            ),
-                          ],
-                        ),
-                        Positioned(
-                          top: 78 * sizeRatio.height,
-                          child: CircleAvatar(
-                            backgroundColor: Colors.amber,
-                            radius: 10,
-                            child: Text(
-                              '1',
-                              style: AppTextStyles.bold(
-                                fontSize: 14,
-                                color: AppColors.mainBlack,
-                              ),
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                  Expanded(
-                    child: Stack(
-                      alignment: Alignment.center,
-                      children: [
-                        Column(
-                          children: [
-                            CircleAvatar(
-                              backgroundColor: Colors.blueGrey,
-                              radius: 38,
-                              child: CircleAvatar(
-                                radius: 35,
-                                backgroundImage:
-                                    AssetImage('assets/images/avatar_img.jpg'),
-                              ),
-                            ),
-                            SizedBox(height: 5 * sizeRatio.height),
-                            Text(
-                              'Herinanwauch',
-                              style: AppTextStyles.bold(
-                                fontSize: 15,
-                                color: AppColors.mainBlack,
-                              ),
-                            ),
-                            Text(
-                              '13m 50s',
-                              style: AppTextStyles.bold(
-                                fontSize: 15,
-                                color: AppColors.mainSecondaryLight,
-                              ),
-                            ),
-                          ],
-                        ),
-                        Positioned(
-                          top: 78 * sizeRatio.height,
-                          child: CircleAvatar(
-                            backgroundColor: Colors.blueGrey,
-                            radius: 10,
-                            child: Text(
-                              '2',
-                              style: AppTextStyles.bold(
-                                fontSize: 14,
-                                color: AppColors.mainBlack,
-                              ),
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                  Expanded(
-                    child: Stack(
-                      alignment: Alignment.center,
-                      children: [
-                        Column(
-                          children: [
-                            CircleAvatar(
-                              backgroundColor: Colors.brown,
-                              radius: 38,
-                              child: CircleAvatar(
-                                radius: 35,
-                                backgroundImage:
-                                    AssetImage('assets/images/avatar_img.jpg'),
-                              ),
-                            ),
-                            SizedBox(height: 5 * sizeRatio.height),
-                            Text(
-                              'Antonio24123',
-                              style: AppTextStyles.bold(
-                                fontSize: 15,
-                                color: AppColors.mainBlack,
-                              ),
-                            ),
-                            Text(
-                              '13m 50s',
-                              style: AppTextStyles.bold(
-                                fontSize: 15,
-                                color: AppColors.mainSecondaryLight,
-                              ),
-                            ),
-                          ],
-                        ),
-                        Positioned(
-                          top: 78 * sizeRatio.height,
-                          child: CircleAvatar(
-                            backgroundColor: Colors.brown,
-                            radius: 10,
-                            child: Text(
-                              '3',
-                              style: AppTextStyles.bold(
-                                fontSize: 14,
-                                color: AppColors.mainBlack,
-                              ),
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ],
+              SizedBox(height: 10.h),
+              const _QuizDetailsPageLeaderboardWidget(),
+              SizedBox(height: 20.h),
+              Text(
+                'Description',
+                style: AppTextStyles.bold(
+                  fontSize: 18.sp,
+                  color: AppColors.mainBlack,
+                ),
+              ),
+              SizedBox(height: 10.h),
+              Text(
+                'Removed is bed are pulled however colonel or law shyness unpacked minutes arose bed turned uncommonly state. Thirty father again placing domestic genius unwilling vexed west gentleman. Immediate abode twenty. Determine perceived entered furniture have collecting. Unaffected dissuade few again.',
+                style: AppTextStyles.semiBold(
+                  fontSize: 16.sp,
+                  color: AppColors.mainSecondaryLight,
+                ),
               ),
             ],
           ),
