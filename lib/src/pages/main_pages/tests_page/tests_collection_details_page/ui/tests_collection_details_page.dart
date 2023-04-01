@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:go_router/go_router.dart';
-import '../../../../config/colors.dart';
-import '../../../../config/text_styles.dart';
+import '../../../../../config/colors.dart';
+import '../../../../../config/text_styles.dart';
 
 part 'components/tests_collection_details_page_appbar_widget.dart';
 part 'components/tests_collection_details_page_header_widget.dart';

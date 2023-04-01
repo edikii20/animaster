@@ -44,6 +44,8 @@ class _PageSelectorBottomNavBarWidget extends StatelessWidget {
                     state.selectedIndex == 0
                         ? 'assets/icons/home_filled.svg'
                         : 'assets/icons/home.svg',
+                    width: 24.w,
+                    height: 24.w,
                     colorFilter: ColorFilter.mode(
                       state.selectedIndex == 0
                           ? AppColors.mainBlack
@@ -83,13 +85,15 @@ class _PageSelectorBottomNavBarWidget extends StatelessWidget {
                       BlendMode.srcIn,
                     ),
                   ),
-                  label: 'Tests',
+                  label: 'Quizzes',
                 ),
                 BottomNavigationBarItem(
                   icon: SvgPicture.asset(
                     state.selectedIndex == 3
                         ? 'assets/icons/star_filled.svg'
                         : 'assets/icons/star.svg',
+                    width: 24.w,
+                    height: 24.w,
                     colorFilter: ColorFilter.mode(
                       state.selectedIndex == 3
                           ? AppColors.mainBlack
@@ -104,6 +108,8 @@ class _PageSelectorBottomNavBarWidget extends StatelessWidget {
                     state.selectedIndex == 4
                         ? 'assets/icons/user_filled.svg'
                         : 'assets/icons/user.svg',
+                    width: 24.w,
+                    height: 24.w,
                     colorFilter: ColorFilter.mode(
                       state.selectedIndex == 4
                           ? AppColors.mainBlack

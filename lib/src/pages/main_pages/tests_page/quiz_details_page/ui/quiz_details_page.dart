@@ -4,9 +4,9 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:go_router/go_router.dart';
 
-import '../../../../config/colors.dart';
-import '../../../../config/text_styles.dart';
-import '../../../../utils/app_buttons.dart';
+import '../../../../../config/colors.dart';
+import '../../../../../config/text_styles.dart';
+import '../../../../../utils/app_buttons.dart';
 
 part 'components/quiz_details_page_appbar_widget.dart';
 part 'components/quiz_details_page_leaderboard_widget.dart';
