@@ -119,7 +119,7 @@ class AuthenticationRepository {
 
   AuthenticationRepository({
     FirebaseAuth? firebaseAuth,
-    EmailAuth? emailOTPProvider,
+    // EmailAuth? emailOTPProvider,
   }) : _firebaseAuth = firebaseAuth ?? FirebaseAuth.instance;
 
   //TODO: Нужно будет переделать на отслеживания tenantId чтобы понимать когда аккаунт удален или дизейблинутный
