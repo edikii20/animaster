@@ -6,7 +6,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../config/colors.dart';
+import '../config/styles.dart';
 
 class App extends StatelessWidget {
   const App({
@@ -16,9 +16,8 @@ class App extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ScreenUtilInit(
-      designSize: const Size(430, 888),
+      designSize: const Size(375, 812),
       builder: (context, child) => MaterialApp.router(
-        restorationScopeId: 'app',
         debugShowCheckedModeBanner: false,
         localizationsDelegates: const [
           AppLocalizations.delegate,

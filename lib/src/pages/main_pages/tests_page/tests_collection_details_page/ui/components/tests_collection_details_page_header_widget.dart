@@ -9,15 +9,15 @@ class _TestsCollectionDetailsPageHeaderWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return SliverPadding(
       padding: EdgeInsets.only(
-        left: 20.w,
-        right: 20.w,
-        bottom: 20.h,
+        left: 20.sp,
+        right: 20.sp,
+        bottom: 20.sp,
       ),
       sliver: SliverAppBar(
         elevation: 0,
         automaticallyImplyLeading: false,
         backgroundColor: Colors.transparent,
-        expandedHeight: 280.h,
+        expandedHeight: 280.sp,
         flexibleSpace: FlexibleSpaceBar(
           collapseMode: CollapseMode.pin,
           background: Stack(
@@ -28,17 +28,17 @@ class _TestsCollectionDetailsPageHeaderWidget extends StatelessWidget {
                     image: AssetImage('assets/images/attack_on_titan.jpg'),
                     fit: BoxFit.cover,
                   ),
-                  borderRadius: BorderRadius.circular(25.w),
+                  borderRadius: BorderRadius.circular(25),
                 ),
               ),
               Container(
                 padding: EdgeInsets.only(
-                  left: 20.w,
-                  right: 20.w,
-                  bottom: 20.h,
+                  left: 20.sp,
+                  right: 20.sp,
+                  bottom: 20.sp,
                 ),
                 decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(25.w),
+                  borderRadius: BorderRadius.circular(25),
                   gradient: const LinearGradient(
                     begin: Alignment.topCenter,
                     end: Alignment.bottomCenter,
@@ -56,10 +56,10 @@ class _TestsCollectionDetailsPageHeaderWidget extends StatelessWidget {
                       'Attack on Titan Shingeki no Kyojin 4',
                       style: AppTextStyles.bold(
                         fontSize: 20.sp,
-                        color: Colors.white,
+                        color: AppColors.white,
                       ),
                     ),
-                    SizedBox(height: 20.h),
+                    20.verticalSpace,
                     Row(
                       children: [
                         Expanded(

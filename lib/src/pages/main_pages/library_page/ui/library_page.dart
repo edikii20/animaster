@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-
-import '../../../../config/colors.dart';
-import '../../../../config/text_styles.dart';
+import '../../../../config/styles.dart';
 
 class LibraryPageWidget extends StatelessWidget {
   const LibraryPageWidget({

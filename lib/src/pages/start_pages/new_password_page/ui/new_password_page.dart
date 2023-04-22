@@ -1,15 +1,17 @@
-import 'package:aniquiz/src/config/colors.dart';
-import 'package:aniquiz/src/config/text_styles.dart';
-import 'package:aniquiz/src/utils/app_buttons.dart';
-import 'package:aniquiz/src/utils/start_pages_input_widget.dart';
-import 'package:aniquiz/src/utils/start_pages_title_widget.dart';
+import 'package:aniquiz/src/app/app_navigation.dart';
+import 'package:aniquiz/src/config/styles.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
+import '../../../../utils/widgets/common/app_buttons.dart';
+import '../../../../utils/widgets/common/app_text_widget.dart';
+import '../../../../utils/widgets/common/start_pages_input_widget.dart';
+import '../../../../utils/widgets/common/start_pages_title_widget.dart';
 
 class NewPasswordPageWidget extends StatefulWidget {
-  const NewPasswordPageWidget({super.key});
+  const NewPasswordPageWidget({
+    Key? key,
+  }) : super(key: key);
 
   @override
   State<NewPasswordPageWidget> createState() => _NewPasswordPageWidgetState();
@@ -32,24 +34,23 @@ class _NewPasswordPageWidgetState extends State<NewPasswordPageWidget> {
   Widget build(BuildContext context) {
     return WillPopScope(
       onWillPop: () async {
-        context.goNamed('forgot_password');
+        AppNavigation.goToForgotPassword(context: context);
         return false;
       },
       child: Scaffold(
-        backgroundColor: Colors.white,
+        backgroundColor: AppColors.white,
         resizeToAvoidBottomInset: false,
         floatingActionButton: Container(
-          padding: EdgeInsets.symmetric(horizontal: 20.w),
-          height: 60.h,
+          padding: EdgeInsets.symmetric(horizontal: 20.sp),
+          height: 60.sp,
           child: AppButtons.fillBorderedButton(
             fillColor: AppColors.mainPurple,
             borderColor: AppColors.mainPurpleDark,
-            child: Text(
-              'Continue',
-              style: AppTextStyles.bold(
-                fontSize: 16.sp,
-                color: Colors.white,
-              ),
+            child: AppTextWidget(
+              text: 'Continue',
+              fontSize: 16.sp,
+              fontWeight: FontWeight.w700,
+              color: AppColors.white,
             ),
             width: double.infinity,
             onTap: () {},
@@ -59,16 +60,17 @@ class _NewPasswordPageWidgetState extends State<NewPasswordPageWidget> {
         body: SafeArea(
           child: Padding(
             padding: EdgeInsets.only(
-              left: 20.w,
-              right: 20.w,
-              top: 30.h,
+              left: 20.sp,
+              right: 20.sp,
+              top: 30.sp,
             ),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 AppButtons.goBackButton(
-                    onPressed: () => context.goNamed('forgot_password')),
-                SizedBox(height: 40.h),
+                    onPressed: () =>
+                        AppNavigation.goToForgotPassword(context: context)),
+                40.verticalSpace,
                 StartPagesTitleWidget(
                   title: 'Create new password',
                   titleIcon: Image.asset('assets/images/lock_icon.png'),
@@ -76,7 +78,7 @@ class _NewPasswordPageWidgetState extends State<NewPasswordPageWidget> {
                       'Save the new password in a safe place, if you forget it then you have to do a forgot password again.',
                   titleCentered: false,
                 ),
-                SizedBox(height: 30.h),
+                30.verticalSpace,
                 Text(
                   'Create a new password',
                   style: AppTextStyles.semiBold(
@@ -89,7 +91,7 @@ class _NewPasswordPageWidgetState extends State<NewPasswordPageWidget> {
                   inputType: StartPagesInputType.password,
                   nextFocusNode: _confirmPasswordFocusNode,
                 ),
-                SizedBox(height: 20.h),
+                20.verticalSpace,
                 Text(
                   'Confirm a new password',
                   style: AppTextStyles.semiBold(

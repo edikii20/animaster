@@ -1,7 +1,8 @@
-import 'package:aniquiz/src/config/colors.dart';
-import 'package:aniquiz/src/config/text_styles.dart';
+import 'package:aniquiz/src/config/styles.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+
+import 'app_text_widget.dart';
 
 class StartPagesTitleWidget extends StatelessWidget {
   const StartPagesTitleWidget({
@@ -34,28 +35,26 @@ class StartPagesTitleWidget extends StatelessWidget {
                     ? MainAxisAlignment.center
                     : MainAxisAlignment.start,
                 children: [
-                  Text(
-                    _title,
-                    style: AppTextStyles.bold(
-                      fontSize: 28.sp,
-                      color: AppColors.mainBlack,
-                    ),
+                  AppTextWidget(
+                    text: _title,
+                    fontSize: 24.sp,
+                    fontWeight: FontWeight.w700,
+                    color: AppColors.mainBlack,
                   ),
-                  SizedBox(width: 10.w),
+                  5.horizontalSpace,
                   SizedBox(
-                    width: 32.w,
-                    height: 32.w,
+                    width: 26.sp,
+                    height: 26.sp,
                     child: _titleIcon,
                   ),
                 ],
               ),
-              SizedBox(height: 20.h),
-              Text(
-                _subTitle!,
-                style: AppTextStyles.medium(
-                  fontSize: 18.sp,
-                  color: AppColors.mainSecondaryLight,
-                ),
+              10.verticalSpace,
+              AppTextWidget(
+                text: _subTitle!,
+                fontSize: 17.sp,
+                fontWeight: FontWeight.w500,
+                color: AppColors.mainSecondaryLight,
                 textAlign:
                     _subTitleCentered ? TextAlign.center : TextAlign.start,
               ),
@@ -66,17 +65,16 @@ class StartPagesTitleWidget extends StatelessWidget {
                 ? MainAxisAlignment.center
                 : MainAxisAlignment.start,
             children: [
-              Text(
-                _title,
-                style: AppTextStyles.bold(
-                  fontSize: 28.sp,
-                  color: AppColors.mainBlack,
-                ),
+              AppTextWidget(
+                text: _title,
+                fontSize: 24.sp,
+                fontWeight: FontWeight.w700,
+                color: AppColors.mainBlack,
               ),
-              SizedBox(width: 10.w),
+              5.horizontalSpace,
               SizedBox(
-                width: 32.w,
-                height: 32.w,
+                width: 26.sp,
+                height: 26.sp,
                 child: _titleIcon,
               ),
             ],

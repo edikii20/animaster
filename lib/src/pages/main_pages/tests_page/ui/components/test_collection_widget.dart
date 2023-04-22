@@ -19,12 +19,12 @@ class _TestCollectionWidget extends StatelessWidget {
               image: AssetImage('assets/images/attack_on_titan.jpg'),
               fit: BoxFit.cover,
             ),
-            borderRadius: BorderRadius.circular(10.w),
+            borderRadius: BorderRadius.circular(10),
           ),
         ),
         Container(
           decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(10.w),
+            borderRadius: BorderRadius.circular(10),
             gradient: LinearGradient(
               begin: Alignment.bottomCenter,
               end: Alignment.center,
@@ -36,9 +36,9 @@ class _TestCollectionWidget extends StatelessWidget {
           ),
         ),
         Positioned.fill(
-          bottom: 15.h,
-          left: 10.w,
-          right: 5.w,
+          bottom: 15.sp,
+          left: 10.sp,
+          right: 5.sp,
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.end,
             children: [
@@ -49,7 +49,7 @@ class _TestCollectionWidget extends StatelessWidget {
                   overflow: TextOverflow.ellipsis,
                   style: AppTextStyles.bold(
                     fontSize: 12.sp,
-                    color: Colors.white,
+                    color: AppColors.white,
                   ),
                 ),
               ),
@@ -60,14 +60,12 @@ class _TestCollectionWidget extends StatelessWidget {
           child: Material(
             color: Colors.transparent,
             child: InkWell(
-              onTap: () => context.goNamed(
-                'collection_details',
-                params: {
-                  'collectionId': '1234',
-                },
+              onTap: () => AppNavigation.goToCollectionDetails(
+                context: context,
+                id: '1234',
               ),
               splashFactory: NoSplash.splashFactory,
-              borderRadius: BorderRadius.circular(10.w),
+              borderRadius: BorderRadius.circular(10),
             ),
           ),
         ),

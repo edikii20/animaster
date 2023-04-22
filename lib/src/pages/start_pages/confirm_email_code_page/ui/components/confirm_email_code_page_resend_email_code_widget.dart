@@ -14,26 +14,23 @@ class _ConfirmEmailCodePageResendEmailCodeWidget extends StatelessWidget {
             ? Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Text(
-                    'You can resend code in ',
-                    style: AppTextStyles.medium(
-                      fontSize: 18.sp,
-                      color: AppColors.mainSecondaryLight,
-                    ),
+                  AppTextWidget(
+                    text: 'You can resend code in ',
+                    fontWeight: FontWeight.w500,
+                    fontSize: 18.sp,
+                    color: AppColors.mainSecondaryLight,
                   ),
-                  Text(
-                    '${state.seconds}',
-                    style: AppTextStyles.medium(
-                      fontSize: 18.sp,
-                      color: AppColors.mainPurple,
-                    ),
+                  AppTextWidget(
+                    text: '${state.seconds}',
+                    fontWeight: FontWeight.w500,
+                    fontSize: 18.sp,
+                    color: AppColors.mainPurple,
                   ),
-                  Text(
-                    ' s',
-                    style: AppTextStyles.medium(
-                      fontSize: 18.sp,
-                      color: AppColors.mainSecondaryLight,
-                    ),
+                  AppTextWidget(
+                    text: ' s',
+                    fontWeight: FontWeight.w500,
+                    fontSize: 18.sp,
+                    color: AppColors.mainSecondaryLight,
                   ),
                 ],
               )
@@ -44,7 +41,7 @@ class _ConfirmEmailCodePageResendEmailCodeWidget extends StatelessWidget {
                   'Resend code',
                   style: AppTextStyles.bold(
                     fontSize: 16.sp,
-                    color: Colors.white,
+                    color: AppColors.white,
                   ),
                 ),
                 onTap: () {

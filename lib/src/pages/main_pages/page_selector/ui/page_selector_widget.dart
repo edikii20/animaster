@@ -1,11 +1,11 @@
-import 'package:aniquiz/src/config/text_styles.dart';
+import 'package:aniquiz/src/app/app_navigation.dart';
 import 'package:aniquiz/src/pages/main_pages/page_selector/cubit/page_selector_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:go_router/go_router.dart';
-import '../../../../config/colors.dart';
+import '../../../../config/styles.dart';
+import '../../../../utils/widgets/common/app_buttons.dart';
 
 part 'components/page_selector_bottom_nav_bar_widget.dart';
 part 'components/page_selector_app_bar_widget.dart';
@@ -27,26 +27,26 @@ class PageSelectorWidget extends StatelessWidget {
       listener: (context, state) {
         switch (state.selectedIndex) {
           case 0:
-            context.goNamed('home');
+            AppNavigation.goToHome(context: context);
             break;
           case 1:
-            context.goNamed('library');
+            AppNavigation.goToLibrary(context: context);
             break;
           case 2:
-            context.goNamed('tests');
+            AppNavigation.goToTests(context: context);
             break;
           case 3:
-            context.goNamed('rating');
+            AppNavigation.goToRating(context: context);
             break;
           case 4:
-            context.goNamed('profile');
+            AppNavigation.goToProfile(context: context);
             break;
         }
       },
       child: WillPopScope(
         onWillPop: () async => false,
         child: Scaffold(
-          backgroundColor: Colors.white,
+          backgroundColor: AppColors.white,
           appBar: const _PageSelectorAppBarWidget(),
           bottomNavigationBar: const _PageSelectorBottomNavBarWidget(),
           body: _child,

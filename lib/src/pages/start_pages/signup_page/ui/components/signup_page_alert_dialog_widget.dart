@@ -33,12 +33,12 @@ class _SignUpPageAlertDialogWidgetState
   @override
   Widget build(BuildContext context) {
     return Dialog(
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30.w)),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
       child: BlocListener<SignUpPageCubit, SignUpPageState>(
         listenWhen: (previous, current) => current is SignUpPageCompleteState,
         listener: (context, state) {
           Future.delayed(const Duration(seconds: 1), () {
-            Navigator.of(context).pop(true);
+            AppNavigation.pop(context: context, result: true);
           });
         },
         child: BlocBuilder<SignUpPageCubit, SignUpPageState>(
@@ -46,54 +46,52 @@ class _SignUpPageAlertDialogWidgetState
           builder: (context, state) {
             return Container(
               padding: EdgeInsets.symmetric(
-                horizontal: 40.w,
-                vertical: 20.h,
+                horizontal: 40.sp,
+                vertical: 20.sp,
               ),
-              height: state is SignUpPageFailureState ? 370.h : 430.h,
+              height: state is SignUpPageFailureState ? 370.sp : 430.sp,
               child: Column(
                 children: [
                   Container(
-                    height: 180.h,
-                    width: 180.h,
+                    height: 180.sp,
+                    width: 180.sp,
                     color: state is SignUpPageFailureState
                         ? Colors.red
                         : AppColors.mainDisableDark,
                   ),
-                  SizedBox(height: 10.h),
-                  Text(
-                    state is SignUpPageFailureState
+                  10.verticalSpace,
+                  AppTextWidget(
+                    text: state is SignUpPageFailureState
                         ? 'Failure!'
                         : 'Verification!',
-                    style: AppTextStyles.bold(
-                      fontSize: 24.sp,
-                      color: AppColors.mainPurple,
-                    ),
+                    fontSize: 24.sp,
+                    fontWeight: FontWeight.w700,
+                    color: AppColors.mainPurple,
                   ),
-                  SizedBox(height: 5.h),
-                  Text(
-                    state is SignUpPageFailureState
+                  5.verticalSpace,
+                  AppTextWidget(
+                    text: state is SignUpPageFailureState
                         ? state.message
                         : 'Check your email. We have sent you a mail to confirm your registration.',
+                    fontSize: 15.sp,
+                    fontWeight: FontWeight.w500,
+                    color: AppColors.mainBlack,
                     textAlign: TextAlign.center,
-                    style: AppTextStyles.medium(
-                      fontSize: 15.sp,
-                      color: AppColors.mainBlack,
-                    ),
                   ),
                   state is SignUpPageFailureState
                       ? const SizedBox.shrink()
-                      : SizedBox(height: 20.h),
+                      : 20.verticalSpace,
                   state is SignUpPageFailureState
                       ? const SizedBox.shrink()
                       : state is SignUpPageCompleteState
                           ? Container(
-                              width: 80.h,
-                              height: 80.h,
+                              width: 80.sp,
+                              height: 80.sp,
                               color: Colors.green,
                             )
                           : SizedBox(
-                              width: 80.h,
-                              height: 80.h,
+                              width: 80.sp,
+                              height: 80.sp,
                               child: Lottie.asset(
                                   'assets/animations/loader_animation.json'),
                             ),

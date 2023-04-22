@@ -20,12 +20,12 @@ class _LogInPageRegistrationFormWidget extends StatelessWidget {
     return Expanded(
       child: ListView(
         physics: const BouncingScrollPhysics(),
-        padding: EdgeInsets.only(bottom: 120.h),
+        padding: EdgeInsets.only(bottom: 120.sp),
         children: [
           Text(
             'Email',
             style: AppTextStyles.semiBold(
-              fontSize: 15.sp,
+              fontSize: 16.sp,
               color: AppColors.mainBlack,
             ),
           ),
@@ -34,11 +34,11 @@ class _LogInPageRegistrationFormWidget extends StatelessWidget {
             inputType: StartPagesInputType.email,
             nextFocusNode: _passwordInputFocusNode,
           ),
-          SizedBox(height: 20.h),
+          20.verticalSpace,
           Text(
             'Password',
             style: AppTextStyles.semiBold(
-              fontSize: 15.sp,
+              fontSize: 16.sp,
               color: AppColors.mainBlack,
             ),
           ),
@@ -47,17 +47,16 @@ class _LogInPageRegistrationFormWidget extends StatelessWidget {
             inputType: StartPagesInputType.password,
             currentFocusNode: _passwordInputFocusNode,
           ),
-          SizedBox(height: 40.h),
+          40.verticalSpace,
           Align(
             alignment: Alignment.center,
             child: GestureDetector(
-              onTap: () => context.goNamed('forgot_password'),
-              child: Text(
-                'Forgot password?',
-                style: AppTextStyles.bold(
-                  fontSize: 18.sp,
-                  color: AppColors.mainPurple,
-                ),
+              onTap: () => AppNavigation.goToForgotPassword(context: context),
+              child: AppTextWidget(
+                text: 'Forgot password?',
+                fontSize: 18.sp,
+                fontWeight: FontWeight.w700,
+                color: AppColors.mainPurple,
               ),
             ),
           ),

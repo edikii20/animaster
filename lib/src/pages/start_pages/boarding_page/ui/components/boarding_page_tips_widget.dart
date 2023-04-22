@@ -8,7 +8,7 @@ class _BoardingPageTipsWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 550.h,
+      height: 400.sp,
       child: PageView(
         onPageChanged: (value) =>
             context.read<BoardingPageCubit>().onTipsChanged(index: value),
@@ -31,38 +31,6 @@ class _BoardingPageTipsWidget extends StatelessWidget {
           ),
         ],
       ),
-    );
-  }
-}
-
-class _BoardingPageTipWidget extends StatelessWidget {
-  const _BoardingPageTipWidget({
-    Key? key,
-    required Widget image,
-    required String text,
-  })  : _image = image,
-        _text = text,
-        super(key: key);
-
-  final Widget _image;
-  final String _text;
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Expanded(
-          child: _image,
-        ),
-        Text(
-          _text,
-          textAlign: TextAlign.center,
-          style: AppTextStyles.bold(
-            fontSize: 28.sp,
-            color: AppColors.mainBlack,
-          ),
-        ),
-      ],
     );
   }
 }

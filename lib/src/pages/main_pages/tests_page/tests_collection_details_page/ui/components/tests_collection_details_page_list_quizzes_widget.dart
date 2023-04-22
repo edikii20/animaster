@@ -12,7 +12,7 @@ class _TestsCollectionDetailsPageListQuizzesWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SliverPadding(
-      padding: EdgeInsets.symmetric(horizontal: 20.w),
+      padding: EdgeInsets.symmetric(horizontal: 20.sp),
       sliver: SliverList(
         delegate: SliverChildBuilderDelegate(
           (context, index) => _TestsCollectionDetailsPageQuizWidget(

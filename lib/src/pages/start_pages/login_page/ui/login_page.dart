@@ -1,14 +1,14 @@
-import 'package:aniquiz/src/config/colors.dart';
-import 'package:aniquiz/src/config/sizes.dart';
-import 'package:aniquiz/src/config/text_styles.dart';
+import 'package:aniquiz/src/app/app_navigation.dart';
+import 'package:aniquiz/src/config/styles.dart';
 import 'package:aniquiz/src/pages/start_pages/login_page/cubit/login_page_cubit.dart';
-import 'package:aniquiz/src/utils/app_buttons.dart';
-import 'package:aniquiz/src/utils/start_pages_input_widget.dart';
-import 'package:aniquiz/src/utils/start_pages_title_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
+import '../../../../utils/widgets/common/app_buttons.dart';
+import '../../../../utils/widgets/common/app_text_widget.dart';
+import '../../../../utils/widgets/common/start_pages_input_widget.dart';
+import '../../../../utils/widgets/common/start_pages_title_widget.dart';
 
 part 'components/login_page_login_form_widget.dart';
 part 'components/login_page_alert_dialog_widget.dart';
@@ -39,7 +39,7 @@ class _LogInPageWidgetState extends State<LogInPageWidget> {
   Widget build(BuildContext context) {
     return WillPopScope(
       onWillPop: () async {
-        context.goNamed('boarding');
+        AppNavigation.goToBoarding(context: context);
         return false;
       },
       child: BlocListener<LogInPageCubit, LogInPageState>(
@@ -53,11 +53,11 @@ class _LogInPageWidgetState extends State<LogInPageWidget> {
           );
         },
         child: Scaffold(
-          backgroundColor: Colors.white,
+          backgroundColor: AppColors.white,
           resizeToAvoidBottomInset: false,
           floatingActionButton: Container(
-            padding: EdgeInsets.symmetric(horizontal: 20.w),
-            height: 60.h,
+            padding: EdgeInsets.symmetric(horizontal: 16.sp),
+            height: 49.sp,
             child: BlocBuilder<LogInPageCubit, LogInPageState>(
               buildWhen: (previous, current) =>
                   (previous is! LogInPageLoadingState &&
@@ -70,10 +70,10 @@ class _LogInPageWidgetState extends State<LogInPageWidget> {
                   borderColor: AppColors.mainPurpleDark,
                   child: state is LogInPageLoadingState
                       ? SizedBox(
-                          width: 21.h,
-                          height: 21.h,
+                          width: 21.sp,
+                          height: 21.sp,
                           child: const CircularProgressIndicator(
-                            color: Colors.white,
+                            color: AppColors.white,
                             strokeWidth: 3,
                           ),
                         )
@@ -81,7 +81,7 @@ class _LogInPageWidgetState extends State<LogInPageWidget> {
                           'SIGN IN',
                           style: AppTextStyles.bold(
                             fontSize: 16.sp,
-                            color: Colors.white,
+                            color: AppColors.white,
                           ),
                         ),
                   width: double.infinity,
@@ -100,22 +100,23 @@ class _LogInPageWidgetState extends State<LogInPageWidget> {
           body: SafeArea(
             child: Padding(
               padding: EdgeInsets.only(
-                left: 20.w,
-                right: 20.w,
-                top: 30.h,
+                left: 16.sp,
+                right: 16.sp,
+                top: 20.sp,
               ),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   AppButtons.goBackButton(
-                      onPressed: () => context.goNamed('boarding')),
-                  SizedBox(height: 40.h),
+                      onPressed: () =>
+                          AppNavigation.goToBoarding(context: context)),
+                  10.verticalSpace,
                   StartPagesTitleWidget(
                     title: 'Hello there',
                     titleIcon: Image.asset('assets/images/hand_icon.png'),
-                    titleCentered: false,
+                    titleCentered: true,
                   ),
-                  SizedBox(height: 30.h),
+                  40.verticalSpace,
                   _LogInPageRegistrationFormWidget(
                     emailInputController: _emailInputController,
                     passwordInputController: _passwordInputController,

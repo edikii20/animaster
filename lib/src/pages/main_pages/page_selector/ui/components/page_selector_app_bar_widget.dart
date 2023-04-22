@@ -24,143 +24,48 @@ class _PageSelectorAppBarWidget extends StatelessWidget
   }
 
   List<Widget> _pickActions({required int index}) {
-    switch (index) {
-      case 0:
-        return [
-          IconButton(
-            onPressed: () {},
-            padding: EdgeInsets.zero,
-            highlightColor: Colors.transparent,
-            splashColor: Colors.transparent,
-            constraints: BoxConstraints.tight(Size(28.w, 28.w)),
-            icon: SvgPicture.asset(
-              'assets/icons/search.svg',
-              width: 28.w,
-              height: 28.w,
-              colorFilter: const ColorFilter.mode(
-                AppColors.mainBlack,
-                BlendMode.srcIn,
-              ),
-            ),
+    if (index == 0) {
+      return [
+        AppButtons.iconButton(
+          icon: 'assets/icons/search.svg',
+          size: 28.sp,
+        ),
+        Padding(
+          padding: EdgeInsets.only(
+            left: 16.sp,
+            right: 16.sp,
           ),
-          Padding(
-            padding: EdgeInsets.only(
-              left: 16.w,
-              right: 20.w,
-            ),
-            child: IconButton(
-              onPressed: () {},
-              padding: EdgeInsets.zero,
-              highlightColor: Colors.transparent,
-              splashColor: Colors.transparent,
-              constraints: BoxConstraints.tight(Size(28.w, 28.w)),
-              icon: SvgPicture.asset(
-                'assets/icons/bell.svg',
-                width: 28.w,
-                height: 28.w,
-                colorFilter: const ColorFilter.mode(
-                  AppColors.mainBlack,
-                  BlendMode.srcIn,
-                ),
-              ),
-            ),
+          child: AppButtons.iconButton(
+            icon: 'assets/icons/bell.svg',
+            size: 28.sp,
           ),
-        ];
-      case 1:
-        return [
-          Padding(
-            padding: EdgeInsets.only(right: 20.w),
-            child: IconButton(
-              onPressed: () {},
-              padding: EdgeInsets.zero,
-              highlightColor: Colors.transparent,
-              splashColor: Colors.transparent,
-              constraints: BoxConstraints.tight(Size(28.w, 28.w)),
-              icon: SvgPicture.asset(
-                'assets/icons/search.svg',
-                width: 28.w,
-                height: 28.w,
-                colorFilter: const ColorFilter.mode(
-                  AppColors.mainBlack,
-                  BlendMode.srcIn,
-                ),
-              ),
-            ),
+        ),
+      ];
+    } else if (index == 4) {
+      return [
+        Padding(
+          padding: EdgeInsets.only(right: 16.sp),
+          child: AppButtons.iconButton(
+            icon: 'assets/icons/settings.svg',
+            size: 28.sp,
           ),
-        ];
-      case 2:
-        return [
-          Padding(
-            padding: EdgeInsets.only(right: 20.w),
-            child: IconButton(
-              onPressed: () {},
-              padding: EdgeInsets.zero,
-              highlightColor: Colors.transparent,
-              splashColor: Colors.transparent,
-              constraints: BoxConstraints.tight(Size(28.w, 28.w)),
-              icon: SvgPicture.asset(
-                'assets/icons/search.svg',
-                width: 28.w,
-                height: 28.w,
-                colorFilter: const ColorFilter.mode(
-                  AppColors.mainBlack,
-                  BlendMode.srcIn,
-                ),
-              ),
-            ),
+        ),
+      ];
+    } else {
+      return [
+        Padding(
+          padding: EdgeInsets.only(right: 16.sp),
+          child: AppButtons.iconButton(
+            icon: 'assets/icons/search.svg',
+            size: 28.sp,
           ),
-        ];
-      case 3:
-        return [
-          Padding(
-            padding: EdgeInsets.only(right: 20.w),
-            child: IconButton(
-              onPressed: () {},
-              padding: EdgeInsets.zero,
-              highlightColor: Colors.transparent,
-              splashColor: Colors.transparent,
-              constraints: BoxConstraints.tight(Size(28.w, 28.w)),
-              icon: SvgPicture.asset(
-                'assets/icons/search.svg',
-                width: 28.w,
-                height: 28.w,
-                colorFilter: const ColorFilter.mode(
-                  AppColors.mainBlack,
-                  BlendMode.srcIn,
-                ),
-              ),
-            ),
-          ),
-        ];
-      case 4:
-        return [
-          Padding(
-            padding: EdgeInsets.only(right: 20.w),
-            child: IconButton(
-              onPressed: () {},
-              padding: EdgeInsets.zero,
-              highlightColor: Colors.transparent,
-              splashColor: Colors.transparent,
-              constraints: BoxConstraints.tight(Size(28.w, 28.w)),
-              icon: SvgPicture.asset(
-                'assets/icons/settings.svg',
-                width: 28.w,
-                height: 28.w,
-                colorFilter: const ColorFilter.mode(
-                  AppColors.mainBlack,
-                  BlendMode.srcIn,
-                ),
-              ),
-            ),
-          ),
-        ];
-      default:
-        return [];
+        ),
+      ];
     }
   }
 
   @override
-  Size get preferredSize => Size.fromHeight(70.h);
+  Size get preferredSize => Size.fromHeight(50.sp);
 
   @override
   Widget build(BuildContext context) {
@@ -171,14 +76,14 @@ class _PageSelectorAppBarWidget extends StatelessWidget
         return AppBar(
           title: _pickTitle(index: state.selectedIndex),
           actions: _pickActions(index: state.selectedIndex),
-          titleSpacing: 20.w,
-          toolbarHeight: 70.h,
+          titleSpacing: 16.sp,
+          toolbarHeight: 50.sp,
           titleTextStyle: AppTextStyles.bold(
             fontSize: 24.sp,
             color: AppColors.mainBlack,
           ),
           elevation: 0,
-          backgroundColor: Colors.white,
+          backgroundColor: AppColors.white,
         );
       },
     );

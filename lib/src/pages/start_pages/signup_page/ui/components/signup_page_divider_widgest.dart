@@ -12,21 +12,20 @@ class _SignUpPageDividerWidgest extends StatelessWidget {
         Expanded(
           child: Container(
             height: 1,
-            margin: EdgeInsets.only(right: 10.w),
+            margin: EdgeInsets.only(right: 10.sp),
             color: AppColors.mainDisableLight.withOpacity(0.3),
           ),
         ),
-        Text(
-          'or',
-          style: AppTextStyles.medium(
-            fontSize: 15.sp,
-            color: AppColors.mainSecondaryLight,
-          ),
+        AppTextWidget(
+          text: 'or',
+          fontSize: 15.sp,
+          fontWeight: FontWeight.w500,
+          color: AppColors.mainSecondaryLight,
         ),
         Expanded(
           child: Container(
             height: 1,
-            margin: EdgeInsets.only(left: 10.w),
+            margin: EdgeInsets.only(left: 10.sp),
             color: AppColors.mainDisableLight.withOpacity(0.3),
           ),
         ),

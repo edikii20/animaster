@@ -18,46 +18,17 @@ class _BoardingPageTipsIndicatorWidget extends StatelessWidget {
           selectedIndex: _selectedIndex,
           itemIndex: 0,
         ),
-        SizedBox(width: 10.w),
+        10.horizontalSpace,
         _BoardingPageTipsIndicatorItemWidget(
           selectedIndex: _selectedIndex,
           itemIndex: 1,
         ),
-        SizedBox(width: 10.w),
+        10.horizontalSpace,
         _BoardingPageTipsIndicatorItemWidget(
           selectedIndex: _selectedIndex,
           itemIndex: 2,
         ),
       ],
-    );
-  }
-}
-
-class _BoardingPageTipsIndicatorItemWidget extends StatelessWidget {
-  const _BoardingPageTipsIndicatorItemWidget({
-    Key? key,
-    required int selectedIndex,
-    required int itemIndex,
-  })  : _selectedIndex = selectedIndex,
-        _itemIndex = itemIndex,
-        super(key: key);
-
-  final int _selectedIndex;
-  final int _itemIndex;
-
-  @override
-  Widget build(BuildContext context) {
-    return AnimatedContainer(
-      width: _selectedIndex == _itemIndex ? 35.w : 10.w,
-      height: 10.w,
-      duration: const Duration(milliseconds: 300),
-      curve: Curves.easeInOut,
-      decoration: BoxDecoration(
-        color: _selectedIndex == _itemIndex
-            ? AppColors.mainPurple
-            : AppColors.mainDisableLight,
-        borderRadius: BorderRadius.circular(100),
-      ),
     );
   }
 }
