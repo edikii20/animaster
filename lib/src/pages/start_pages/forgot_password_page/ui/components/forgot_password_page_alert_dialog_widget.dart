@@ -12,21 +12,21 @@ class _ForgotPasswordPageAlertDialogWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Dialog(
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30.w)),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
       child: Container(
         padding: EdgeInsets.symmetric(
-          horizontal: 40.w,
-          vertical: 20.h,
+          horizontal: 40.sp,
+          vertical: 20.sp,
         ),
-        height: 370.h,
+        height: 370.sp,
         child: Column(
           children: [
             Container(
-              height: 180.h,
-              width: 180.h,
+              height: 180.sp,
+              width: 180.sp,
               color: Colors.red,
             ),
-            SizedBox(height: 10.h),
+            10.verticalSpace,
             Text(
               'Failure!',
               style: AppTextStyles.bold(
@@ -34,7 +34,7 @@ class _ForgotPasswordPageAlertDialogWidget extends StatelessWidget {
                 color: AppColors.mainPurple,
               ),
             ),
-            SizedBox(height: 5.h),
+            5.verticalSpace,
             Text(
               _message,
               textAlign: TextAlign.center,

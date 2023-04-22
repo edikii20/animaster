@@ -1,4 +1,4 @@
-import 'package:aniquiz/src/utils/start_pages_input_widget.dart';
+import 'start_pages_input_widget.dart';
 
 mixin InputValidationMixin {
   final _emailValidator = RegExp(

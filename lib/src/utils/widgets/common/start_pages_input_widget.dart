@@ -1,9 +1,7 @@
-import 'package:aniquiz/src/utils/input_validation_mixin.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-
-import '../config/colors.dart';
-import '../config/text_styles.dart';
+import '../../../config/styles.dart';
+import 'input_validation_mixin.dart';
 
 enum StartPagesInputType { username, email, password, confirmPassword }
 
@@ -91,13 +89,13 @@ class _StartPagesInputWidgetState extends State<StartPagesInputWidget>
     if (widget._inputType == StartPagesInputType.password ||
         widget._inputType == StartPagesInputType.confirmPassword) {
       return Padding(
-        padding: EdgeInsets.symmetric(vertical: 12.h),
+        padding: EdgeInsets.symmetric(vertical: 12.sp),
         child: Row(
           mainAxisSize: MainAxisSize.min,
           children: [
             SizedBox(
-              width: 24.w,
-              height: 24.w,
+              width: 20.sp,
+              height: 20.sp,
               child: _isCorrectInput == null
                   ? null
                   : _isCorrectInput!
@@ -110,7 +108,7 @@ class _StartPagesInputWidgetState extends State<StartPagesInputWidget>
                           color: Colors.red,
                         ),
             ),
-            SizedBox(width: 5.w),
+            5.horizontalSpace,
             GestureDetector(
               onTap: () => _onTapObscurePassword(),
               child: Icon(
@@ -127,9 +125,9 @@ class _StartPagesInputWidgetState extends State<StartPagesInputWidget>
       return _isCorrectInput == null
           ? null
           : Container(
-              width: 24.w,
-              height: 24.w,
-              padding: EdgeInsets.symmetric(vertical: 12.h),
+              width: 20.sp,
+              height: 20.sp,
+              padding: EdgeInsets.symmetric(vertical: 12.sp),
               child: _isCorrectInput!
                   ? Image.asset(
                       'assets/images/correct_icon.png',

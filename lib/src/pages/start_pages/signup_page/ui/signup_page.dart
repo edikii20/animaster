@@ -1,20 +1,20 @@
 import 'dart:async';
 import 'package:aniquiz/src/app/bloc/app_bloc.dart';
-import 'package:aniquiz/src/config/colors.dart';
-import 'package:aniquiz/src/config/text_styles.dart';
-import 'package:aniquiz/src/domain/db/cloud_firestore_db/cloud_firestore_manager.dart';
+import 'package:aniquiz/src/config/styles.dart';
 import 'package:aniquiz/src/domain/repositories/authentication_repository.dart';
 import 'package:aniquiz/src/pages/start_pages/signup_page/cubit/signup_page_cubit.dart';
-import 'package:aniquiz/src/utils/app_buttons.dart';
-import 'package:aniquiz/src/utils/start_pages_input_widget.dart';
-import 'package:aniquiz/src/utils/start_pages_title_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import 'package:lottie/lottie.dart';
 
-part 'components/signup_page_registration_form_widget.dart';
+import '../../../../app/app_navigation.dart';
+import '../../../../utils/widgets/common/app_buttons.dart';
+import '../../../../utils/widgets/common/app_text_widget.dart';
+import '../../../../utils/widgets/common/start_pages_input_widget.dart';
+import '../../../../utils/widgets/common/start_pages_title_widget.dart';
+
 part 'components/signup_page_divider_widgest.dart';
 part 'components/signup_page_alert_dialog_widget.dart';
 
@@ -86,17 +86,17 @@ class _SignUpPageWidgetState extends State<SignUpPageWidget> {
       },
       child: WillPopScope(
         onWillPop: () async {
-          context.goNamed('boarding');
+          AppNavigation.goToBoarding(context: context);
           return false;
         },
         child: GestureDetector(
           onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
           child: Scaffold(
-            backgroundColor: Colors.white,
+            backgroundColor: AppColors.white,
             resizeToAvoidBottomInset: false,
             floatingActionButton: Container(
-              padding: EdgeInsets.symmetric(horizontal: 20.w),
-              height: 60.h,
+              padding: EdgeInsets.symmetric(horizontal: 16.sp),
+              height: 49.sp,
               child: BlocBuilder<SignUpPageCubit, SignUpPageState>(
                 buildWhen: (previous, current) =>
                     (previous is! SignUpPageLoadingState &&
@@ -109,19 +109,18 @@ class _SignUpPageWidgetState extends State<SignUpPageWidget> {
                     borderColor: AppColors.mainPurpleDark,
                     child: state is SignUpPageLoadingState
                         ? SizedBox(
-                            width: 21.h,
-                            height: 21.h,
+                            width: 21.sp,
+                            height: 21.sp,
                             child: const CircularProgressIndicator(
-                              color: Colors.white,
+                              color: AppColors.white,
                               strokeWidth: 3,
                             ),
                           )
-                        : Text(
-                            'Sign up',
-                            style: AppTextStyles.bold(
-                              fontSize: 16.sp,
-                              color: Colors.white,
-                            ),
+                        : AppTextWidget(
+                            text: 'Sign up',
+                            fontSize: 16.sp,
+                            fontWeight: FontWeight.w700,
+                            color: AppColors.white,
                           ),
                     width: double.infinity,
                     onTap: state is SignUpPageLoadingState
@@ -140,18 +139,21 @@ class _SignUpPageWidgetState extends State<SignUpPageWidget> {
             floatingActionButtonLocation:
                 FloatingActionButtonLocation.centerFloat,
             body: SafeArea(
-              child: Padding(
+              child: SingleChildScrollView(
                 padding: EdgeInsets.only(
-                  left: 20.w,
-                  right: 20.w,
-                  top: 30.h,
+                  left: 16.sp,
+                  right: 16.sp,
+                  top: 20.sp,
+                  bottom: 90.sp,
                 ),
+                physics: const BouncingScrollPhysics(),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     AppButtons.goBackButton(
-                        onPressed: () => context.goNamed('boarding')),
-                    SizedBox(height: 40.h),
+                        onPressed: () =>
+                            AppNavigation.goToBoarding(context: context)),
+                    10.verticalSpace,
                     StartPagesTitleWidget(
                       title: 'Create an account',
                       subTitle:
@@ -160,19 +162,95 @@ class _SignUpPageWidgetState extends State<SignUpPageWidget> {
                       titleCentered: true,
                       subTitleCentered: true,
                     ),
-                    SizedBox(height: 30.h),
+                    20.verticalSpace,
                     //TODO: Исправить ошибку при которой когда клавиатура открыта и нажимается кнопка назад происходить overflow
                     //TODO: Нужно при нажатии кнопки назад убирать клавиатуру а только потом переходить на другую страницу
-                    _SignUpPageRegistrationFormWidget(
-                      usernameInputController: _usernameInputController,
-                      emailInputController: _emailInputController,
+                    Text(
+                      'Username',
+                      style: AppTextStyles.semiBold(
+                        fontSize: 16.sp,
+                        color: AppColors.mainBlack,
+                      ),
+                    ),
+                    StartPagesInputWidget(
+                      inputController: _usernameInputController,
+                      inputType: StartPagesInputType.username,
+                      nextFocusNode: _emailInputFocusNode,
+                    ),
+                    20.verticalSpace,
+                    Text(
+                      'Email',
+                      style: AppTextStyles.semiBold(
+                        fontSize: 16.sp,
+                        color: AppColors.mainBlack,
+                      ),
+                    ),
+                    StartPagesInputWidget(
+                      inputController: _emailInputController,
+                      inputType: StartPagesInputType.email,
+                      currentFocusNode: _emailInputFocusNode,
+                      nextFocusNode: _passwordInputFocusNode,
+                    ),
+                    20.verticalSpace,
+                    Text(
+                      'Password',
+                      style: AppTextStyles.semiBold(
+                        fontSize: 16.sp,
+                        color: AppColors.mainBlack,
+                      ),
+                    ),
+                    StartPagesInputWidget(
+                      inputController: _passwordInputController,
+                      inputType: StartPagesInputType.password,
+                      currentFocusNode: _passwordInputFocusNode,
+                      nextFocusNode: _confirmPasswordFocusNode,
+                    ),
+                    20.verticalSpace,
+                    Text(
+                      'Confirm Password',
+                      style: AppTextStyles.semiBold(
+                        fontSize: 16.sp,
+                        color: AppColors.mainBlack,
+                      ),
+                    ),
+                    StartPagesInputWidget(
+                      inputController: _confirmPasswordInputController,
                       passwordInputController: _passwordInputController,
-                      confirmPasswordInputController:
-                          _confirmPasswordInputController,
-                      emailInputFocusNode: _emailInputFocusNode,
-                      passwordInputFocusNode: _passwordInputFocusNode,
-                      confirmPasswordFocusNode: _confirmPasswordFocusNode,
-                    )
+                      inputType: StartPagesInputType.confirmPassword,
+                      currentFocusNode: _confirmPasswordFocusNode,
+                    ),
+                    40.verticalSpace,
+                    const _SignUpPageDividerWidgest(),
+                    30.verticalSpace,
+                    AppButtons.fillBorderedButton(
+                      fillColor: AppColors.mainButtonWhiteLight,
+                      borderColor: AppColors.mainDisableDark,
+                      child: Text(
+                        'Continue with Google',
+                        style: AppTextStyles.semiBold(
+                          fontSize: 16.sp,
+                          color: AppColors.mainBlack,
+                        ),
+                      ),
+                      width: double.infinity,
+                      icon: Image.asset('assets/images/google_icon.png'),
+                      onTap: () {},
+                    ),
+                    30.verticalSpace,
+
+                    AppButtons.fillBorderedButton(
+                      fillColor: AppColors.mainButtonWhiteLight,
+                      borderColor: AppColors.mainDisableDark,
+                      child: AppTextWidget(
+                        text: 'Continue with Apple',
+                        fontSize: 16.sp,
+                        fontWeight: FontWeight.w600,
+                        color: AppColors.mainBlack,
+                      ),
+                      width: double.infinity,
+                      icon: Image.asset('assets/images/apple_icon.png'),
+                      onTap: () {},
+                    ),
                   ],
                 ),
               ),

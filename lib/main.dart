@@ -16,16 +16,14 @@ void main() async {
   );
   await Hive.initFlutter();
 
-  final authenticationRepository = AuthenticationRepository();
-
   //await authenticationRepository.user.first;
 
   runApp(
-    RepositoryProvider.value(
-      value: authenticationRepository,
+    RepositoryProvider(
+      create: (context) => AuthenticationRepository(),
       child: BlocProvider(
-        create: (_) => AppBloc(
-          authenticationRepository: authenticationRepository,
+        create: (context) => AppBloc(
+          authenticationRepository: context.read<AuthenticationRepository>(),
         ),
         child: const App(),
       ),

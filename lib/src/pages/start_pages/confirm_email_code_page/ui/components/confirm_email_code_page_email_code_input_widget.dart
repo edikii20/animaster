@@ -28,8 +28,8 @@ class _ConfirmEmailCodePageEmailCodeInputWidget extends StatelessWidget {
       showCursor: false,
       pinTheme: PinTheme(
         shape: PinCodeFieldShape.box,
-        fieldWidth: 80.w,
-        fieldHeight: 70.w,
+        fieldWidth: 80.sp,
+        fieldHeight: 70.sp,
         activeFillColor: AppColors.mainButtonWhiteLight,
         selectedFillColor: AppColors.mainButtonWhiteLight,
         inactiveFillColor: AppColors.mainButtonWhiteLight,
@@ -37,7 +37,7 @@ class _ConfirmEmailCodePageEmailCodeInputWidget extends StatelessWidget {
         selectedColor: AppColors.mainPurple,
         activeColor: AppColors.mainSecondaryDark,
         borderWidth: 1,
-        borderRadius: BorderRadius.circular(20.w),
+        borderRadius: BorderRadius.circular(20),
       ),
       controller: _emailCodeInputController,
       dialogConfig: DialogConfig(

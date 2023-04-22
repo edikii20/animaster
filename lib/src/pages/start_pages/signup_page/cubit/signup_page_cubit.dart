@@ -1,9 +1,10 @@
 import 'dart:async';
 import 'package:aniquiz/src/domain/repositories/authentication_repository.dart';
-import 'package:aniquiz/src/utils/input_validation_mixin.dart';
-import 'package:aniquiz/src/utils/start_pages_input_widget.dart';
 import 'package:bloc/bloc.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
+import '../../../../utils/widgets/common/input_validation_mixin.dart';
+import '../../../../utils/widgets/common/start_pages_input_widget.dart';
 
 part 'signup_page_state.dart';
 

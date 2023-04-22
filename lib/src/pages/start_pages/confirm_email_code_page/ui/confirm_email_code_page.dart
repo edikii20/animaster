@@ -1,19 +1,22 @@
-import 'package:aniquiz/src/config/colors.dart';
-import 'package:aniquiz/src/config/text_styles.dart';
+import 'package:aniquiz/src/config/styles.dart';
 import 'package:aniquiz/src/pages/start_pages/confirm_email_code_page/cubit/confirm_email_code_page_cubit.dart';
-import 'package:aniquiz/src/utils/app_buttons.dart';
-import 'package:aniquiz/src/utils/start_pages_title_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
+import '../../../../app/app_navigation.dart';
+import '../../../../utils/widgets/common/app_buttons.dart';
+import '../../../../utils/widgets/common/app_text_widget.dart';
+import '../../../../utils/widgets/common/start_pages_title_widget.dart';
 
 part 'components/confirm_email_code_page_email_code_input_widget.dart';
 part 'components/confirm_email_code_page_resend_email_code_widget.dart';
 
 class ConfirmEmailCodePageWidget extends StatefulWidget {
-  const ConfirmEmailCodePageWidget({super.key});
+  const ConfirmEmailCodePageWidget({
+    Key? key,
+  }) : super(key: key);
 
   @override
   State<ConfirmEmailCodePageWidget> createState() =>
@@ -36,7 +39,7 @@ class _ConfirmEmailCodePageWidgetState
       listenWhen: (previous, current) =>
           current.status == ConfirmEmailCodePageStatus.complete,
       listener: (context, state) {
-        context.goNamed('new_password');
+        AppNavigation.goToNewPassword(context: context);
       },
       child: BlocListener<ConfirmEmailCodePageCubit, ConfirmEmailCodePageState>(
         listenWhen: (previous, current) => previous.seconds != current.seconds,
@@ -47,24 +50,23 @@ class _ConfirmEmailCodePageWidgetState
         },
         child: WillPopScope(
           onWillPop: () async {
-            context.goNamed('forgot_password');
+            AppNavigation.goToForgotPassword(context: context);
             return false;
           },
           child: Scaffold(
-            backgroundColor: Colors.white,
+            backgroundColor: AppColors.white,
             resizeToAvoidBottomInset: false,
             floatingActionButton: Container(
-              padding: EdgeInsets.symmetric(horizontal: 20.w),
-              height: 60.h,
+              padding: EdgeInsets.symmetric(horizontal: 16.sp),
+              height: 49.sp,
               child: AppButtons.fillBorderedButton(
                 fillColor: AppColors.mainPurple,
                 borderColor: AppColors.mainPurpleDark,
-                child: Text(
-                  'Confirm',
-                  style: AppTextStyles.bold(
-                    fontSize: 16.sp,
-                    color: Colors.white,
-                  ),
+                child: AppTextWidget(
+                  text: 'Confirm',
+                  fontWeight: FontWeight.w700,
+                  fontSize: 16.sp,
+                  color: AppColors.white,
                 ),
                 width: double.infinity,
                 onTap: () => context
@@ -77,38 +79,39 @@ class _ConfirmEmailCodePageWidgetState
             body: SafeArea(
               child: Padding(
                 padding: EdgeInsets.only(
-                  left: 20.w,
-                  right: 20.w,
-                  top: 30.h,
+                  left: 16.sp,
+                  right: 16.sp,
+                  top: 20.sp,
                 ),
                 child: Column(
                   children: [
                     Align(
                       alignment: Alignment.centerLeft,
                       child: AppButtons.goBackButton(
-                          onPressed: () => context.goNamed('forgot_password')),
+                          onPressed: () => AppNavigation.goToForgotPassword(
+                              context: context)),
                     ),
-                    SizedBox(height: 40.h),
+                    10.verticalSpace,
                     StartPagesTitleWidget(
                       title: 'You\'ve got mail',
                       titleIcon: Image.asset('assets/images/email_icon.png'),
                       subTitle:
                           'We have sent the OTP verification code to your email address. Check your email and enter the code below.',
-                      titleCentered: false,
+                      titleCentered: true,
+                      subTitleCentered: true,
                     ),
-                    SizedBox(height: 50.h),
+                    50.verticalSpace,
                     _ConfirmEmailCodePageEmailCodeInputWidget(
                       emailCodeInputController: _emailCodeInputController,
                     ),
-                    SizedBox(height: 20.h),
-                    Text(
-                      'Didn\'t receive email?',
-                      style: AppTextStyles.medium(
-                        fontSize: 18.sp,
-                        color: AppColors.mainSecondaryLight,
-                      ),
+                    20.verticalSpace,
+                    AppTextWidget(
+                      text: 'Didn\'t receive email?',
+                      fontWeight: FontWeight.w500,
+                      fontSize: 18.sp,
+                      color: AppColors.mainSecondaryLight,
                     ),
-                    SizedBox(height: 20.h),
+                    20.verticalSpace,
                     const _ConfirmEmailCodePageResendEmailCodeWidget(),
                   ],
                 ),

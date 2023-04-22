@@ -11,17 +11,17 @@ class _QuizDetailsPageAppbarWidget extends StatelessWidget
     return AppBar(
       actions: [
         Padding(
-          padding: EdgeInsets.only(right: 20.w),
+          padding: EdgeInsets.only(right: 20.sp),
           child: IconButton(
             onPressed: () {},
             padding: EdgeInsets.zero,
             highlightColor: Colors.transparent,
             splashColor: Colors.transparent,
-            constraints: BoxConstraints.tight(Size(28.w, 28.w)),
+            constraints: BoxConstraints.tight(Size(28.sp, 28.sp)),
             icon: SvgPicture.asset(
               'assets/icons/heart.svg',
-              width: 28.w,
-              height: 28.w,
+              width: 28.sp,
+              height: 28.sp,
               colorFilter: const ColorFilter.mode(
                 AppColors.mainBlack,
                 BlendMode.srcIn,
@@ -31,20 +31,20 @@ class _QuizDetailsPageAppbarWidget extends StatelessWidget
         ),
       ],
       leading: AppButtons.goBackButton(
-        onPressed: () => context.pop(),
+        onPressed: () => AppNavigation.pop(context: context),
       ),
-      leadingWidth: 69.1.w,
+      leadingWidth: 69.1.sp,
       titleSpacing: 0,
-      toolbarHeight: 70.h,
+      toolbarHeight: 70.sp,
       titleTextStyle: AppTextStyles.bold(
         fontSize: 24.sp,
         color: AppColors.mainBlack,
       ),
       elevation: 0,
-      backgroundColor: Colors.white,
+      backgroundColor: AppColors.white,
     );
   }
 
   @override
-  Size get preferredSize => Size.fromHeight(70.h);
+  Size get preferredSize => Size.fromHeight(70.sp);
 }

@@ -5,9 +5,9 @@ import 'package:aniquiz/src/pages/main_pages/library_page/ui/library_page.dart';
 import 'package:aniquiz/src/pages/main_pages/page_selector/cubit/page_selector_cubit.dart';
 import 'package:aniquiz/src/pages/main_pages/page_selector/ui/page_selector_widget.dart';
 import 'package:aniquiz/src/pages/main_pages/profile_page/ui/profile_page.dart';
-import 'package:aniquiz/src/pages/main_pages/quiz_details_page/ui/quiz_details_page.dart';
 import 'package:aniquiz/src/pages/main_pages/rating_page/ui/rating_page.dart';
-import 'package:aniquiz/src/pages/main_pages/tests_collection_details_page/ui/tests_collection_details_page.dart';
+import 'package:aniquiz/src/pages/main_pages/tests_page/quiz_details_page/ui/quiz_details_page.dart';
+import 'package:aniquiz/src/pages/main_pages/tests_page/tests_collection_details_page/ui/tests_collection_details_page.dart';
 import 'package:aniquiz/src/pages/main_pages/tests_page/ui/tests_page.dart';
 import 'package:aniquiz/src/pages/start_pages/boarding_page/cubit/boarding_page_cubit.dart';
 import 'package:aniquiz/src/pages/start_pages/boarding_page/ui/boarding_page.dart';
@@ -29,6 +29,88 @@ import '../pages/start_pages/confirm_email_code_page/ui/confirm_email_code_page.
 import '../pages/start_pages/login_page/cubit/login_page_cubit.dart';
 
 abstract class AppNavigation {
+  static void pop({required BuildContext context, Object? result}) {
+    Navigator.of(context).pop(result);
+  }
+
+  static void goToLoader({required BuildContext context}) {
+    context.goNamed('loader');
+  }
+
+  static void goToBoarding({required BuildContext context}) {
+    context.goNamed('boarding');
+  }
+
+  static void goToSignup({required BuildContext context}) {
+    context.goNamed('signup');
+  }
+
+  static void goToLogin({required BuildContext context}) {
+    context.goNamed('login');
+  }
+
+  static void goToForgotPassword({required BuildContext context}) {
+    context.goNamed('forgot_password');
+  }
+
+  static void goToConfirmEmailCode({
+    required BuildContext context,
+    required String email,
+  }) {
+    context.goNamed(
+      'confirm_email_code',
+      extra: email,
+    );
+  }
+
+  static void goToNewPassword({required BuildContext context}) {
+    context.goNamed('new_password');
+  }
+
+  static void goToHome({required BuildContext context}) {
+    context.goNamed('home');
+  }
+
+  static void goToLibrary({required BuildContext context}) {
+    context.goNamed('library');
+  }
+
+  static void goToTests({required BuildContext context}) {
+    context.goNamed('tests');
+  }
+
+  static void goToCollectionDetails({
+    required BuildContext context,
+    required String id,
+  }) {
+    context.goNamed(
+      'collection_details',
+      params: {'collectionId': id},
+    );
+  }
+
+  static void goToQuizDetails({
+    required BuildContext context,
+    required String quizId,
+    required String collectionId,
+  }) {
+    context.goNamed(
+      'quiz_details',
+      params: {
+        'collectionId': collectionId,
+        'quizId': quizId,
+      },
+    );
+  }
+
+  static void goToRating({required BuildContext context}) {
+    context.goNamed('rating');
+  }
+
+  static void goToProfile({required BuildContext context}) {
+    context.goNamed('profile');
+  }
+
   static final List<String> _startPagesRoutes = [
     '/boarding',
     '/signup',
@@ -43,9 +125,9 @@ abstract class AppNavigation {
 
   static GoRouter getRouter({required AppBloc appBloc}) {
     return GoRouter(
-      initialLocation: '/tests/123/12',
+      initialLocation: '/tests/123',
       navigatorKey: _rootNavigatorKey,
-      //refreshListenable: appBloc,
+      // refreshListenable: appBloc,
       // redirect: (context, state) {
       //   final authStatus = appBloc.state.authStatus;
       //   if (authStatus == AuthStatus.unauthenticated &&

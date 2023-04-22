@@ -1,19 +1,20 @@
-import 'package:aniquiz/src/config/colors.dart';
-import 'package:aniquiz/src/config/sizes.dart';
-import 'package:aniquiz/src/config/text_styles.dart';
+import 'package:aniquiz/src/config/styles.dart';
 import 'package:aniquiz/src/pages/start_pages/forgot_password_page/cubit/forgot_password_page_cubit.dart';
-import 'package:aniquiz/src/utils/app_buttons.dart';
-import 'package:aniquiz/src/utils/start_pages_title_widget.dart';
-import 'package:aniquiz/src/utils/start_pages_input_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
+import '../../../../app/app_navigation.dart';
+import '../../../../utils/widgets/common/app_buttons.dart';
+import '../../../../utils/widgets/common/start_pages_input_widget.dart';
+import '../../../../utils/widgets/common/start_pages_title_widget.dart';
 
 part 'components/forgot_password_page_alert_dialog_widget.dart';
 
 class ForgotPasswordPageWidget extends StatefulWidget {
-  const ForgotPasswordPageWidget({super.key});
+  const ForgotPasswordPageWidget({
+    Key? key,
+  }) : super(key: key);
 
   @override
   State<ForgotPasswordPageWidget> createState() =>
@@ -33,7 +34,7 @@ class _ForgotPasswordPageWidgetState extends State<ForgotPasswordPageWidget> {
   Widget build(BuildContext context) {
     return WillPopScope(
       onWillPop: () async {
-        context.goNamed('login');
+        AppNavigation.goToLogin(context: context);
         return false;
       },
       child: BlocListener<ForgotPasswordPageCubit, ForgotPasswordPageState>(
@@ -42,9 +43,9 @@ class _ForgotPasswordPageWidgetState extends State<ForgotPasswordPageWidget> {
             current is ForgotPasswordPageFailureState,
         listener: (context, state) {
           if (state is ForgotPasswordPageCompleteState) {
-            context.goNamed(
-              'confirm_email_code',
-              extra: _emailInputController.text,
+            AppNavigation.goToConfirmEmailCode(
+              context: context,
+              email: _emailInputController.text,
             );
           } else {
             showDialog(
@@ -56,11 +57,11 @@ class _ForgotPasswordPageWidgetState extends State<ForgotPasswordPageWidget> {
           }
         },
         child: Scaffold(
-          backgroundColor: Colors.white,
+          backgroundColor: AppColors.white,
           resizeToAvoidBottomInset: false,
           floatingActionButton: Container(
-            padding: EdgeInsets.symmetric(horizontal: 20.w),
-            height: 60.h,
+            padding: EdgeInsets.symmetric(horizontal: 16.sp),
+            height: 49.sp,
             child:
                 BlocBuilder<ForgotPasswordPageCubit, ForgotPasswordPageState>(
               buildWhen: (previous, current) =>
@@ -74,10 +75,10 @@ class _ForgotPasswordPageWidgetState extends State<ForgotPasswordPageWidget> {
                   borderColor: AppColors.mainPurpleDark,
                   child: state is ForgotPasswordPageLoadingState
                       ? SizedBox(
-                          width: 21.h,
-                          height: 21.h,
+                          width: 21.sp,
+                          height: 21.sp,
                           child: const CircularProgressIndicator(
-                            color: Colors.white,
+                            color: AppColors.white,
                             strokeWidth: 3,
                           ),
                         )
@@ -85,7 +86,7 @@ class _ForgotPasswordPageWidgetState extends State<ForgotPasswordPageWidget> {
                           'Continue',
                           style: AppTextStyles.bold(
                             fontSize: 16.sp,
-                            color: Colors.white,
+                            color: AppColors.white,
                           ),
                         ),
                   width: double.infinity,
@@ -103,24 +104,26 @@ class _ForgotPasswordPageWidgetState extends State<ForgotPasswordPageWidget> {
           body: SafeArea(
             child: Padding(
               padding: EdgeInsets.only(
-                left: 20.w,
-                right: 20.w,
-                top: 30.h,
+                left: 16.sp,
+                right: 16.sp,
+                top: 20.sp,
               ),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   AppButtons.goBackButton(
-                      onPressed: () => context.goNamed('login')),
-                  SizedBox(height: 40.h),
+                      onPressed: () =>
+                          AppNavigation.goToLogin(context: context)),
+                  10.verticalSpace,
                   StartPagesTitleWidget(
                     title: 'Forgot Password',
                     titleIcon: Image.asset('assets/images/key_icon.png'),
                     subTitle:
                         'Enter your email address to get an OTP code to reset your password.',
-                    titleCentered: false,
+                    titleCentered: true,
+                    subTitleCentered: true,
                   ),
-                  SizedBox(height: 30.h),
+                  40.verticalSpace,
                   Text(
                     'Email',
                     style: AppTextStyles.semiBold(

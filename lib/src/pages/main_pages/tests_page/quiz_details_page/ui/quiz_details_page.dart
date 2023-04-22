@@ -1,16 +1,15 @@
+import 'package:aniquiz/src/app/app_navigation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:go_router/go_router.dart';
-
-import '../../../../config/colors.dart';
-import '../../../../config/text_styles.dart';
-import '../../../../utils/app_buttons.dart';
+import '../../../../../config/styles.dart';
+import '../../../../../utils/widgets/common/app_buttons.dart';
 
 part 'components/quiz_details_page_appbar_widget.dart';
 part 'components/quiz_details_page_leaderboard_widget.dart';
 part 'components/quiz_details_page_quiz_info_widget.dart';
+part 'components/quiz_details_page_leaderboard_element_widget.dart';
+part 'components/quiz_details_page_quiz_info_element_widget.dart';
 
 class QuizDetailsPageWidget extends StatelessWidget {
   const QuizDetailsPageWidget({
@@ -25,15 +24,15 @@ class QuizDetailsPageWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return WillPopScope(
       onWillPop: () async {
-        context.pop();
+        AppNavigation.pop(context: context);
         return false;
       },
       child: Scaffold(
-        backgroundColor: Colors.white,
+        backgroundColor: AppColors.white,
         appBar: const _QuizDetailsPageAppbarWidget(),
         floatingActionButton: Container(
-          padding: EdgeInsets.symmetric(horizontal: 20.w),
-          height: 60.h,
+          padding: EdgeInsets.symmetric(horizontal: 20.sp),
+          height: 60.sp,
           child: AppButtons.fillBorderedButton(
             fillColor: AppColors.mainPurple,
             borderColor: AppColors.mainPurpleDark,
@@ -41,7 +40,7 @@ class QuizDetailsPageWidget extends StatelessWidget {
               'Start',
               style: AppTextStyles.bold(
                 fontSize: 16.sp,
-                color: Colors.white,
+                color: AppColors.white,
               ),
             ),
             width: double.infinity,
@@ -51,25 +50,25 @@ class QuizDetailsPageWidget extends StatelessWidget {
         floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
         body: SingleChildScrollView(
           padding: EdgeInsets.only(
-            left: 20.w,
-            right: 20.w,
-            bottom: 100.h,
+            left: 20.sp,
+            right: 20.sp,
+            bottom: 100.sp,
           ),
           physics: const BouncingScrollPhysics(),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Container(
-                height: 280.h,
+                height: 280.sp,
                 decoration: BoxDecoration(
                   image: DecorationImage(
                     image: AssetImage('assets/images/quiz_img.jpg'),
                     fit: BoxFit.cover,
                   ),
-                  borderRadius: BorderRadius.circular(25.w),
+                  borderRadius: BorderRadius.circular(25),
                 ),
               ),
-              SizedBox(height: 20.h),
+              20.verticalSpace,
               Text(
                 'Re-Train your Brain AOT',
                 style: AppTextStyles.bold(
@@ -77,10 +76,10 @@ class QuizDetailsPageWidget extends StatelessWidget {
                   color: AppColors.mainBlack,
                 ),
               ),
-              SizedBox(height: 10.h),
+              10.verticalSpace,
               Divider(
                 color: AppColors.mainDisableLight.withOpacity(0.3),
-                height: 20.h,
+                height: 20.sp,
                 thickness: 1,
               ),
               const _QuizDetailsPageQuizInfoWidget(
@@ -91,10 +90,10 @@ class QuizDetailsPageWidget extends StatelessWidget {
               ),
               Divider(
                 color: AppColors.mainDisableLight.withOpacity(0.3),
-                height: 20.h,
+                height: 20.sp,
                 thickness: 1,
               ),
-              SizedBox(height: 10.h),
+              10.verticalSpace,
               Text(
                 'Leaders',
                 style: AppTextStyles.bold(
@@ -102,9 +101,9 @@ class QuizDetailsPageWidget extends StatelessWidget {
                   color: AppColors.mainBlack,
                 ),
               ),
-              SizedBox(height: 10.h),
+              10.verticalSpace,
               const _QuizDetailsPageLeaderboardWidget(),
-              SizedBox(height: 20.h),
+              20.verticalSpace,
               Text(
                 'Description',
                 style: AppTextStyles.bold(
@@ -112,7 +111,7 @@ class QuizDetailsPageWidget extends StatelessWidget {
                   color: AppColors.mainBlack,
                 ),
               ),
-              SizedBox(height: 10.h),
+              10.verticalSpace,
               Text(
                 'Removed is bed are pulled however colonel or law shyness unpacked minutes arose bed turned uncommonly state. Thirty father again placing domestic genius unwilling vexed west gentleman. Immediate abode twenty. Determine perceived entered furniture have collecting. Unaffected dissuade few again.',
                 style: AppTextStyles.semiBold(

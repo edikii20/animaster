@@ -1,41 +1,7 @@
 part of '../quiz_details_page.dart';
 
-class _QuizDetailsPageLeaderboardWidget extends StatelessWidget {
-  const _QuizDetailsPageLeaderboardWidget({
-    Key? key,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Row(
-      children: [
-        _QuizLeaderboardElementWidget(
-          name: 'Pepranarolan',
-          image: 'assets/images/avatar_img.jpg',
-          time: '10m 32s',
-          quizLeaderboardElementType: QuizLeaderboardElementType.first,
-        ),
-        _QuizLeaderboardElementWidget(
-          name: 'Herinanwauch',
-          image: 'assets/images/avatar_img.jpg',
-          time: '11m 46s',
-          quizLeaderboardElementType: QuizLeaderboardElementType.second,
-        ),
-        _QuizLeaderboardElementWidget(
-          name: 'edikii',
-          image: 'assets/images/avatar_img.jpg',
-          time: '13m 50s',
-          quizLeaderboardElementType: QuizLeaderboardElementType.third,
-        ),
-      ],
-    );
-  }
-}
-
-enum QuizLeaderboardElementType { first, second, third }
-
-class _QuizLeaderboardElementWidget extends StatelessWidget {
-  const _QuizLeaderboardElementWidget({
+class _QuizDetailsPageLeaderboardElementWidget extends StatelessWidget {
+  const _QuizDetailsPageLeaderboardElementWidget({
     Key? key,
     required String name,
     required String image,
@@ -84,13 +50,13 @@ class _QuizLeaderboardElementWidget extends StatelessWidget {
             children: [
               CircleAvatar(
                 backgroundColor: _pickColor(),
-                radius: 38.w,
+                radius: 38.sp,
                 child: CircleAvatar(
-                  radius: 35.w,
+                  radius: 35.sp,
                   backgroundImage: AssetImage(_image),
                 ),
               ),
-              SizedBox(height: 10.h),
+              10.verticalSpace,
               Text(
                 _name,
                 style: AppTextStyles.bold(
@@ -108,10 +74,10 @@ class _QuizLeaderboardElementWidget extends StatelessWidget {
             ],
           ),
           Positioned(
-            top: 73.h,
+            top: 73.sp,
             child: CircleAvatar(
               backgroundColor: _pickColor(),
-              radius: 10.w,
+              radius: 10.sp,
               child: Text(
                 _pickPlace(),
                 style: AppTextStyles.bold(
